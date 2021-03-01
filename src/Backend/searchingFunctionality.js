@@ -2,12 +2,10 @@ const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const MEDIAWIKI_ENDPOINT = 'https://www.mediawiki.org/w/api.php';
 const NUMBER_OF_RETRIES = 5;
-export const getUserFeed = async(username) => {
-    
-};
 
 
-export const getWikibaseItem = async(searchItem) => {
+
+const getWikibaseItem = async searchItem => {
     const params = {
         action: 'query',
         format: 'json',
@@ -17,7 +15,7 @@ export const getWikibaseItem = async(searchItem) => {
     const item = wikipediaQuery(WIKIPEDIA_ENDPOINT_SEARCH,params,NUMBER_OF_RETRIES).then(result=>result.query.pages.pageprops.wikibase_item);
     return item;
 };
-
+export default getWikibaseItem;
 // ~ Helper Functions ---------------------------------------------------------
 
 /**
