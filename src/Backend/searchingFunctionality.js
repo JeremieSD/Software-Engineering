@@ -4,8 +4,10 @@ const MEDIAWIKI_ENDPOINT = 'https://www.mediawiki.org/w/api.php';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require("node-fetch");
 
-
-const getWikibaseItem = async (searchItem) => {
+//Grabs wikibase_id from a search
+//@param {string} searchItem - Item to search Qid for
+//@returns {Object} -1 or QID 
+export const getWikibaseItem = async (searchItem) => {
     const params = {
         action: 'query',
         format: 'json',
@@ -16,13 +18,8 @@ const getWikibaseItem = async (searchItem) => {
     return item;
 };
 
-const extraResult = async (json1) =>{
-    var temp = 0;
-    while (typeof json1[temp] == 'undefined'){
-        temp = temp + 1;
-    }
-    return json1[temp].pageprops.wikibase_item;
-};
+
+
 // ~ Helper Functions ---------------------------------------------------------
 
 /**
@@ -45,6 +42,9 @@ const wikipediaQuery = async (endpoint, params, n) => {
     }
   };
 
+// Helper function to check whether something is a json string
+// @Param {string} str - string to be checked to see if it is in valid json
+// @returns {boolean} - returns whether the string is in valid json format
 function isJson(str) {
     try {
         JSON.parse(str);
@@ -54,4 +54,16 @@ function isJson(str) {
     return true;
 }
 
-getWikibaseItem("Albert Einstein").then((response) => console.log(response))
+
+//Helper function to return wikibase_item necessary
+//@param {json} - json straight from query
+//@returns {promise} returns -1 if it fails to find it and otherwise returns wikibase_item 
+const extraResult = async (json1) =>{
+    var temp = 0;
+    while (typeof json1[temp] == 'undefined'){
+        temp = temp + 1;
+    }
+    if (json1[temp].hasOwnProperty('pageprops')){
+        return json1[temp].pageprops.wikibase_item;
+    };return -1;
+};
