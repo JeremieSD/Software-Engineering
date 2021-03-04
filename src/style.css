@@ -10,7 +10,7 @@ body {
   background-color: #fffffE;
 }
 input {
-  border: none;
+  border: none; 
 }
 
 .card-profile:hover{
