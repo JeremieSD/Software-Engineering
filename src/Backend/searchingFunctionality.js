@@ -138,3 +138,17 @@ const getRevisionsOfPage = async (qid) => {
     var item = await wikipediaQuery(WIKIDATA_ENDPOINT,params,NUMBER_OF_RETRIES).then(result=>getRevisions(result.query.pages));
     return item;
 };
+
+//Grabs 10 items with pages close to the input text
+// @param {string} searchItem - text to search pages for
+// @returns {Object} - pages in json
+const getPrefixSearch = async (searchItem) => {
+    const params = {
+        action: 'query',
+        list: 'prefixsearch',
+        pssearch: searchItem,
+        format: 'json'
+    };
+    var item = await wikipediaQueryRSS(WIKIDATA_ENDPOINT, params, NUMBER_OF_RETRIES);
+    return item;
+}
