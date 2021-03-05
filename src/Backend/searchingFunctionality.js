@@ -152,3 +152,4 @@ const getPrefixSearch = async (searchItem) => {
     var item = await wikipediaQueryRSS(WIKIDATA_ENDPOINT, params, NUMBER_OF_RETRIES);
     return item;
 }
+//test
