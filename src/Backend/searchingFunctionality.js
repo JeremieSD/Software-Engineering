@@ -142,14 +142,14 @@ const getRevisionsOfPage = async (qid) => {
 //Grabs 10 items with pages close to the input text
 // @param {string} searchItem - text to search pages for
 // @returns {Object} - pages in json
-const getPrefixSearch = async (searchItem) => {
+export const getPrefixSearch = async (searchItem) => {
     const params = {
         action: 'query',
+        format: 'json',
         list: 'prefixsearch',
-        pssearch: searchItem,
-        format: 'json'
+        pssearch: searchItem
     };
-    var item = await wikipediaQueryRSS(WIKIDATA_ENDPOINT, params, NUMBER_OF_RETRIES);
+    var item = await wikipediaQuery(WIKIPEDIA_ENDPOINT_SEARCH, params, NUMBER_OF_RETRIES).then(result=> {return result});
     return item;
 }
 //test
