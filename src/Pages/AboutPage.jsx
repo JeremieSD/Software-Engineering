@@ -28,14 +28,14 @@ class AboutPage extends Component {
       {
         firstName: "Matteo",
         lastName: "McGuinness",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Frontend Team",
         github: "https://github.com/m477301",
       },
       {
         firstName: "Emmet",
         lastName: "Morrin",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Backend Team",
         github: "https://github.com/Unimuspanet",
       },
@@ -49,7 +49,7 @@ class AboutPage extends Component {
       {
         firstName: "Xiaolei",
         lastName: "Zhang",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Frontend Team",
         github: "https://github.com/Xiaoleiii",
       }], currentStudent: true
@@ -64,7 +64,7 @@ class AboutPage extends Component {
           firstName: "Brian",
           lastName: "Lynch",
           year: "3rd Year CS",
-          team: "Backend Team",
+          team: "Frontend Team",
           github: "https://github.com/brianlunch",
         },
         {
@@ -84,21 +84,21 @@ class AboutPage extends Component {
         {
           firstName: "Alex",
           lastName: "Mahon",
-          year: "2rd Year CS",
+          year: "2nd Year CS",
           team: "Frontend Team",
           github: "https://github.com/Juuiko",
         },
         {
           firstName: "Flora",
           lastName: "Molnar",
-          year: "2rd Year CSB",
+          year: "2nd Year CSB",
           team: "Frontend Team",
           github: "https://github.com/flora-m",
         },
         {
           firstName: "Lexes",
           lastName: "Mantiquilla",
-          year: "2rd Year CS",
+          year: "2nd Year CS",
           team: "Backend Team",
           github: "https://github.com/lexesjan",
         }]
@@ -120,28 +120,28 @@ class AboutPage extends Component {
       {
         firstName: "Matteo",
         lastName: "McGuinness",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Frontend Team",
         github: "https://github.com/m477301",
       },
       {
         firstName: "Emmet",
         lastName: "Morrin",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Backend Team",
         github: "https://github.com/Unimuspanet",
       },
       {
         firstName: "Aoife",
         lastName: "Khan",
-        year: "2rd Year CSB",
+        year: "2nd Year CSB",
         team: "Frontend Team",
         github: "https://github.com/aoife-K",
       },
       {
         firstName: "Xiaolei",
         lastName: "Zhang",
-        year: "2rd Year ICS",
+        year: "2nd Year ICS",
         team: "Frontend Team",
         github: "https://github.com/Xiaoleiii",
       }]
