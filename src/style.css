@@ -166,6 +166,28 @@ img {
   border-radius: 50%;
 }
 
+.text-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.text-title-button {
+  margin-left: 15px;
+  border-color: transparent;
+  color: #409eff;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+  outline:none;
+  border: 0 none;
+}
+
+.text-title-button:focus {
+      border: 0 none;
+      outline: none;
+  }
+
 .text-red {
   color: var(--red) !important;
 }
