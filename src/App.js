@@ -11,6 +11,7 @@ import RecentEditSize from './Pages/RecentEditSize';
 import LargestRecentEdits from './Pages/LargestRecentEdits';
 import ProportionFlagged from './Pages/ProportionFlagged';
 import AboutPage from './Pages/AboutPage';
+import PageRevisionsPage from './Pages/PageRevisionsPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
@@ -42,6 +43,7 @@ function App() {
           />
           <Route exact path="/about-page" component={AboutPage} />
           <Route exact path="/feed" component={FeedData} />
+          <Route exact path="/page-revisions" component={PageRevisionsPage} />
         </Switch>
       </Router>
     </div>
