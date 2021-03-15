@@ -13,6 +13,12 @@ class SimpleBarGraph extends Component {
     this.loadData();
   }
 
+  componentDidMount() {
+    this.refreshInterval = setInterval(async () => {
+      await this.refresh();
+    }, this.props.settings.refreshTime);
+  }
+
   tooltip = function(click, url) {
     return (
       <div className="iframe-container">
@@ -42,12 +48,6 @@ class SimpleBarGraph extends Component {
       await method();
     }
   };
-
-  componentDidMount() {
-    this.refreshInterval = setInterval(async () => {
-      await this.refresh();
-    }, this.props.settings.refreshTime);
-  }
 
   render() {
     let margin = {};

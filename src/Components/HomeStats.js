@@ -52,35 +52,25 @@ class HomeStats extends Component {
   render() {
     return (
       <div className="row col-lg-12 mx-auto col-12 justify-content-center  homeStatContainer text-left">
-            
+        <div className="col-lg-3 col-12 homeStat">
+          <h1 id="div1">{this.state.errorCode}</h1>
+          <h1>Items</h1>
+        </div>
 
-            <div className="col-lg-3 col-12 homeStat">
-            <h1 id="div1">{this.state.errorCode}</h1>
-            <h1>Items</h1>
-            </div>
+        <div className="col-lg-3 col-12 homeStat">
+          <h1 id="div2">{this.state.errorCode}</h1>
+          <h1>Edits</h1>
+        </div>
 
-            <div className="col-lg-3 col-12 homeStat">
-            <h1 id="div2">{this.state.errorCode}</h1>
-            <h1>Edits</h1>
-            </div>
+        <div className="col-lg-3 col-12 homeStat">
+          <h1 id="div3">{this.state.errorCode}</h1>
+          <h1>Users</h1>
+        </div>
 
-            <div className="col-lg-3 col-12 homeStat">
-            <h1 id="div3">{this.state.errorCode}</h1>
-            <h1>Users</h1>
-            </div>
-
-            <div className="col-lg-3 col-12  homeStat">
-            <h1 id="div4">{this.state.errorCode}</h1>
-            <h1>Active Users</h1>
-            </div>
-            
-          
-           
-        
-           
-      
-            
-      
+        <div className="col-lg-3 col-12  homeStat">
+          <h1 id="div4">{this.state.errorCode}</h1>
+          <h1>Active Users</h1>
+        </div>
       </div>
     );
   }

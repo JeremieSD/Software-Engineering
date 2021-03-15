@@ -11,146 +11,152 @@ class AboutPage extends Component {
 
     this.state = {
       history: this.props.history,
-      studentList: [{
-        firstName: "Jeremie",
-        lastName: "Sajeev Daniel",
-        year: "3rd Year ICS",
-        team: "Backend Team",
-        github: "https://github.com/JeremieSD",
-      },
-      {
-        firstName: "Conor",
-        lastName: "O'Neill",
-        year: "3rd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/conoro24",
-      },
-      {
-        firstName: "Matteo",
-        lastName: "McGuinness",
-        year: "2nd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/m477301",
-      },
-      {
-        firstName: "Emmet",
-        lastName: "Morrin",
-        year: "2nd Year ICS",
-        team: "Backend Team",
-        github: "https://github.com/Unimuspanet",
-      },
-      {
-        firstName: "Aoife",
-        lastName: "Khan",
-        year: "2rd Year CSB",
-        team: "Frontend Team",
-        github: "https://github.com/aoife-K",
-      },
-      {
-        firstName: "Xiaolei",
-        lastName: "Zhang",
-        year: "2nd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/Xiaoleiii",
-      }], currentStudent: true
+      studentList: [
+        {
+          firstName: 'Jeremie',
+          lastName: 'Sajeev Daniel',
+          year: '3rd Year ICS',
+          team: 'Backend Team',
+          github: 'https://github.com/JeremieSD',
+        },
+        {
+          firstName: 'Conor',
+          lastName: "O'Neill",
+          year: '3rd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/conoro24',
+        },
+        {
+          firstName: 'Matteo',
+          lastName: 'McGuinness',
+          year: '2nd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/m477301',
+        },
+        {
+          firstName: 'Emmet',
+          lastName: 'Morrin',
+          year: '2nd Year ICS',
+          team: 'Backend Team',
+          github: 'https://github.com/Unimuspanet',
+        },
+        {
+          firstName: 'Aoife',
+          lastName: 'Khan',
+          year: '2rd Year CSB',
+          team: 'Frontend Team',
+          github: 'https://github.com/aoife-K',
+        },
+        {
+          firstName: 'Xiaolei',
+          lastName: 'Zhang',
+          year: '2nd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/Xiaoleiii',
+        },
+      ],
+      currentStudent: true,
     };
     this.setData = this.setData.bind(this);
   }
   setData = () => {
-    var list = [];
+    let list = [];
     if (this.state.currentStudent) {
       list = [
         {
-          firstName: "Brian",
-          lastName: "Lynch",
-          year: "3rd Year CS",
-          team: "Frontend Team",
-          github: "https://github.com/brianlunch",
+          firstName: 'Brian',
+          lastName: 'Lynch',
+          year: '3rd Year CS',
+          team: 'Frontend Team',
+          github: 'https://github.com/brianlunch',
         },
         {
-          firstName: "Isobel",
-          lastName: "Mahon",
-          year: "3rd Year CS",
-          team: "Frontend Team",
-          github: "https://github.com/isobelm",
+          firstName: 'Isobel',
+          lastName: 'Mahon',
+          year: '3rd Year CS',
+          team: 'Frontend Team',
+          github: 'https://github.com/isobelm',
         },
         {
-          firstName: "Odhran",
-          lastName: "Mullen",
-          year: "3rd Year CSB",
-          team: "Backend Team",
-          github: "https://github.com/omullan",
+          firstName: 'Odhran',
+          lastName: 'Mullen',
+          year: '3rd Year CSB',
+          team: 'Backend Team',
+          github: 'https://github.com/omullan',
         },
         {
-          firstName: "Alex",
-          lastName: "Mahon",
-          year: "2nd Year CS",
-          team: "Frontend Team",
-          github: "https://github.com/Juuiko",
+          firstName: 'Alex',
+          lastName: 'Mahon',
+          year: '2nd Year CS',
+          team: 'Frontend Team',
+          github: 'https://github.com/Juuiko',
         },
         {
-          firstName: "Flora",
-          lastName: "Molnar",
-          year: "2nd Year CSB",
-          team: "Frontend Team",
-          github: "https://github.com/flora-m",
+          firstName: 'Flora',
+          lastName: 'Molnar',
+          year: '2nd Year CSB',
+          team: 'Frontend Team',
+          github: 'https://github.com/flora-m',
         },
         {
-          firstName: "Lexes",
-          lastName: "Mantiquilla",
-          year: "2nd Year CS",
-          team: "Backend Team",
-          github: "https://github.com/lexesjan",
-        }]
+          firstName: 'Lexes',
+          lastName: 'Mantiquilla',
+          year: '2nd Year CS',
+          team: 'Backend Team',
+          github: 'https://github.com/lexesjan',
+        },
+      ];
     } else {
-      list = [{
-        firstName: "Jeremie",
-        lastName: "Sajeev Daniel",
-        year: "3rd Year ICS",
-        team: "Backend Team",
-        github: "https://github.com/JeremieSD",
-      },
-      {
-        firstName: "Conor",
-        lastName: "O'Neill",
-        year: "3rd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/conoro24",
-      },
-      {
-        firstName: "Matteo",
-        lastName: "McGuinness",
-        year: "2nd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/m477301",
-      },
-      {
-        firstName: "Emmet",
-        lastName: "Morrin",
-        year: "2nd Year ICS",
-        team: "Backend Team",
-        github: "https://github.com/Unimuspanet",
-      },
-      {
-        firstName: "Aoife",
-        lastName: "Khan",
-        year: "2nd Year CSB",
-        team: "Frontend Team",
-        github: "https://github.com/aoife-K",
-      },
-      {
-        firstName: "Xiaolei",
-        lastName: "Zhang",
-        year: "2nd Year ICS",
-        team: "Frontend Team",
-        github: "https://github.com/Xiaoleiii",
-      }]
+      list = [
+        {
+          firstName: 'Jeremie',
+          lastName: 'Sajeev Daniel',
+          year: '3rd Year ICS',
+          team: 'Backend Team',
+          github: 'https://github.com/JeremieSD',
+        },
+        {
+          firstName: 'Conor',
+          lastName: "O'Neill",
+          year: '3rd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/conoro24',
+        },
+        {
+          firstName: 'Matteo',
+          lastName: 'McGuinness',
+          year: '2nd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/m477301',
+        },
+        {
+          firstName: 'Emmet',
+          lastName: 'Morrin',
+          year: '2nd Year ICS',
+          team: 'Backend Team',
+          github: 'https://github.com/Unimuspanet',
+        },
+        {
+          firstName: 'Aoife',
+          lastName: 'Khan',
+          year: '2nd Year CSB',
+          team: 'Frontend Team',
+          github: 'https://github.com/aoife-K',
+        },
+        {
+          firstName: 'Xiaolei',
+          lastName: 'Zhang',
+          year: '2nd Year ICS',
+          team: 'Frontend Team',
+          github: 'https://github.com/Xiaoleiii',
+        },
+      ];
     }
     this.setState({
       currentStudent: !this.state.currentStudent,
-      studentList: list
-    })
-  }
+      studentList: list,
+    });
+  };
   render() {
     return (
       <div className="aboutPageContainer">
@@ -236,11 +242,18 @@ class AboutPage extends Component {
               </div>
               <br />
               <div className="text-title">
-              <h3 className="text-red">Students</h3>
-              <button className="text-button text-title-button" onClick={this.setData}>{this.state.currentStudent?"see previous team":"see present team"}</button>
+                <h3 className="text-red">Students</h3>
+                <button
+                  className="text-button text-title-button"
+                  onClick={this.setData}
+                >
+                  {this.state.currentStudent
+                    ? 'see previous team'
+                    : 'see present team'}
+                </button>
               </div>
               <div className="card-deck  text-center">
-                {this.state.studentList.slice(0, 3).map(function (item, key) {
+                {this.state.studentList.slice(0, 3).map(function(item, key) {
                   return (
                     <div className="card card-profile" key={key}>
                       <div className="card-body">
@@ -265,11 +278,11 @@ class AboutPage extends Component {
                         </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
               <div className="card-deck  text-center">
-                {this.state.studentList.slice(3, 6).map(function (item, key) {
+                {this.state.studentList.slice(3, 6).map(function(item, key) {
                   return (
                     <div className="card card-profile" key={key}>
                       <div className="card-body">
@@ -294,7 +307,7 @@ class AboutPage extends Component {
                         </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
