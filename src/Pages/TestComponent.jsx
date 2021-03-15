@@ -27,7 +27,7 @@ class TestComponent extends Component {
   render() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <SearchBar settings={searchSuggestions} paused={this.state.paused} />
+        <SearchBar settings={searchSuggestions} />
       </div>
     );
   }

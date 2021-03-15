@@ -8,10 +8,7 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       data: null,
-      loaded: false,
     };
-
-    this.loadData();
   }
 
   // useEffect(() => {
@@ -76,6 +73,7 @@ class SearchBar extends Component {
     // no search empty values
     //console.log('empty values');
     // }
+    this.loadData();
   };
 
   render() {

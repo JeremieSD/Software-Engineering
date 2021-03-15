@@ -3,7 +3,7 @@ const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const MEDIAWIKI_ENDPOINT = 'https://www.mediawiki.org/w/api.php';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
-var Feed = require('rss-to-json');
+// var Feed = require('rss-to-json');
 
 //Send you all the information regarding a user
 //Returns whole User Query:
@@ -11,7 +11,7 @@ var Feed = require('rss-to-json');
 //link: link to user page
 //language: usually repersented like en
 //generator: no idea what this is
-//lastBuildDate:Last time it was queried 
+//lastBuildDate:Last time it was queried
 //item: Array of items that the user edited
 //item.title: Title of what the edit was on
 //item.link: Link to the changes
@@ -22,19 +22,18 @@ var Feed = require('rss-to-json');
 //item.comments: comment of the change
 //@params {name} - User name
 //@returns {json} - regardless of whether the user has done anything or not
-export const userSearch = async name => {
-  const params = {
-    action: 'feedcontributions',
-    user: name,
-  };
-  var item = await wikipediaQueryRSS(
-    MEDIAWIKI_ENDPOINT,
-    params,
-    NUMBER_OF_RETRIES
-  );
-  console.log(item);
-  return item;
-};
+// export const userSearch = async name => {
+//   const params = {
+//     action: 'feedcontributions',
+//     user: name,
+//   };
+//   var item = await wikipediaQueryRSS(
+//     MEDIAWIKI_ENDPOINT,
+//     params,
+//     NUMBER_OF_RETRIES
+//   );
+//   return item;
+// };
 //SuperFunction for page revisions search
 //Returns Json array of revisions:
 //Each index will contain one revision which will all contain
@@ -47,7 +46,7 @@ export const userSearch = async name => {
 //@returns {Promise} returns revisions if exists otherwise returns -1
 export const pageRevisionsSearch = async searchitem => {
   var item = await getWikibaseItem(searchitem);
-  if (item == -1) {
+  if (item === -1) {
     return -1;
   }
   item = await getRevisionsOfPage(item);
@@ -82,19 +81,19 @@ const wikipediaQuery = async (endpoint, params, n) => {
  * @param {Object} params - Object of parameters to use when querying
  * @param {number} n - Number of times to retry if failure occurs
  * @returns {Promise.<Object>}
- */
-const wikipediaQueryRSS = async (endpoint, params, n) => {
-  try {
-    const paramsString = new URLSearchParams(params).toString();
-    const url = endpoint + '?' + paramsString;
-    return await Feed.load(url);
-  } catch (err) {
-    if (n === 1) {
-      throw err;
-    }
-    return setTimeout(wikipediaQueryRSS(endpoint, params, n - 1), 500);
-  }
-};
+//  */
+// const wikipediaQueryRSS = async (endpoint, params, n) => {
+//   try {
+//     const paramsString = new URLSearchParams(params).toString();
+//     const url = endpoint + '?' + paramsString;
+//     return await Feed.load(url);
+//   } catch (err) {
+//     if (n === 1) {
+//       throw err;
+//     }
+//     return setTimeout(wikipediaQueryRSS(endpoint, params, n - 1), 500);
+//   }
+// };
 // Helper function to check whether something is a json string
 // @Param {string} str - string to be checked to see if it is in valid json
 // @returns {boolean} - returns whether the string is in valid json format
@@ -112,7 +111,7 @@ function isJson(str) {
 //@returns {promise} returns -1 if it fails to find it and otherwise returns wikibase_item
 const extraResult = async json1 => {
   var temp = -1;
-  while (typeof json1[temp] == 'undefined') {
+  while (typeof json1[temp] === 'undefined') {
     temp = temp + 1;
   }
   if (json1[temp].hasOwnProperty('pageprops')) {
@@ -126,7 +125,7 @@ const extraResult = async json1 => {
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const getRevisions = async json1 => {
   var temp = 0;
-  while (typeof json1[temp] == 'undefined') {
+  while (typeof json1[temp] === 'undefined') {
     temp = temp + 1;
   }
   if (json1[temp].hasOwnProperty('revisions')) {
