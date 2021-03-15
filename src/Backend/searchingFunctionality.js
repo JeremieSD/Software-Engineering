@@ -42,7 +42,7 @@ export const userSearch = async(name) =>{
 //@returns {Promise} returns revisions if exists otherwise returns -1
 export const pageRevisionsSearch = async(searchitem) =>{
     var item = await (getWikibaseItem(searchitem));
-    if (item == -1){
+    if (item === -1){
         return -1;
     }
     item = await getRevisionsOfPage(item);
@@ -109,7 +109,7 @@ function isJson(str) {
 //@returns {promise} returns -1 if it fails to find it and otherwise returns wikibase_item 
 const extraResult = async (json1) =>{
     var temp = -1;
-    while (typeof json1[temp] == 'undefined'){
+    while (typeof json1[temp] === 'undefined'){
         temp = temp + 1;
     }
     if (json1[temp].hasOwnProperty('pageprops')){
@@ -122,7 +122,7 @@ const extraResult = async (json1) =>{
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const getRevisions = async (json1) =>{
     var temp = 0;
-    while (typeof json1[temp] == 'undefined'){
+    while (typeof json1[temp] === 'undefined'){
         temp = temp + 1;
     }
     if (json1[temp].hasOwnProperty('revisions')){
