@@ -62,7 +62,7 @@ class NavbarLocal extends Component {
               as={Link}
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/isobelm/Software-Engineering"
+              href="https://github.com/JeremieSD/Software-Engineering"
               className={
                 activePage.endsWith('/ksknc') ? 'nav-link--active' : 'nav-link'
               }
