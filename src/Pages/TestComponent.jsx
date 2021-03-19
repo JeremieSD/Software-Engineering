@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import SearchBar from '../Components/SearchBar';
-import { pageRevisionsSearch } from '../Backend/searchingFunctionality';
+import { getPrefixSearch } from '../Backend/searchingFunctionality';
 
 export const searchSuggestions = {
   getData: async function() {
     console.log('dataFetch');
-    return await pageRevisionsSearch('Star Wars');
+    return await getPrefixSearch('Star Wars');
   },
   // refreshTime: 2000,
   // refreshMethod: function() {

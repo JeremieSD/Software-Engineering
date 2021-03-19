@@ -110,7 +110,7 @@ class SearchBar extends Component {
                 borderStyle: 'solid',
                 borderColor: '#d4d4d4',
               }}
-            ></input>
+            />
             <input type="submit" style={{}} />
 
             {/* {suggestions.map(suggestion => {
