@@ -12,6 +12,8 @@ import { LargestRecentEditsSettings } from './LargestRecentEdits';
 import { RecentEditSizeSettings } from './RecentEditSize';
 import { ProportionFlaggedSettings } from './ProportionFlagged';
 
+import { NumberOfChangesSettings } from './NumberOfChanges';
+
 //This is the dashboard page, it shows the feed and all of our graphs
 
 class HomePage extends Component {
