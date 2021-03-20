@@ -45,7 +45,7 @@ const fetch = require('node-fetch');
 //@Param {string} searchitem - item to query for revisions
 //@returns {Promise} returns revisions if exists otherwise returns -1
 export const pageRevisionsSearch = async searchitem => {
-  var item = await getWikibaseItem(searchitem);
+  let item = await getWikibaseItem(searchitem);
   if (item === -1) {
     return -1;
   }
@@ -65,7 +65,7 @@ export const pageRevisionsSearch = async searchitem => {
 const wikipediaQuery = async (endpoint, params, n) => {
   try {
     const paramsString = new URLSearchParams(params).toString();
-    const url = endpoint + '?' + paramsString;
+    const url = endpoint + '?' + paramsString + '&origin=*';
     return await fetch(url).then(response => response.json());
   } catch (err) {
     if (n === 1) {
@@ -110,7 +110,7 @@ function isJson(str) {
 //@param {json} - json straight from query
 //@returns {promise} returns -1 if it fails to find it and otherwise returns wikibase_item
 const extraResult = async json1 => {
-  var temp = -1;
+  let temp = -1;
   while (typeof json1[temp] === 'undefined') {
     temp = temp + 1;
   }
@@ -124,7 +124,7 @@ const extraResult = async json1 => {
 //@param {json} - json straight from query
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const getRevisions = async json1 => {
-  var temp = 0;
+  let temp = 0;
   while (typeof json1[temp] === 'undefined') {
     temp = temp + 1;
   }
@@ -163,7 +163,7 @@ const getRevisionsOfPage = async qid => {
     rvlimit: 500,
     rvdir: 'older',
   };
-  var item = await wikipediaQuery(
+  let item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
@@ -181,7 +181,7 @@ export const getPrefixSearch = async searchItem => {
     list: 'prefixsearch',
     pssearch: searchItem,
   };
-  var item = await wikipediaQuery(
+  let item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES

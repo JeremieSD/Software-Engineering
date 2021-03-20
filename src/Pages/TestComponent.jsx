@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import SearchBar from '../Components/SearchBar';
+// import { pageRevisionsSearch } from '../Backend/searchingFunctionality';
 import { getPrefixSearch } from '../Backend/searchingFunctionality';
+import SearchBar from '../Components/SearchBar';
 
 export const searchSuggestions = {
-  getData: async function() {
+  getData: async function(val) {
     console.log('dataFetch');
-    return await getPrefixSearch('Star Wars');
+    // return await pageRevisionsSearch(val);
+    return await getPrefixSearch(val);
   },
-  // refreshTime: 2000,
-  // refreshMethod: function() {
-  //   this.loadData();
-  // },
 };
 
 class TestComponent extends Component {
