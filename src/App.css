@@ -67,19 +67,18 @@
     background-color: #fff;
   }
 
-  .homeNav{
+  .homeNav {
     margin-top: 7%;
   }
 
-  .homeStat{
+  .homeStat {
     border-top: 1px solid var(--red);
     border-bottom: 1px solid var(--red);
-    border-right:none;
-    border-left:none;
+    border-right: none;
+    border-left: none;
     border-radius: 2%;
   }
 }
-
 
 .navbar-light .navbar-nav .nav-link {
   color: var(--p);

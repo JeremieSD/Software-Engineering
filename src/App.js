@@ -11,6 +11,7 @@ import RecentEditSize from './Pages/RecentEditSize';
 import LargestRecentEdits from './Pages/LargestRecentEdits';
 import ProportionFlagged from './Pages/ProportionFlagged';
 import AboutPage from './Pages/AboutPage';
+import TestComponent from './Pages/TestComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/page" component={TestPage} />
+          <Route exact path="/testComponent" component={TestComponent} />
           <Route
             exact
             path="/users-by-most-edits"
