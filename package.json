@@ -22,6 +22,7 @@
     "react-native-rss-parser": "^1.4.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.3",
+    "rss-parser": "^3.12.0",
     "wikibase-sdk": "^7.2.1"
   },
   "devDependencies": {
@@ -30,7 +31,7 @@
     "gh-pages": "^2.2.0",
     "mocha": "^8.3.0",
     "prettier": "^1.18.2",
-    "rss-to-json": "^1.1.2"
+    "rss-to-json": "github:nasa8x/rss-to-json"
   },
   "prettier": {
     "trailingComma": "es5",
