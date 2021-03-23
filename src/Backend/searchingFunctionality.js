@@ -4,24 +4,26 @@ const DESCRIPTION_REST_API = 'https://en.wikipedia.org/api/rest_v1/page/summary/
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 
-/** 
-  Send you all the information regarding a user
-  Returns whole User Query:
-  title: Think this is useless, havent explored too many of it though but it says that its user contributions and thats about it
-  link: link to user page
-  language: usually repersented like en
-  generator: no idea what this is
-  lastBuildDate:Last time it was queried
-  item: Array of items that the user edited
-  item.title: Title of what the edit was on
-  item.link: Link to the changes
-  item.guid: appears to be the same as link although further exploration is needed
-  item.description: Description of the change, can be used with NLP package to get links
-  item.pubDate: Format = Wed, 24 Feb 2021 01:22:25 GMT
-  item.dc:creator: Returns username of editor to item
-  item.comments: comment of the change
+/*
+  userSearch: gets a json list of the 500 most recent contributions made my a user, along with a key to get the next 500
+  '' - String
+  # - number
+  Json format:
+  {
+    userid: #,
+    user: '',
+    pageid: #,
+    revid: #,
+    parentid: #,
+    ns: #,
+    title: '',
+    timestamp: 'YYYY-MM-DDTHH:MM:SSZ',
+    comment: '',
+    size: #
+  }
   @params {name} - User name
-  @returns {Promise} - regardless of whether the user has done anything or not
+  @returns {Promise, Promise} - first element contains a promise of a json list of contributions made by the user
+                                second element contains a key to get the next 500 contributions made by the user, -1 if end of list
 */
 export const userSearch = async name => {
   const params = {
@@ -39,6 +41,28 @@ export const userSearch = async name => {
   return item;
 };
 
+/*
+  userSearchCont: gets a continued json list of the 500 most recent contributions made my a user, along with a key to get the next 500
+  '' - String
+  # - number
+  Json format:
+  {
+    userid: #,
+    user: '',
+    pageid: #,
+    revid: #,
+    parentid: #,
+    ns: #,
+    title: '',
+    timestamp: 'YYYY-MM-DDTHH:MM:SSZ',
+    comment: '',
+    size: #
+  }
+  @params {name, cont} - User name
+                         continue key
+  @returns {Promise, Promise} - first element contains a promise of a json list of contributions made by the user
+                                second element contains a key to get the next 500 contributions made by the user, -1 if end of list
+*/
 export const userSearchCont = async (name, cont) => {
   const params = {
     action: 'query',
@@ -56,17 +80,22 @@ export const userSearchCont = async (name, cont) => {
   return item;
 };
 
-/** 
-SuperFunction for page revisions search
-Returns Json array of revisions:
-Each index will contain one revision which will all contain
-revid: id for the revision that took place
-parentid: id for the revision that was before it
-user: user who did the revision
-timestamp: yyyy-mm-ddT24hrZ format
-comment: comment on whatever the user decided
-@Param {string} searchitem - item to query for revisions
-@returns {Promise} returns array of revisions if exists otherwise returns -1 and another element which is the key for continuing the search
+/*
+  pageRevisionsSearch: gets a json list of the last 500 page edits, along with a key to get to the next 500
+  '' - String
+  # - number
+  Json format:
+  {
+    revid: #,
+    parentid: #,
+    user: '',
+    anon: '',
+    timestamp: 'YYYY-MM-DDTHH:MM:SSZ',
+    comment: ''
+  }
+  @params {searchItem} - page query
+  @returns {Promise, Promise} - first element contains a promise of a json list of page edits
+                                second element contains a key to get the next 500 page edits, -1 if end of list
 */
 export const pageRevisionsSearch = async searchitem => {
   let item = await getWikibaseItem(searchitem);
@@ -77,17 +106,23 @@ export const pageRevisionsSearch = async searchitem => {
   return item;
 };
 
-/** 
-SuperFunction for page revisions continued search
-Returns Json array of revisions:
-Each index will contain one revision which will all contain
-revid: id for the revision that took place
-parentid: id for the revision that was before it
-user: user who did the revision
-timestamp: yyyy-mm-ddT24hrZ format
-comment: comment on whatever the user decided
-@Param {string} searchitem - item to query for revisions
-@returns {Promise} returns array of revisions if exists otherwise returns -1 and another element which is the key for continuing the search
+/*
+  pageRevisionsSearchCont: gets a json list of the last 500 page edits, along with a key to get to the next 500
+  '' - String
+  # - number
+  Json format:
+  {
+    revid: #,
+    parentid: #,
+    user: '',
+    anon: '',
+    timestamp: 'YYYY-MM-DDTHH:MM:SSZ',
+    comment: ''
+  }
+  @params {searchItem, cont} - page query
+                               continue key
+  @returns {Promise, Promise} - first element contains a promise of a json list of page edits
+                                second element contains a key to get the next 500 page edits, -1 if end of list
 */
 export const pageRevisionsSearchCont = async (searchitem,cont) => {
   let item = await getWikibaseItem(searchitem);
@@ -119,22 +154,6 @@ const wikipediaQuery = async (endpoint, params, n) => {
     return setTimeout(wikipediaQuery(endpoint, params, n - 1), 500);
   }
 };
-
-
-
-/** 
-  Helper function to check whether something is a json string
-  @Param {string} str - string to be checked to see if it is in valid json
-  @returns {boolean} - returns whether the string is in valid json format
-*/
-function isJson(str) {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
 
 //Helper function to return wikibase_item necessary
 //@param {json} - json straight from query
@@ -240,9 +259,21 @@ const getRevisionsHelper = async (pages, result) =>{
     return [getRevisions(pages),-1];
   }
 };
-//Grabs 10 items with pages close to the input text
-// @param {string} searchItem - text to search pages for
-// @returns {Object} - pages in json
+
+/*
+  getPrefixSearch: gets a prefix search of 10 items from an input string
+  '' - String
+  # - number
+  Json nested inside query.prefixsearch
+  Json format:
+  {
+    ns: #,
+    title: '',
+    pageid: #
+  }
+  @params {searchItem} - prefix search item
+  @returns {Promise} - promise of 10 prefix search results
+*/
 export const getPrefixSearch = async searchItem => {
   const params = {
     action: 'query',
