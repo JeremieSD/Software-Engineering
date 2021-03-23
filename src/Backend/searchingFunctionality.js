@@ -149,6 +149,17 @@ const getRevisions = async json1 => {
   return -1;
 };
 
+//Helper function to return revisions
+//@param {json} - json straight from query
+//@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
+const userContributionsSeperator = async (usercontribs, result) => {
+  if (result.hasOwnProperty('continue')){
+    return [getcontribs(usercontribs),result['continue'].rvcontinue];
+  }else{
+    return [getcontribs(usercontribs),-1];
+  }
+};
+
 //Grabs wikibase_id from a search
 //@param {string} searchItem - Item to search Qid for
 //@returns {Object} -1 or QID
