@@ -31,7 +31,8 @@
     "gh-pages": "^2.2.0",
     "mocha": "^8.3.0",
     "prettier": "^1.18.2",
-    "rss-to-json": "github:nasa8x/rss-to-json"
+    "rss-to-json": "github:nasa8x/rss-to-json",
+    "xmlhttprequest": "^1.8.0"
   },
   "prettier": {
     "trailingComma": "es5",
