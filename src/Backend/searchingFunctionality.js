@@ -23,7 +23,7 @@ const fetch = require('node-fetch');
   @params {name} - User name
   @returns {Promise} - regardless of whether the user has done anything or not
 */
-const userSearch = async name => {
+export const userSearch = async name => {
   const params = {
     action: 'query',
     format: 'json',
@@ -32,6 +32,23 @@ const userSearch = async name => {
     ucuser: name
   };
   var item = await wikipediaQuery(
+    WIKIPEDIA_ENDPOINT_SEARCH,
+    params,
+    NUMBER_OF_RETRIES
+  ).then(result => userContributionsSeperator(result.query.usercontribs,result));
+  return item;
+};
+
+export const userSearchCont = async (name, cont) => {
+  const params = {
+    action: 'query',
+    format: 'json',
+    list: 'usercontribs',
+    uclimit: 500,
+    ucuser: name,
+    uccontinue: cont
+  };
+  let item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
@@ -51,13 +68,12 @@ comment: comment on whatever the user decided
 @Param {string} searchitem - item to query for revisions
 @returns {Promise} returns array of revisions if exists otherwise returns -1 and another element which is the key for continuing the search
 */
-const pageRevisionsSearch = async searchitem => {
+export const pageRevisionsSearch = async searchitem => {
   let item = await getWikibaseItem(searchitem);
   if (item === -1) {
     return -1;
   }
   item = await getRevisionsOfPage(item);
-  console.log(item)
   return item;
 };
 
@@ -73,13 +89,12 @@ comment: comment on whatever the user decided
 @Param {string} searchitem - item to query for revisions
 @returns {Promise} returns array of revisions if exists otherwise returns -1 and another element which is the key for continuing the search
 */
-const pageRevisionsSearchCont = async (searchitem,cont) => {
+export const pageRevisionsSearchCont = async (searchitem,cont) => {
   let item = await getWikibaseItem(searchitem);
   if (item === -1) {
     return -1;
   }
   item = await getRevisionsOfPageCont(item,cont);
-  console.log(item)
   return item;
 };
 
@@ -154,9 +169,9 @@ const getRevisions = async json1 => {
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const userContributionsSeperator = async (usercontribs, result) => {
   if (result.hasOwnProperty('continue')){
-    return [getcontribs(usercontribs),result['continue'].rvcontinue];
+    return [usercontribs, result['continue'].uccontinue];
   }else{
-    return [getcontribs(usercontribs),-1];
+    return [usercontribs, -1];
   }
 };
 
@@ -210,7 +225,6 @@ const getRevisionsOfPageCont = async (qid,cont) => {
     rvlimit: 500,
     rvcontinue: cont
   };
-  console.log(cont);
   let item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
@@ -229,7 +243,7 @@ const getRevisionsHelper = async (pages, result) =>{
 //Grabs 10 items with pages close to the input text
 // @param {string} searchItem - text to search pages for
 // @returns {Object} - pages in json
-const getPrefixSearch = async searchItem => {
+export const getPrefixSearch = async searchItem => {
   const params = {
     action: 'query',
     format: 'json',
@@ -245,5 +259,3 @@ const getPrefixSearch = async searchItem => {
   });
   return item;
 };
-//test
-// console.log(pageRevisionsSearchCont('Albert Einstein','20190308010343|876984702'));
