@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GraphPage from './GraphPage';
 import PieChart from '../Components/PieChart';
 import { pageRevisionsSearch } from '../Backend/searchingFunctionality';
+import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
 export const NumberOfChangesSettings = {
   getData: async function() {
