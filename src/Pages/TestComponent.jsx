@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-// import { pageRevisionsSearch } from '../Backend/searchingFunctionality';
+import { pageRevisionsSearch } from '../Backend/searchingFunctionality';
 import { getPrefixSearch } from '../Backend/searchingFunctionality';
 import SearchBar from '../Components/SearchBar';
 
 export const searchSuggestions = {
   getData: async function(val) {
     console.log('dataFetch');
-    // return await pageRevisionsSearch(val);
     return await getPrefixSearch(val);
+  },
+};
+
+export const pageRevisionsCall = {
+  getData: async function(val) {
+    console.log('dataFetch');
+    return await pageRevisionsSearch(val);
   },
 };
 
@@ -25,7 +31,7 @@ class TestComponent extends Component {
   render() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <SearchBar settings={searchSuggestions} />
+        <SearchBar settings={searchSuggestions} pageRev={pageRevisionsCall} />
       </div>
     );
   }

@@ -3,15 +3,25 @@ const SearchBar = props => {
   const [search, setSearch] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [pub, setPub] = useState(false);
-  // const [results, setResults] = useState(null);
+  const [results, setResults] = useState(null);
 
   const loadData = value => {
     const getData = props.settings.getData.bind(this);
+    // console.log('dataToBeFetched ');
+    getData(value).then(data => {
+      // console.log('data ' + data);
+      // setResults(data);
+      parseData(data);
+    });
+  };
+
+  const callPageRevisions = value => {
+    const getData = props.pageRev.getData.bind(this);
     console.log('dataToBeFetched ');
     getData(value).then(data => {
       console.log('data ' + data);
-      // setResults(data);
-      parseData(data);
+      setResults(data);
+      // parseData(data);
     });
   };
 
@@ -27,11 +37,13 @@ const SearchBar = props => {
         return [...suggestions, sugg];
       });
     });
-    console.log('finish');
+    // console.log('finish');
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log('Submit');
+    callPageRevisions(search);
   };
 
   useEffect(() => {
