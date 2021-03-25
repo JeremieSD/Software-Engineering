@@ -16,7 +16,7 @@ const SearchBar = props => {
   };
 
   const parseData = results => {
-    console.log(results)
+    console.log(results);
     const values = results.query.prefixsearch;
     setSuggestions([]);
     values.map(obj => {
@@ -73,7 +73,13 @@ const SearchBar = props => {
               borderColor: '#d4d4d4',
             }}
           />
-          <input type="submit" onClick={ ()=>{props.searchValue(search)}} style={{}} />
+          <input
+            type="submit"
+            onClick={() => {
+              props.searchValue(search);
+            }}
+            style={{}}
+          />
 
           {search &&
             suggestions.map(suggestion => {

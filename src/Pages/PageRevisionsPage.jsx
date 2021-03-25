@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as utils from '../Backend/searchingFunctionality'
+import * as utils from '../Backend/searchingFunctionality';
 
 class PageRevisionsPage extends Component {
   constructor(props) {
@@ -14,21 +14,21 @@ class PageRevisionsPage extends Component {
       ifConfirm: true,
       firmsList: [],
       recentChanges: [],
-      paused: false
+      paused: false,
     };
-    this.onClicks = this.onClicks.bind(this)
+    this.onClicks = this.onClicks.bind(this);
   }
 
   useEffect() {
     const refresh = setInterval(() => {
       if (!paused && this.state.value) {
         const item = utils.pageRevisionsSearch(this.state.value).then(str => {
-          this.setState({ recentChanges: str })
-        })
+          this.setState({ recentChanges: str });
+        });
       }
     }, 5000);
     return () => clearInterval(refresh);
-  };
+  }
 
   togglePause() {
     setPaused(prevPause => !prevPause);
@@ -36,14 +36,14 @@ class PageRevisionsPage extends Component {
 
   //匹配列鼠标点击事件
   onClicks(value) {
-    this.setState({ value: value })
+    this.setState({ value: value });
     //输入不为空
     const item = utils.pageRevisionsSearch(value).then(str => {
-      str[0].then(value=>{
-        console.log(value)
-        this.setState({ recentChanges: value })
-      })
-    })
+      str[0].then(value => {
+        console.log(value);
+        this.setState({ recentChanges: value });
+      });
+    });
   }
   // //input输入框点击事件
   // inputClick = () => {
@@ -64,17 +64,21 @@ class PageRevisionsPage extends Component {
                 <form className="text-left" onChange={this.togglePause}>
                   <label>
                     <input type="checkbox" /> Paused
-        </label>
+                  </label>
                 </form>
                 <ul className="search-list-page-group">
                   {this.state.recentChanges.map((item, index) => (
                     <li className="list-group-item text-left" key={index}>
                       <div
                         className={
-                          item.scores?.damaging?.score?.prediction ? 'text-red' : ''
+                          item.scores?.damaging?.score?.prediction
+                            ? 'text-red'
+                            : ''
                         }
                       >
-                        {`User ${item.user} action ${getTimeDifference(item.timestamp)} seconds ago`}
+                        {`User ${item.user} action ${getTimeDifference(
+                          item.timestamp
+                        )} seconds ago`}
                       </div>
                     </li>
                   ))}
@@ -103,7 +107,10 @@ class PageRevisionsPage extends Component {
                     </datalist>
                   </span>
                 </span> */}
-                <SearchBar settings={SearchSettings} searchValue={this.onClicks.bind(this)} />
+                <SearchBar
+                  settings={SearchSettings}
+                  searchValue={this.onClicks.bind(this)}
+                />
               </div>
               {/* <div >
                 <div className="match" id="adepmatch" >
@@ -124,12 +131,12 @@ class PageRevisionsPage extends Component {
   }
 }
 const SearchSettings = {
-  getData: async (value) => {
-    var data;
+  getData: async value => {
+    let data;
     const item = await utils.getPrefixSearch(value).then(str => {
-      console.log(str)
+      console.log(str);
       data = str;
-    })
+    });
     return data;
   },
 };

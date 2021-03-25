@@ -1,6 +1,7 @@
 const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
-const DESCRIPTION_REST_API = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+const DESCRIPTION_REST_API =
+  'https://en.wikipedia.org/api/rest_v1/page/summary/';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 
@@ -31,13 +32,15 @@ export const userSearch = async name => {
     format: 'json',
     list: 'usercontribs',
     uclimit: 500,
-    ucuser: name
+    ucuser: name,
   };
-  var item = await wikipediaQuery(
+  let item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => userContributionsSeperator(result.query.usercontribs,result));
+  ).then(result =>
+    userContributionsSeperator(result.query.usercontribs, result)
+  );
   return item;
 };
 
@@ -70,13 +73,15 @@ export const userSearchCont = async (name, cont) => {
     list: 'usercontribs',
     uclimit: 500,
     ucuser: name,
-    uccontinue: cont
+    uccontinue: cont,
   };
   let item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => userContributionsSeperator(result.query.usercontribs,result));
+  ).then(result =>
+    userContributionsSeperator(result.query.usercontribs, result)
+  );
   return item;
 };
 
@@ -124,12 +129,12 @@ export const pageRevisionsSearch = async searchitem => {
   @returns {Promise, Promise} - first element contains a promise of a json list of page edits
                                 second element contains a key to get the next 500 page edits, -1 if end of list
 */
-export const pageRevisionsSearchCont = async (searchitem,cont) => {
+export const pageRevisionsSearchCont = async (searchitem, cont) => {
   let item = await getWikibaseItem(searchitem);
   if (item === -1) {
     return -1;
   }
-  item = await getRevisionsOfPageCont(item,cont);
+  item = await getRevisionsOfPageCont(item, cont);
   return item;
 };
 
@@ -187,9 +192,9 @@ const getRevisions = async json1 => {
 //@param {json} - json straight from query
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const userContributionsSeperator = async (usercontribs, result) => {
-  if (result.hasOwnProperty('continue')){
+  if (result.hasOwnProperty('continue')) {
     return [usercontribs, result['continue'].uccontinue];
-  }else{
+  } else {
     return [usercontribs, -1];
   }
 };
@@ -226,7 +231,7 @@ const getRevisionsOfPage = async qid => {
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages,result));
+  ).then(result => getRevisionsHelper(result.query.pages, result));
   return item;
 };
 
@@ -234,7 +239,7 @@ const getRevisionsOfPage = async qid => {
 // @param {string} qid - id to search revisions for
 // @param {string} cont - key to get next results
 // @returns {Object} -1 or revisions in json
-const getRevisionsOfPageCont = async (qid,cont) => {
+const getRevisionsOfPageCont = async (qid, cont) => {
   const params = {
     action: 'query',
     format: 'json',
@@ -242,21 +247,21 @@ const getRevisionsOfPageCont = async (qid,cont) => {
     titles: qid,
     rvprops: 'ids|timestamp|flags|comment|user',
     rvlimit: 500,
-    rvcontinue: cont
+    rvcontinue: cont,
   };
   let item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages,result));
+  ).then(result => getRevisionsHelper(result.query.pages, result));
   return item;
 };
 
-const getRevisionsHelper = async (pages, result) =>{
-  if (result.hasOwnProperty('continue')){
-    return [getRevisions(pages),result['continue'].rvcontinue];
-  }else{
-    return [getRevisions(pages),-1];
+const getRevisionsHelper = async (pages, result) => {
+  if (result.hasOwnProperty('continue')) {
+    return [getRevisions(pages), result['continue'].rvcontinue];
+  } else {
+    return [getRevisions(pages), -1];
   }
 };
 
