@@ -35,10 +35,7 @@ class GraphPage extends Component {
               </form>
             </p>
           </div>
-          <div className="col-lg-9 col-12">
-            {this.props.graph}
-          </div>
-
+          <div className="col-lg-9 col-12">{this.props.graph}</div>
         </div>
       </div>
     );
