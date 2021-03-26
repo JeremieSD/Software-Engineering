@@ -2,6 +2,7 @@ const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const DESCRIPTION_REST_API =
   'https://en.wikipedia.org/api/rest_v1/page/summary/';
+const DBPEDIA_SPOTLIGHT_API = 'api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;

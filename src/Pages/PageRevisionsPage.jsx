@@ -16,14 +16,14 @@ class PageRevisionsPage extends Component {
       firmsList: [],
       recentChanges: [],
     };
-    this.onClicks = this.onClicks.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   //Match column mouse click events
   onClick(value) {
     this.feed.onclick(value);
   }
-	
+
   render() {
     return (
       <div>
@@ -31,12 +31,20 @@ class PageRevisionsPage extends Component {
         <div className="row justify-content-left text-dark">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div className="feedContainer">
-              <PageFeed value={this.state.value} onRef={(ref)=>{this.feed = ref}}/>
+              <PageFeed
+                value={this.state.value}
+                onRef={ref => {
+                  this.feed = ref;
+                }}
+              />
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div>
-                <SearchBar settings={SearchSettings} searchValue={this.onClick.bind(this)} />
+              <SearchBar
+                settings={SearchSettings}
+                searchValue={this.onClick.bind(this)}
+              />
             </div>
           </div>
         </div>
