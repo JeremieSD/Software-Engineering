@@ -1,10 +1,11 @@
 const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
-const DESCRIPTION_REST_API = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+const DESCRIPTION_REST_API =
+  'https://en.wikipedia.org/api/rest_v1/page/summary/';
 const DBPEDIA_SPOTLIGHT_API = 'https://api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 /*
   userSearch: gets a json list of the 500 most recent contributions made my a user, along with a key to get the next 500
@@ -33,13 +34,15 @@ export const userSearch = async name => {
     format: 'json',
     list: 'usercontribs',
     uclimit: 500,
-    ucuser: name
+    ucuser: name,
   };
-  var item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => userContributionsSeperator(result.query.usercontribs,result));
+  ).then(result =>
+    userContributionsSeperator(result.query.usercontribs, result)
+  );
   return item;
 };
 
@@ -72,13 +75,15 @@ export const userSearchCont = async (name, cont) => {
     list: 'usercontribs',
     uclimit: 500,
     ucuser: name,
-    uccontinue: cont
+    uccontinue: cont,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => userContributionsSeperator(result.query.usercontribs,result));
+  ).then(result =>
+    userContributionsSeperator(result.query.usercontribs, result)
+  );
   return item;
 };
 
@@ -126,12 +131,12 @@ export const pageRevisionsSearch = async searchitem => {
   @returns {Promise, Promise} - first element contains a promise of a json list of page edits
                                 second element contains a key to get the next 500 page edits, -1 if end of list
 */
-export const pageRevisionsSearchCont = async (searchitem,cont) => {
+export const pageRevisionsSearchCont = async (searchitem, cont) => {
   let item = await getWikibaseItem(searchitem);
   if (item === -1) {
     return -1;
   }
-  item = await getRevisionsOfPageCont(item,cont);
+  item = await getRevisionsOfPageCont(item, cont);
   return item;
 };
 
@@ -189,9 +194,9 @@ const getRevisions = async json1 => {
 //@param {json} - json straight from query
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const userContributionsSeperator = async (usercontribs, result) => {
-  if (result.hasOwnProperty('continue')){
+  if (result.hasOwnProperty('continue')) {
     return [usercontribs, result['continue'].uccontinue];
-  }else{
+  } else {
     return [usercontribs, -1];
   }
 };
@@ -224,11 +229,11 @@ const getRevisionsOfPage = async qid => {
     rvprops: 'ids|timestamp|flags|comment|user',
     rvlimit: 500,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages,result));
+  ).then(result => getRevisionsHelper(result.query.pages, result));
   return item;
 };
 
@@ -236,7 +241,7 @@ const getRevisionsOfPage = async qid => {
 // @param {string} qid - id to search revisions for
 // @param {string} cont - key to get next results
 // @returns {Object} -1 or revisions in json
-const getRevisionsOfPageCont = async (qid,cont) => {
+const getRevisionsOfPageCont = async (qid, cont) => {
   const params = {
     action: 'query',
     format: 'json',
@@ -244,21 +249,21 @@ const getRevisionsOfPageCont = async (qid,cont) => {
     titles: qid,
     rvprops: 'ids|timestamp|flags|comment|user',
     rvlimit: 500,
-    rvcontinue: cont
+    rvcontinue: cont,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages,result));
+  ).then(result => getRevisionsHelper(result.query.pages, result));
   return item;
 };
 
-const getRevisionsHelper = async (pages, result) =>{
-  if (result.hasOwnProperty('continue')){
-    return [getRevisions(pages),result['continue'].rvcontinue];
-  }else{
-    return [getRevisions(pages),-1];
+const getRevisionsHelper = async (pages, result) => {
+  if (result.hasOwnProperty('continue')) {
+    return [getRevisions(pages), result['continue'].rvcontinue];
+  } else {
+    return [getRevisions(pages), -1];
   }
 };
 
@@ -283,7 +288,7 @@ export const getPrefixSearch = async searchItem => {
     list: 'prefixsearch',
     pssearch: searchItem,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
@@ -300,7 +305,7 @@ export const getPrefixSearch = async searchItem => {
                                 second item contains a long description of the page
 */
 export const getPageDescription = async searchItem => {
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     DESCRIPTION_REST_API + searchItem,
     NUMBER_OF_RETRIES
   ).then(result => [result.description, result.extract]);
@@ -315,13 +320,13 @@ export const getPageDescription = async searchItem => {
                                   number of retries
   @returns {response} - html hypertext linked string
 */
-const httpGet = async(endpoint, params, n) => {
-  try{
+const httpGet = async (endpoint, params, n) => {
+  try {
     const paramsString = new URLSearchParams(params).toString();
     const url = endpoint + '?' + paramsString + '&origin=*';
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false );
-    xmlHttp.send( null );
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', url, false);
+    xmlHttp.send(null);
     return xmlHttp.responseText;
   } catch (err) {
     if (n === 1) {
@@ -329,7 +334,7 @@ const httpGet = async(endpoint, params, n) => {
     }
     return setTimeout(httpGet(endpoint, params, n - 1), 500);
   }
-}
+};
 
 /*
   getHyperlinkedDescription: using dbpedia spotlight, an input text is converted into a hyperlinked html text document
@@ -337,13 +342,11 @@ const httpGet = async(endpoint, params, n) => {
   @returns {Promise} - output html file of the hyperlinked text
 */
 export const getHyperlinkedDescription = async text => {
-  const params = { 
-    text: text
+  const params = {
+    text: text,
   };
-  let item = await httpGet(
-    DBPEDIA_SPOTLIGHT_API,
-    params,
-    1
-  ).then(response => response);
+  const item = await httpGet(DBPEDIA_SPOTLIGHT_API, params, 1).then(
+    response => response
+  );
   return item;
 };
