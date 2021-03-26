@@ -396,3 +396,9 @@ ul {
 .searchListSuggestion:hover {
   background-color: #d4d4d4;
 }
+
+.search-list-page-group {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

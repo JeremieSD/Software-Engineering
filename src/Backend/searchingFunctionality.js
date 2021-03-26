@@ -2,7 +2,6 @@ const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const DESCRIPTION_REST_API =
   'https://en.wikipedia.org/api/rest_v1/page/summary/';
-const DBPEDIA_SPOTLIGHT_API = 'https://api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
@@ -36,7 +35,7 @@ export const userSearch = async name => {
     uclimit: 500,
     ucuser: name,
   };
-  const item = await wikipediaQuery(
+  let item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES

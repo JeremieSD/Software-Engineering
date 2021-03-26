@@ -69,6 +69,17 @@ class NavbarLocal extends Component {
             >
               Github Project
             </a>
+            <Nav.Link
+              as={Link}
+              to="/page-revisions"
+              className={
+                activePage.endsWith('/page-revisions')
+                  ? 'nav-link--active'
+                  : 'nav-link'
+              }
+            >
+              Page Revisions
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
