@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
+import PageFeed from '../Components/PageFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
 
@@ -22,7 +23,7 @@ class PageRevisionsPage extends Component {
   onClick(value) {
     this.feed.onclick(value);
   }
-	
+
   render() {
     return (
       <div>
@@ -30,12 +31,20 @@ class PageRevisionsPage extends Component {
         <div className="row justify-content-left text-dark">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div className="feedContainer">
-              <PageFeed value={this.state.value} onRef={(ref)=>{this.feed = ref}}/>
+              <PageFeed
+                value={this.state.value}
+                onRef={ref => {
+                  this.feed = ref;
+                }}
+              />
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div>
-                <SearchBar settings={SearchSettings} searchValue={this.onClick.bind(this)} />
+              <SearchBar
+                settings={SearchSettings}
+                searchValue={this.onClick.bind(this)}
+              />
             </div>
           </div>
         </div>
