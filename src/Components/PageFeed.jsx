@@ -8,35 +8,40 @@ class PageFeed extends Component {
       history: this.props.history,
       recentChanges: [],
       paused: false,
-      value:""
+      value: '',
     };
-    this.togglePause = this.togglePause.bind(this)
-  };
+    this.togglePause = this.togglePause.bind(this);
+  }
   componentDidMount() {
-    this.props.onRef(this)
-    setInterval(function () {
-      console.log("timed task starts"+this.state.paused+"----"+this.state.value)
-      if (!this.state.paused && this.state.value) {
-        console.log("timed task executes")
-        const item = utils.pageRevisionsSearch(this.state.value).then(str => {
-          str[0].then(value => {
-            console.log(value)
-            this.setState({ recentChanges: value })
-          })
-        })
-      }
-    }.bind(this), 1000);
-  };
+    this.props.onRef(this);
+    setInterval(
+      function() {
+        console.log(
+          'timed task starts' + this.state.paused + '----' + this.state.value
+        );
+        if (!this.state.paused && this.state.value) {
+          console.log('timed task executes');
+          const item = utils.pageRevisionsSearch(this.state.value).then(str => {
+            str[0].then(value => {
+              console.log(value);
+              this.setState({ recentChanges: value });
+            });
+          });
+        }
+      }.bind(this),
+      1000
+    );
+  }
 
   onclick(search) {
-    console.log(search)
-    this.setState({ value: search })
+    console.log(search);
+    this.setState({ value: search });
     const item = utils.pageRevisionsSearch(search).then(str => {
       str[0].then(value => {
-        console.log(value)
-        this.setState({ recentChanges: value })
-      })
-    })
+        console.log(value);
+        this.setState({ recentChanges: value });
+      });
+    });
   }
   togglePause() {
     this.state.paused = !this.state.paused;
@@ -48,7 +53,7 @@ class PageFeed extends Component {
         <form className="text-left" onChange={this.togglePause}>
           <label>
             <input type="checkbox" /> Paused
-        </label>
+          </label>
         </form>
         <ul className="search-list-page-group">
           {this.state.recentChanges.map((item, index) => (
@@ -58,8 +63,9 @@ class PageFeed extends Component {
                   item.scores?.damaging?.score?.prediction ? 'text-red' : ''
                 }
               >
-                {`User ${item.user} action ${item.type} on ${item.title
-                  } ${getTimeDifference(item.timestamp)} seconds ago`}
+                {`User ${item.user} action ${item.type} on ${
+                  item.title
+                } ${getTimeDifference(item.timestamp)} seconds ago`}
               </div>
             </li>
           ))}

@@ -25,21 +25,6 @@ const SearchBar = props => {
     });
   };
 
-<<<<<<< HEAD
-  const componentDidMount = () => {
-    this.refreshInterval = setInterval(async () => {
-      await this.refresh();
-    }, this.props.settings.refreshTime);
-  };
-
-  const refresh = async () => {
-    if (!this.props.paused) {
-      this.loadData();
-    }
-  };
-
-=======
->>>>>>> 7ad6e0b... 'pageRevInitialSetup'
   const parseData = results => {
     console.log(results);
     const values = results.query.prefixsearch;
