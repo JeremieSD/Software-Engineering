@@ -16,7 +16,7 @@ class PageRevisionsPage extends Component {
       firmsList: [],
       recentChanges: [],
     };
-    this.onClicks = this.onClicks.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   //Match column mouse click events
