@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 const SearchBar = props => {
   const [search, setSearch] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -25,6 +25,18 @@ const SearchBar = props => {
     });
   };
 
+  const componentDidMount = () => {
+    this.refreshInterval = setInterval(async () => {
+      await this.refresh();
+    }, this.props.settings.refreshTime);
+  };
+
+  const refresh = async () => {
+    if (!this.props.paused) {
+      this.loadData();
+    }
+  };
+
   const parseData = results => {
     console.log(results);
     const values = results.query.prefixsearch;
@@ -48,7 +60,7 @@ const SearchBar = props => {
 
   useEffect(() => {
     if (search && !pub) {
-      console.log(search);
+      //console.log(search);
       loadData(search);
     } else {
       setSuggestions([]);
