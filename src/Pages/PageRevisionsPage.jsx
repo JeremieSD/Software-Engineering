@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
+import PageFeed from '../Components/PageFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
 
