@@ -9,6 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@nivo/bar": "^0.61.1",
+    "@nivo/calendar": "^0.67.0",
     "@nivo/line": "^0.61.1",
     "@nivo/pie": "^0.61.1",
     "@testing-library/jest-dom": "^4.2.4",

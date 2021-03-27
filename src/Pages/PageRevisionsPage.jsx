@@ -116,19 +116,19 @@ class PageRevisionsPage extends Component {
                   searchValue={this.onClicks.bind(this)}
                 />
                 <CardDeck className="deck">
-                <GraphCard
-                  title="Number of Changes"
-                  pageLink="number-of-changes"
-                  history={this.state.history}
-                  graph={
-                    <PieChart
-                      paused={false}
-                      fullGraph={false}
-                      settings={NumberOfChangesSettings}
-                    />
-                  }
-                />
-              </CardDeck>
+                  <GraphCard
+                    title="Number of Changes"
+                    pageLink="number-of-changes"
+                    history={this.state.history}
+                    graph={
+                      <PieChart
+                        paused={false}
+                        fullGraph={false}
+                        settings={NumberOfChangesSettings}
+                      />
+                    }
+                  />
+                </CardDeck>
               </div>
               {/* <div >
                 <div className="match" id="adepmatch" >
