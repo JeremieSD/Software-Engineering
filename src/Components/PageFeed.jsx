@@ -58,14 +58,12 @@ class PageFeed extends Component {
         <ul className="search-list-page-group">
           {this.state.recentChanges.map((item, index) => (
             <li className="list-group-item text-left" key={index}>
-              <div
-                className={
-                  item.scores?.damaging?.score?.prediction ? 'text-red' : ''
-                }
-              >
-                {`User ${item.user} action ${item.type} on ${
-                  item.title
-                } ${getTimeDifference(item.timestamp)} seconds ago`}
+              <div>
+                {`User: ${item.user}`}
+                <br></br>
+                {`Comment: ${item.comment}`}
+                <br></br>
+                {`Time: ${item.timestamp}`}
               </div>
             </li>
           ))}
@@ -74,9 +72,5 @@ class PageFeed extends Component {
     );
   }
 }
-const getTimeDifference = toCompare =>
-  Math.round(
-    Math.abs(new Date().getTime() - new Date(toCompare).getTime()) / 1000
-  );
 
 export default PageFeed;
