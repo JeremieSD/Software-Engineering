@@ -3,6 +3,10 @@ import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
+import CardDeck from 'react-bootstrap/CardDeck';
+import PieChart from '../Components/PieChart';
+import { NumberOfChangesSettings } from './NumberOfChanges';
+import GraphCard from '../Components/GraphCard';
 
 class PageRevisionsPage extends Component {
   constructor(props) {
@@ -21,18 +25,18 @@ class PageRevisionsPage extends Component {
 
   useEffect() {
     const refresh = setInterval(() => {
-      if (!paused && this.state.value) {
-        const item = utils.pageRevisionsSearch(this.state.value).then(str => {
-          this.setState({ recentChanges: str });
-        });
-      }
+      // if (!paused && this.state.value) {
+      //   const item = utils.pageRevisionsSearch(this.state.value).then(str => {
+      //     this.setState({ recentChanges: str });
+      //   });
+      // }
     }, 5000);
     return () => clearInterval(refresh);
   }
 
-  togglePause() {
-    setPaused(prevPause => !prevPause);
-  }
+  // togglePause() {
+  //   setPaused(prevPause => !prevPause);
+  // }
 
   //匹配列鼠标点击事件
   onClicks(value) {
@@ -111,6 +115,20 @@ class PageRevisionsPage extends Component {
                   settings={SearchSettings}
                   searchValue={this.onClicks.bind(this)}
                 />
+                <CardDeck className="deck">
+                <GraphCard
+                  title="Number of Changes"
+                  pageLink="number-of-changes"
+                  history={this.state.history}
+                  graph={
+                    <PieChart
+                      paused={false}
+                      fullGraph={false}
+                      settings={NumberOfChangesSettings}
+                    />
+                  }
+                />
+              </CardDeck>
               </div>
               {/* <div >
                 <div className="match" id="adepmatch" >
