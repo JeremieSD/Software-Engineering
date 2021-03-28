@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import PageFeed from '../Components/PageFeed';
+import GraphCard from '../Components/GraphCard';
+import PieChart from '../Components/PieChart';
+import CardDeck from 'react-bootstrap/CardDeck';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
+import { NumberOfChangesSettings } from './NumberOfChanges';
 
 class PageRevisionsPage extends Component {
   constructor(props) {
@@ -45,6 +49,24 @@ class PageRevisionsPage extends Component {
                 settings={SearchSettings}
                 searchValue={this.onClick.bind(this)}
               />
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <div className="deck-container">
+              <CardDeck className="deck">
+                <GraphCard
+                  title="Number Of Changes"
+                  pageLink="number-of-changes"
+                  history={this.state.history}
+                  graph={
+                    <PieChart
+                      paused={false}
+                      fullGraph={false}
+                      settings={NumberOfChangesSettings}
+                    />
+                  }
+                />
+              </CardDeck>
             </div>
           </div>
         </div>
