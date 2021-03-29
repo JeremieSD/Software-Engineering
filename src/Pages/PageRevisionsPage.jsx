@@ -49,6 +49,20 @@ class PageRevisionsPage extends Component {
                 settings={SearchSettings}
                 searchValue={this.onClick.bind(this)}
               />
+              <CardDeck className="deck">
+                <GraphCard
+                  title="Number of Changes"
+                  pageLink="number-of-changes"
+                  history={this.state.history}
+                  graph={
+                    <PieChart
+                      paused={false}
+                      fullGraph={false}
+                      settings={NumberOfChangesSettings}
+                    />
+                  }
+                />
+              </CardDeck>
             </div>
           </div>
         </div>
