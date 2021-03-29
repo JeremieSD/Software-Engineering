@@ -7,8 +7,8 @@ export const PageRevisionsOverTimeSettings = {
   getData: async function() {
     const data = await pageRevisionsSearch();
     data.forEach(item => {
-      item.day = item.timestamp.slice(0, -10);
-      item.value = getValue(item.timestamp, item);
+      // item.day = item.timestamp.slice(0, -10);
+      // item.value = getValue(item.timestamp, item);
     });
     return data;
   },
@@ -16,8 +16,8 @@ export const PageRevisionsOverTimeSettings = {
   refreshMethod: async function() {
     const data = await pageRevisionsSearch();
     data.forEach(item => {
-      item.day = item.timestamp.slice(0, -10);
-      item.value = getValue(item.timestamp, item);
+      // item.day = item.timestamp.slice(0, -10);
+      // item.value = getValue(item.timestamp, item);
     });
     return data;
   },

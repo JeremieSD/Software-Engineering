@@ -8,9 +8,9 @@ export const NumberOfChangesSettings = {
   getData: async () => {
     const data = await pageRevisionsSearch();
     data.forEach(item => {
-      item.id = item.revid;
+      //item.id = item.revid;
       //item.value = userCount(item.user, item);
-      item.label = item.user;
+      //item.label = item.user;
     });
     return data;
   },
@@ -19,8 +19,8 @@ export const NumberOfChangesSettings = {
     const data = await pageRevisionsSearch();
     data.forEach(item => {
       //item.value = userCount(item.user, item);
-      item.id = item.revid;
-      item.label = item.user;
+      // item.id = item.revid;
+      // item.label = item.user;
     });
     return data;
   },
@@ -46,6 +46,7 @@ class NumberOfChanges extends Component {
     this.state = {
       history: this.props.history,
       paused: false,
+      value: '',
     };
   }
 

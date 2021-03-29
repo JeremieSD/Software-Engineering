@@ -8,6 +8,8 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import PieChart from '../Components/PieChart';
 import { NumberOfChangesSettings } from './NumberOfChanges';
 import GraphCard from '../Components/GraphCard';
+import { PageRevisionsOverTimeSettings } from './PageRevisionsOverTime';
+import CalendarGraph from '../Components/CalendarGraph';
 
 class PageRevisionsPage extends Component {
   constructor(props) {
@@ -59,6 +61,20 @@ class PageRevisionsPage extends Component {
                       paused={false}
                       fullGraph={false}
                       settings={NumberOfChangesSettings}
+                    />
+                  }
+                />
+              </CardDeck>
+              <CardDeck className="deck">
+                <GraphCard
+                  title="Page Revisions Over Time"
+                  pageLink="page-revisions-over-time"
+                  history={this.state.history}
+                  graph={
+                    <CalendarGraph
+                      paused={false}
+                      fullGraph={false}
+                      settings={PageRevisionsOverTimeSettings}
                     />
                   }
                 />
