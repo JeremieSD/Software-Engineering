@@ -60,9 +60,9 @@ class PageFeed extends Component {
             <li className="list-group-item text-left" key={index}>
               <div>
                 {`User: ${item.user}`}
-                <br></br>
+                <br />
                 {`Comment: ${item.comment}`}
-                <br></br>
+                <br />
                 {`Time: ${item.timestamp}`}
               </div>
             </li>
