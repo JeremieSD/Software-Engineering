@@ -2,8 +2,10 @@ const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const DESCRIPTION_REST_API =
   'https://en.wikipedia.org/api/rest_v1/page/summary/';
+const DBPEDIA_SPOTLIGHT_API = 'api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 /*
   userSearch: gets a json list of the 500 most recent contributions made my a user, along with a key to get the next 500
@@ -75,7 +77,7 @@ export const userSearchCont = async (name, cont) => {
     ucuser: name,
     uccontinue: cont,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
@@ -227,7 +229,7 @@ const getRevisionsOfPage = async qid => {
     rvprops: 'ids|timestamp|flags|comment|user',
     rvlimit: 500,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
@@ -249,7 +251,7 @@ const getRevisionsOfPageCont = async (qid, cont) => {
     rvlimit: 500,
     rvcontinue: cont,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
     params,
     NUMBER_OF_RETRIES
@@ -286,12 +288,65 @@ export const getPrefixSearch = async searchItem => {
     list: 'prefixsearch',
     pssearch: searchItem,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
   ).then(result => {
     return result;
   });
+  return item;
+};
+
+/*
+  getPageDescription: gets a short and long description of page
+  @params {searchItem} - page search item
+  @returns {Promise, Promise} - first item contains a short description of the page
+                                second item contains a long description of the page
+*/
+export const getPageDescription = async searchItem => {
+  const item = await wikipediaQuery(
+    DESCRIPTION_REST_API + searchItem,
+    NUMBER_OF_RETRIES
+  ).then(result => [result.description, result.extract]);
+  console.log(item);
+  return item;
+};
+
+/*
+  httpGet - helper function, similar to wikipediaQuery for getHyperlinkedDescription function
+  @params {endpoint, params, n} - api endpoint link
+                                  api parameters
+                                  number of retries
+  @returns {response} - html hypertext linked string
+*/
+const httpGet = async (endpoint, params, n) => {
+  try {
+    const paramsString = new URLSearchParams(params).toString();
+    const url = endpoint + '?' + paramsString + '&origin=*';
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', url, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+  } catch (err) {
+    if (n === 1) {
+      throw err;
+    }
+    return setTimeout(httpGet(endpoint, params, n - 1), 500);
+  }
+};
+
+/*
+  getHyperlinkedDescription: using dbpedia spotlight, an input text is converted into a hyperlinked html text document
+  @params {text} - input text string to be converted
+  @returns {Promise} - output html file of the hyperlinked text
+*/
+export const getHyperlinkedDescription = async text => {
+  const params = {
+    text: text,
+  };
+  const item = await httpGet(DBPEDIA_SPOTLIGHT_API, params, 1).then(
+    response => response
+  );
   return item;
 };

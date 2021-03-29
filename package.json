@@ -4,14 +4,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-brands-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@nivo/bar": "^0.61.1",
-    "@nivo/calendar": "^0.67.0",
-    "@nivo/line": "^0.61.1",
-    "@nivo/pie": "^0.61.1",
+    "@nivo/bar": "^0.67.0",
+    "@nivo/core": "^0.67.0",
+    "@nivo/line": "^0.67.0",
+    "@nivo/pie": "^0.67.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -32,7 +32,8 @@
     "gh-pages": "^2.2.0",
     "mocha": "^8.3.0",
     "prettier": "^1.18.2",
-    "rss-to-json": "github:nasa8x/rss-to-json"
+    "rss-to-json": "github:nasa8x/rss-to-json",
+    "xmlhttprequest": "^1.8.0"
   },
   "prettier": {
     "trailingComma": "es5",
