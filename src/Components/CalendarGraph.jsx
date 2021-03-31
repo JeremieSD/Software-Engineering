@@ -8,17 +8,32 @@ class CalendarGraph extends Component {
       loaded: false,
       data: null,
       fullGraph: this.props.fullGraph,
+      recentChanges: this.props.recentChanges,
+      value: this.props.value,
+      key: 0,
+      initialCall: true,
     };
 
-    this.loadData();
+    // if (this.state.value) {
+    //   this.loadData();
+    // }
   }
 
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
-      const method = this.props.settings.refreshMethod.bind(this);
-      await method();
+      if (this.state.initialCall && !this.props.paused && this.props.value) {
+        console.log('ini: ' + this.state.initialCall);
+        await this.refresh();
+      }
+      // const method = this.props.settings.refreshMethod.bind(this);
+      // await method();
     }, this.props.settings.refreshTime);
   }
+
+  refresh = async () => {
+    this.setState({ initialCall: false });
+    this.loadData();
+  };
 
   tooltip = function(click, url) {
     return (
@@ -61,15 +76,9 @@ class CalendarGraph extends Component {
           'Loading...'
         ) : (
           <ResponsiveCalendar
-<<<<<<< HEAD
             data={this.state.data}
             from="2020-03-01"
             to="2021-07-12"
-=======
-            data={data}
-            from="2015-03-01"
-            to="2016-07-12"
->>>>>>> 1a95a5e... 'matteosUpdate'
             emptyColor="#eeeeee"
             colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}

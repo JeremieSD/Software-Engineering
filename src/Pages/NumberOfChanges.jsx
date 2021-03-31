@@ -9,13 +9,13 @@ import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
 export const NumberOfChangesSettings = {
   getData: async function(searchValue) {
-    console.log('here ' + searchValue);
+    // console.log('here ' + searchValue);
 
     // if (searchValue) {
     const data = await pageRevisionsSearch(searchValue).then(str => {
       str[0].then(value => {
-        console.log('first-call');
-        console.log('value: ');
+        // console.log('first-call');
+        console.log('value over number: ');
         console.log(value);
         this.setState({ values: value });
       });
@@ -24,7 +24,7 @@ export const NumberOfChangesSettings = {
     this.state.values.forEach(item => {
       item.id = item.revid;
       item.label = item.user;
-      console.log(item);
+      // console.log(item);
       item.value = this.state.values.reduce(function(s, o) {
         if (o.user === item.user) {
           s++;
@@ -44,8 +44,8 @@ export const NumberOfChangesSettings = {
     ).then(str => {
       // return str;
       str[0].then(value => {
-        console.log(value);
-        console.log('cont-call: ');
+        // console.log(value);
+        // console.log('cont-call: ');
       });
       this.setState({ keyValue: str[1] });
     });
@@ -154,26 +154,22 @@ class NumberOfChanges extends Component {
     // );
   }
 
-  setKey(keys) {
-    this.setState({ key: keys });
-  }
-
-  userCount(user, value, j) {
-    return value.reduce(function(total, otherItems) {
-      if (otherItems.user === user) {
-        total++;
-      }
-      if (j === 0) {
-        console.log('Tot' + total);
-      }
-      return total;
-    });
-  }
+  // userCount(user, value, j) {
+  //   return value.reduce(function(total, otherItems) {
+  //     if (otherItems.user === user) {
+  //       total++;
+  //     }
+  //     if (j === 0) {
+  //       // console.log('Tot' + total);
+  //     }
+  //     return total;
+  //   });
+  // }
 
   onclick(search) {
-    console.log('S ' + search);
+    // console.log('S ' + search);
     this.setState({ value: search });
-    console.log('V ' + this.state.value);
+    // console.log('V ' + this.state.value);
   }
 
   handlePause = () => {

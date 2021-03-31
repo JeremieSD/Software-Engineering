@@ -7,7 +7,9 @@ import * as utils from '../Backend/searchingFunctionality';
 import CardDeck from 'react-bootstrap/CardDeck';
 import NumberOfChanges, { NumberOfChangesSettings } from './NumberOfChanges';
 import GraphCard from '../Components/GraphCard';
-import { PageRevisionsOverTimeSettings } from './PageRevisionsOverTime';
+import PageRevisionsOverTime, {
+  PageRevisionsOverTimeSettings,
+} from './PageRevisionsOverTime';
 import CalendarGraph from '../Components/CalendarGraph';
 
 class PageRevisionsPage extends Component {
@@ -28,6 +30,7 @@ class PageRevisionsPage extends Component {
   onClick(value) {
     this.feed.onclick(value);
     this.changes.onclick(value);
+    this.overTime.onclick(value);
   }
 
   render() {
@@ -77,10 +80,17 @@ class PageRevisionsPage extends Component {
                   pageLink="page-revisions-over-time"
                   history={this.state.history}
                   graph={
+                    /*
                     <CalendarGraph
                       paused={false}
                       fullGraph={false}
                       settings={PageRevisionsOverTimeSettings}
+                    /> */
+                    <PageRevisionsOverTime
+                      history={this.state.history}
+                      onRef={ref => {
+                        this.overTime = ref;
+                      }}
                     />
                   }
                 />

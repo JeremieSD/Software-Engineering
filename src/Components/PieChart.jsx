@@ -23,7 +23,7 @@ class PieChart extends Component {
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
       if (this.state.initialCall && !this.props.paused && this.props.value) {
-        console.log('ini: ' + this.state.initialCall);
+        // console.log('ini: ' + this.state.initialCall);
         await this.refresh();
       }
     }, this.props.settings.refreshTime);
@@ -44,7 +44,7 @@ class PieChart extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
-      console.log('heyy ' + data);
+      // console.log('heyy ' + data);
       const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
       this.setState({
         loaded: true,
