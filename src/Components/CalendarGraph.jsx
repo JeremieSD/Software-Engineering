@@ -49,7 +49,7 @@ class CalendarGraph extends Component {
 
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
-    getData().then(data => {
+    getData(this.state.value).then(data => {
       const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
       this.setState({
         loaded: true,
