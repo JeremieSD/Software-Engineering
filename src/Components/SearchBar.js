@@ -7,16 +7,16 @@ const SearchBar = props => {
 
   const loadData = value => {
     const getData = props.settings.getData.bind(this);
-    console.log('dataToBeFetched ');
+    // console.log('dataToBeFetched ');
     getData(value).then(data => {
-      console.log('data ' + data);
+      // console.log('data ' + data);
       // setResults(data);
       parseData(data);
     });
   };
 
   const parseData = results => {
-    console.log(results);
+    // console.log(results);
     const values = results.query.prefixsearch;
     setSuggestions([]);
     values.map(obj => {
@@ -27,7 +27,7 @@ const SearchBar = props => {
         return [...suggestions, sugg];
       });
     });
-    console.log('finish');
+    // console.log('finish');
   };
 
   const handleSubmit = e => {
@@ -36,7 +36,7 @@ const SearchBar = props => {
 
   useEffect(() => {
     if (search && !pub) {
-      console.log(search);
+      // console.log(search);
       loadData(search);
     } else {
       setSuggestions([]);

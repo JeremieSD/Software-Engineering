@@ -5,17 +5,27 @@ class PieChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: this.props.loading,
       loaded: false,
       data: null,
       fullGraph: this.props.fullGraph,
+      recentChanges: this.props.recentChanges,
+      value: this.props.value,
+      key: 0,
+      initialCall: true,
     };
 
-    this.loadData();
+    // if (this.state.value) {
+    //   this.loadData();
+    // }
   }
 
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
-      await this.refresh();
+      if (this.state.initialCall && !this.props.paused && this.props.value) {
+        console.log('ini: ' + this.state.initialCall);
+        await this.refresh();
+      }
     }, this.props.settings.refreshTime);
   }
 
@@ -33,7 +43,8 @@ class PieChart extends Component {
 
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
-    getData().then(data => {
+    getData(this.props.value).then(data => {
+      console.log('heyy ' + data);
       const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
       this.setState({
         loaded: true,
@@ -43,9 +54,8 @@ class PieChart extends Component {
   };
 
   refresh = async () => {
-    if (!this.props.paused) {
-      this.loadData();
-    }
+    this.setState({ initialCall: false });
+    this.loadData();
   };
 
   render() {

@@ -304,6 +304,7 @@ export const getPrefixSearch = async searchItem => {
   @returns {Promise, Promise} - first item contains a short description of the page
                                 second item contains a long description of the page
 */
+
 export const getPageDescription = async searchItem => {
   const item = await wikipediaQuery(
     DESCRIPTION_REST_API + searchItem,
@@ -350,3 +351,39 @@ export const getHyperlinkedDescription = async text => {
   );
   return item;
 };
+
+// test
+// const item = pageRevisionsSearch('Albert Einstein').then(str => {
+//   str[0].then(value => {
+//     console.log(value);
+//   });
+// });
+
+// let key = 0;
+// let i = 0;
+// const value = 'Albert Einstein';
+// const inter = setInterval(function() {
+//   if (i == 0) {
+//     const item = pageRevisionsSearch(value).then(str => {
+//       str[0].then(list => {
+//         console.log('first-call: ' + i);
+//         // console.log(list);
+//         i = i + 1;
+//       });
+//       console.log('Key ' + str[1]);
+//       key = str[1];
+//     });
+//   } else if (i > 0 && key != -1) {
+//     const item = pageRevisionsSearchCont(value, key).then(str => {
+//       str[0].then(list => {
+//         console.log('calls: ' + i);
+//         // console.log(list);
+//       });
+//       console.log('Key ' + str[1]);
+//       key = str[1];
+//     });
+//   } else if (key == -1) {
+//     console.log('FINISHED');
+//     clearInterval(inter);
+//   }
+// }, 2000);

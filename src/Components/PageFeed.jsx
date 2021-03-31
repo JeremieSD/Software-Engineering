@@ -16,14 +16,14 @@ class PageFeed extends Component {
     this.props.onRef(this);
     setInterval(
       function() {
-        console.log(
-          'timed task starts' + this.state.paused + '----' + this.state.value
-        );
+        // console.log(
+        //   'timed task starts' + this.state.paused + '----' + this.state.value
+        // );
         if (!this.state.paused && this.state.value) {
-          console.log('timed task executes');
+          // console.log('timed task executes');
           const item = utils.pageRevisionsSearch(this.state.value).then(str => {
             str[0].then(value => {
-              console.log(value);
+              // console.log(value);
               this.setState({ recentChanges: value });
             });
           });
@@ -34,11 +34,11 @@ class PageFeed extends Component {
   }
 
   onclick(search) {
-    console.log(search);
+    // console.log(search);
     this.setState({ value: search });
     const item = utils.pageRevisionsSearch(search).then(str => {
       str[0].then(value => {
-        console.log(value);
+        // console.log(value);
         this.setState({ recentChanges: value });
       });
     });

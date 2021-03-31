@@ -5,8 +5,7 @@ import PageFeed from '../Components/PageFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
 import CardDeck from 'react-bootstrap/CardDeck';
-import PieChart from '../Components/PieChart';
-import { NumberOfChangesSettings } from './NumberOfChanges';
+import NumberOfChanges, { NumberOfChangesSettings } from './NumberOfChanges';
 import GraphCard from '../Components/GraphCard';
 import { PageRevisionsOverTimeSettings } from './PageRevisionsOverTime';
 import CalendarGraph from '../Components/CalendarGraph';
@@ -28,6 +27,7 @@ class PageRevisionsPage extends Component {
   //Match column mouse click events
   onClick(value) {
     this.feed.onclick(value);
+    this.changes.onclick(value);
   }
 
   render() {
@@ -57,10 +57,16 @@ class PageRevisionsPage extends Component {
                   pageLink="number-of-changes"
                   history={this.state.history}
                   graph={
-                    <PieChart
-                      paused={false}
-                      fullGraph={false}
-                      settings={NumberOfChangesSettings}
+                    // <PieChart
+                    //   paused={true}
+                    //   fullGraph={false}
+                    //   settings={NumberOfChangesSettings}
+                    // />
+                    <NumberOfChanges
+                      history={this.state.history}
+                      onRef={ref => {
+                        this.changes = ref;
+                      }}
                     />
                   }
                 />
