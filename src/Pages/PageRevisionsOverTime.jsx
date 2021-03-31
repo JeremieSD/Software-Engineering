@@ -19,8 +19,14 @@ export const PageRevisionsOverTimeSettings = {
       console.log('key ' + this.state.keyValue);
     });
     this.state.values.forEach(item => {
-      // item.day = item.timestamp.slice(0, -10);
+      item.day = item.timestamp.slice(0, -10);
       // item.value = getValue(item.timestamp, item);
+      item.value = this.state.values.reduce(function(s, o) {
+        if (o.timestamp === item.timestamp) {
+          s++;
+        }
+        return s;
+      }, 0);
     });
     return this.state.values;
   },
