@@ -12,51 +12,86 @@ export const PageRevisionsOverTimeSettings = {
       str[0].then(value => {
         console.log('first-call');
         console.log('value Over Time: ');
-        console.log(value);
+        // console.log(value);
         this.setState({ values: value });
+        this.setState({ nextVals: value });
       });
       this.setState({ keyValue: str[1] });
       console.log('key ' + this.state.keyValue);
     });
+    let myMap = new Map();
+    let a = 0;
     this.state.values.forEach(item => {
+      if (
+        !myMap.has(item.timestamp.slice(0, -10)) &&
+        item.timestamp.slice(0, -10) > '2020-01-01' &&
+        item.timestamp.slice(0, -10) < '2021-07-01'
+      ) {
+        myMap.set(item.timestamp.slice(0, -10), item);
+      }
+    });
+    for (let item of myMap.values()) {
       item.day = item.timestamp.slice(0, -10);
-      // item.value = getValue(item.timestamp, item);
       item.value = this.state.values.reduce(function(s, o) {
-        if (o.timestamp === item.timestamp) {
+        if (o.timestamp.slice(0, -10) === item.day) {
           s++;
         }
         return s;
       }, 0);
-    });
-    return this.state.values;
+      if (a === 30) {
+        console.log(item.timestamp.slice(0, -10) + 'V:  ' + item.value);
+      }
+      a++;
+    }
+    let array = [myMap.size];
+    let j = 0;
+    for (let item of myMap.values()) {
+      array[j++] = item;
+    }
+    return array;
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
     console.log('Refresh ' + searchValue);
-    const data = await pageRevisionsSearchCont(
-      searchValue,
-      this.state.keyValue
-    ).then(str => {
-      // return str;
-      str[0].then(value => {
-        console.log(value);
-        console.log('cont-call: ');
+    if (this.state.keyValue != -1) {
+      const data = await pageRevisionsSearchCont(
+        searchValue,
+        this.state.keyValue
+      ).then(str => {
+        // return str;
+        str[0].then(value => {
+          console.log('cont-call: ');
+          this.setState({ values: this.state.values.concat(value) });
+        });
+        this.setState({ keyValue: str[1] });
       });
-      this.setState({ keyValue: str[1] });
-    });
-    this.state.values.forEach(item => {
-      // item.day = item.timestamp.slice(0, -10);
-      // item.value = getValue(item.timestamp, item);
-    });
-    return this.state.values;
-  },
-  getValue: async function(date, array) {
-    return array.reduce(function(s, o) {
-      if (o.timestamp === date) {
-        s++;
+      let myMap = new Map();
+      this.state.values.forEach(item => {
+        if (
+          !myMap.has(item.timestamp.slice(0, -10)) &&
+          item.timestamp.slice(0, -10) > '2020-01-01' &&
+          item.timestamp.slice(0, -10) < '2021-07-01'
+        ) {
+          myMap.set(item.timestamp.slice(0, -10), item);
+        }
+      });
+      for (let item of myMap.values()) {
+        item.day = item.timestamp.slice(0, -10);
+        item.value = this.state.values.reduce(function(s, o) {
+          if (o.timestamp.slice(0, -10) === item.day) {
+            s++;
+          }
+          return s;
+        }, 0);
       }
-      return s;
-    }, 0);
+      let array = [myMap.size];
+      let j = 0;
+      for (let item of myMap.values()) {
+        array[j++] = item;
+      }
+      return array;
+    }
+    return -1;
   },
   colorBy: 'type',
   colors: 'set2',
@@ -75,9 +110,6 @@ class PageRevisionsOverTime extends Component {
       history: this.props.history,
       paused: false,
       value: '',
-      key: '',
-      recentChanges: [],
-      loading: false,
     };
   }
 
@@ -119,9 +151,7 @@ class PageRevisionsOverTime extends Component {
         fullGraph={true}
         settings={PageRevisionsOverTimeSettings}
         paused={this.state.paused}
-        recentChanges={this.state.recentChanges}
         value={this.state.value}
-        loading={this.state.loading}
       />
       //     }
       //     name="Page Revisions Over Time"

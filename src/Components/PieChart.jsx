@@ -1,30 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { ResponsivePie } from '@nivo/pie';
 
 class PieChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: this.props.loading,
       loaded: false,
       data: null,
       fullGraph: this.props.fullGraph,
-      recentChanges: this.props.recentChanges,
       value: this.props.value,
-      key: 0,
       initialCall: true,
+      dataFinished: false,
+      changeValue: '',
+      // paused: false,
     };
 
     // if (this.state.value) {
     //   this.loadData();
     // }
+    // this.togglePause = this.togglePause.bind(this);
   }
-
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
-      if (this.state.initialCall && !this.props.paused && this.props.value) {
-        // console.log('ini: ' + this.state.initialCall);
+      if (this.state.changeValue != this.props.value) {
+        this.setState({ value: this.props.value, dataFinished: false });
+      }
+      if (
+        this.state.initialCall &&
+        this.state.value &&
+        !this.state.dataFinished
+      ) {
+        this.setState({ changeValue: this.state.value });
         await this.refresh();
+      } else if (
+        !this.state.initialCall &&
+        this.state.value &&
+        !this.state.dataFinished
+      ) {
+        await this.refreshCont();
       }
     }, this.props.settings.refreshTime);
   }
@@ -44,12 +57,40 @@ class PieChart extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
-      // console.log('heyy ' + data);
-      const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
-      this.setState({
-        loaded: true,
-        data: smlData,
-      });
+      if (data != -1) {
+        console.log(data);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        this.setState({
+          loaded: true,
+          data: smlData,
+        });
+      } else {
+        console.log('Error No Data');
+        this.setState({ dataFinished: true });
+      }
+    });
+  };
+
+  loadDataCont = () => {
+    const getData = this.props.settings.refreshMethod.bind(this);
+    getData(this.props.value).then(data => {
+      if (data != -1) {
+        console.log(data);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        this.setState({
+          loaded: true,
+          data: smlData,
+        });
+      } else {
+        console.log('Error No Data');
+        this.setState({
+          dataFinished: true,
+          // value: '',
+          initialCall: true,
+          // loaded: false,
+          // data: null,
+        });
+      }
     });
   };
 
@@ -57,6 +98,14 @@ class PieChart extends Component {
     this.setState({ initialCall: false });
     this.loadData();
   };
+
+  refreshCont = async () => {
+    this.loadDataCont();
+  };
+
+  // togglePause() {
+  //   this.state.paused = !this.state.paused;
+  // }
 
   render() {
     let margin = {};

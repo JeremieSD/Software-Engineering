@@ -54,17 +54,12 @@ class PageRevisionsPage extends Component {
                 settings={SearchSettings}
                 searchValue={this.onClick.bind(this)}
               />
-              <CardDeck className="deck">
+              <CardDeck className="CardDeckRev">
                 <GraphCard
                   title="Number of Changes"
                   pageLink="number-of-changes"
                   history={this.state.history}
                   graph={
-                    // <PieChart
-                    //   paused={true}
-                    //   fullGraph={false}
-                    //   settings={NumberOfChangesSettings}
-                    // />
                     <NumberOfChanges
                       history={this.state.history}
                       onRef={ref => {
@@ -74,18 +69,12 @@ class PageRevisionsPage extends Component {
                   }
                 />
               </CardDeck>
-              <CardDeck className="deck">
+              <CardDeck className="CardDeckRev">
                 <GraphCard
                   title="Page Revisions Over Time"
                   pageLink="page-revisions-over-time"
                   history={this.state.history}
                   graph={
-                    /*
-                    <CalendarGraph
-                      paused={false}
-                      fullGraph={false}
-                      settings={PageRevisionsOverTimeSettings}
-                    /> */
                     <PageRevisionsOverTime
                       history={this.state.history}
                       onRef={ref => {
@@ -103,14 +92,21 @@ class PageRevisionsPage extends Component {
   }
 }
 
-const SearchSettings = {
-  getData: async value => {
-    let data;
-    const item = await utils.getPrefixSearch(value).then(str => {
-      console.log(str);
-      data = str;
-    });
-    return data;
+// export const SearchSettings = {
+//   getData: async value => {
+//     let data;
+//     const item = await utils.getPrefixSearch(value).then(str => {
+//       console.log(str);
+//       data = str;
+//     });
+//     return data;
+//   },
+// };
+
+export const SearchSettings = {
+  getData: async function(val) {
+    console.log('dataFetch ' + val);
+    return await utils.getPrefixSearch(val);
   },
 };
 

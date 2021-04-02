@@ -8,10 +8,10 @@ class CalendarGraph extends Component {
       loaded: false,
       data: null,
       fullGraph: this.props.fullGraph,
-      recentChanges: this.props.recentChanges,
       value: this.props.value,
-      key: 0,
       initialCall: true,
+      dataFinished: false,
+      changeValue: '',
     };
 
     // if (this.state.value) {
@@ -21,18 +21,33 @@ class CalendarGraph extends Component {
 
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
-      if (this.state.initialCall && !this.props.paused && this.props.value) {
-        console.log('ini: ' + this.state.initialCall);
-        await this.refresh();
+      if (this.state.changeValue != this.props.value) {
+        this.setState({ value: this.props.value, dataFinished: false });
       }
-      // const method = this.props.settings.refreshMethod.bind(this);
-      // await method();
+      if (
+        this.state.initialCall &&
+        this.state.value &&
+        !this.state.dataFinished
+      ) {
+        this.setState({ changeValue: this.state.value });
+        await this.refresh();
+      } else if (
+        !this.state.initialCall &&
+        this.state.value &&
+        !this.state.dataFinished
+      ) {
+        await this.refreshCont();
+      }
     }, this.props.settings.refreshTime);
   }
 
   refresh = async () => {
     this.setState({ initialCall: false });
     this.loadData();
+  };
+
+  refreshCont = async () => {
+    this.loadDataCont();
   };
 
   tooltip = function(click, url) {
@@ -50,11 +65,36 @@ class CalendarGraph extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
-      const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+      console.log(data);
+      const smlData = data;
       this.setState({
         loaded: true,
         data: smlData,
       });
+    });
+  };
+
+  loadDataCont = () => {
+    const getData = this.props.settings.refreshMethod.bind(this);
+    getData(this.props.value).then(data => {
+      if (data != -1) {
+        console.log('New Data');
+        console.log(data);
+        const smlData = data;
+        this.setState({
+          loaded: true,
+          data: smlData,
+        });
+      } else {
+        console.log('Error No Data');
+        this.setState({
+          dataFinished: true,
+          // value: '',
+          initialCall: true,
+          // loaded: false,
+          // data: null,
+        });
+      }
     });
   };
 
@@ -77,7 +117,7 @@ class CalendarGraph extends Component {
         ) : (
           <ResponsiveCalendar
             data={this.state.data}
-            from="2020-03-01"
+            from="2020-01-01"
             to="2021-07-12"
             emptyColor="#eeeeee"
             colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}

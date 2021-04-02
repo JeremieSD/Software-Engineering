@@ -112,6 +112,11 @@
   margin-bottom: 2%;
 }
 
+.CardDeckRev {
+  /* width: 15rem; */
+  margin-bottom: 2%;
+}
+
 .card-title {
   text-align: left;
   justify-content: left;

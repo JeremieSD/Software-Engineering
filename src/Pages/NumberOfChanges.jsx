@@ -11,59 +11,82 @@ export const NumberOfChangesSettings = {
   getData: async function(searchValue) {
     // console.log('here ' + searchValue);
 
-    // if (searchValue) {
-    const data = await pageRevisionsSearch(searchValue).then(str => {
-      str[0].then(value => {
-        // console.log('first-call');
-        console.log('value over number: ');
-        console.log(value);
-        this.setState({ values: value });
+    if (searchValue) {
+      const data = await pageRevisionsSearch(searchValue).then(str => {
+        str[0].then(value => {
+          console.log('first-call ' + searchValue);
+          console.log('value over number: ');
+          console.log(value);
+          this.setState({ values: value });
+        });
+        this.setState({ keyValue: str[1] });
       });
-      this.setState({ keyValue: str[1] });
-    });
-    this.state.values.forEach(item => {
-      item.id = item.revid;
-      item.label = item.user;
-      // console.log(item);
-      item.value = this.state.values.reduce(function(s, o) {
-        if (o.user === item.user) {
-          s++;
+      let myMap = new Map();
+      this.state.values.forEach(item => {
+        if (!myMap.has(item.user)) {
+          myMap.set(item.user, item);
         }
-        return s;
-      }, 0);
-    });
-    return this.state.values;
-    // }
+      });
+      for (let item of myMap.values()) {
+        item.id = item.revid;
+        item.label = item.user;
+        item.value = this.state.values.reduce(function(s, o) {
+          if (o.user === item.user) {
+            s++;
+          }
+          return s;
+        }, 0);
+      }
+      let array = [myMap.size];
+      let j = 0;
+      for (let item of myMap.values()) {
+        array[j++] = item;
+      }
+      this.setState({ singleArray: array });
+      return array;
+    }
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
     console.log('Refresh ' + searchValue);
-    const data = await pageRevisionsSearchCont(
-      searchValue,
-      this.state.keyValue
-    ).then(str => {
-      // return str;
-      str[0].then(value => {
-        // console.log(value);
-        // console.log('cont-call: ');
+    if (this.state.keyValue != -1) {
+      const data = await pageRevisionsSearchCont(
+        searchValue,
+        this.state.keyValue
+      ).then(str => {
+        str[0].then(value => {
+          console.log(value);
+          console.log('cont-call: ');
+          this.setState({ values: this.state.values.concat(value) });
+        });
+        this.setState({ keyValue: str[1] });
       });
-      this.setState({ keyValue: str[1] });
-    });
-    // data.forEach(item => {
-    //   item.value = userCount(item.user, item);
-    //   item.id = item.revid;
-    //   item.label = item.user;
-    // });
-    return data;
+      let myMap = new Map();
+      this.state.values.forEach(item => {
+        if (!myMap.has(item.user)) {
+          myMap.set(item.user, item);
+        }
+      });
+      for (let item of myMap.values()) {
+        item.id = item.revid;
+        item.label = item.user;
+        item.value = this.state.values.reduce(function(s, o) {
+          if (o.user === item.user) {
+            s++;
+          }
+          return s;
+        }, 0);
+      }
+      let array = [myMap.size];
+      let j = 0;
+      for (let item of myMap.values()) {
+        array[j++] = item;
+      }
+      this.setState({ singleArray: array });
+      return array;
+    }
+    return -1;
   },
-  // getCount: async function(user, data) {
-  //   return data.reduce(function(s, o) {
-  //     if (o.user === user) {
-  //       s++;
-  //     }
-  //     return s;
-  //   }, 0);
-  // },
   colorBy: 'type',
   colors: 'set2',
   onClick: function(click) {
@@ -89,87 +112,10 @@ class NumberOfChanges extends Component {
 
   componentDidMount() {
     this.props.onRef(this);
-    // let i = 0;
-    // const inter = setInterval(
-    //   function() {
-    //     if (this.state.paused && this.state.value) {
-    //       this.handlePause();
-    //       const item = pageRevisionsSearch(this.state.value).then(str => {
-    //         str[0].then(value => {
-    //           this.state.loading = true;
-    //           value.forEach(item => {
-    //             item.id = item.revid;
-    //             item.value = String(this.userCount(item.user, value));
-    //             item.label = item.user;
-    //           });
-    //           console.log('first-call: ' + i);
-    //           this.setState({
-    //             recentChanges: this.state.recentChanges.concat(value),
-    //           });
-    //           let j = 0;
-    //           this.state.recentChanges.forEach(item => {
-    //             item.id = item.revid;
-    //             item.value = String(
-    //               this.userCount(item.user, this.state.recentChanges, j)
-    //             );
-    //             // console.log('I ' + item.value);
-    //             item.label = item.user;
-    //             j++;
-    //           });
-    //           i++;
-    //         });
-    //         console.log('Key ' + str[1]);
-    //         this.setState({ key: str[1] });
-    //       });
-    //     } else if (this.state.key !== -1 && !this.state.paused) {
-    //       const item = pageRevisionsSearchCont(
-    //         this.state.value,
-    //         this.state.key
-    //       ).then(str => {
-    //         str[0].then(value => {
-    //           this.state.loading = true;
-    //           console.log('cont-call: ' + i);
-    //           this.setState({
-    //             recentChanges: this.state.recentChanges.concat(value),
-    //           });
-    //           this.state.recentChanges.forEach(item => {
-    //             item.id = item.revid;
-    //             // item.value = String(
-    //             //   this.userCount(item.user, this.state.recentChanges)
-    //             // );
-    //             // console.log('I ' + item.value);
-    //             item.label = item.user;
-    //           });
-    //           i++;
-    //         });
-    //         console.log('Key ' + str[1]);
-    //         this.setState({ key: str[1] });
-    //       });
-    //     } else if (this.state.key === -1 && !this.state.paused) {
-    //       console.log('FINISHED');
-    //       clearInterval(inter);
-    //     }
-    //   }.bind(this),
-    //   2000
-    // );
   }
 
-  // userCount(user, value, j) {
-  //   return value.reduce(function(total, otherItems) {
-  //     if (otherItems.user === user) {
-  //       total++;
-  //     }
-  //     if (j === 0) {
-  //       // console.log('Tot' + total);
-  //     }
-  //     return total;
-  //   });
-  // }
-
   onclick(search) {
-    // console.log('S ' + search);
     this.setState({ value: search });
-    // console.log('V ' + this.state.value);
   }
 
   handlePause = () => {
