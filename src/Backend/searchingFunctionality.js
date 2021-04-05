@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 /*
-  userSearch: gets a json list of the 500 most recent contributions made my a user, along with a key to get the next 500
+  userSearch: gets a json list of the 20 most recent contributions made my a user, along with a key to get the next 20
   '' - String
   # - number
   Json format:
@@ -26,14 +26,14 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
   }
   @params {name} - User name
   @returns {Promise, Promise} - first element contains a promise of a json list of contributions made by the user
-                                second element contains a key to get the next 500 contributions made by the user, -1 if end of list
+                                second element contains a key to get the next 20 contributions made by the user, -1 if end of list
 */
 export const userSearch = async name => {
   const params = {
     action: 'query',
     format: 'json',
     list: 'usercontribs',
-    uclimit: 500,
+    uclimit: 20,
     ucuser: name,
   };
   let item = await wikipediaQuery(
@@ -47,7 +47,7 @@ export const userSearch = async name => {
 };
 
 /*
-  userSearchCont: gets a continued json list of the 500 most recent contributions made my a user, along with a key to get the next 500
+  userSearchCont: gets a continued json list of the 20 most recent contributions made my a user, along with a key to get the next 20
   '' - String
   # - number
   Json format:
@@ -66,14 +66,14 @@ export const userSearch = async name => {
   @params {name, cont} - User name
                          continue key
   @returns {Promise, Promise} - first element contains a promise of a json list of contributions made by the user
-                                second element contains a key to get the next 500 contributions made by the user, -1 if end of list
+                                second element contains a key to get the next 20 contributions made by the user, -1 if end of list
 */
 export const userSearchCont = async (name, cont) => {
   const params = {
     action: 'query',
     format: 'json',
     list: 'usercontribs',
-    uclimit: 500,
+    uclimit: 20,
     ucuser: name,
     uccontinue: cont,
   };
@@ -88,7 +88,7 @@ export const userSearchCont = async (name, cont) => {
 };
 
 /*
-  pageRevisionsSearch: gets a json list of the last 500 page edits, along with a key to get to the next 500
+  pageRevisionsSearch: gets a json list of the last 20 page edits, along with a key to get to the next 20
   '' - String
   # - number
   Json format:
@@ -102,7 +102,7 @@ export const userSearchCont = async (name, cont) => {
   }
   @params {searchItem} - page query
   @returns {Promise, Promise} - first element contains a promise of a json list of page edits
-                                second element contains a key to get the next 500 page edits, -1 if end of list
+                                second element contains a key to get the next 20 page edits, -1 if end of list
 */
 export const pageRevisionsSearch = async searchitem => {
   let item = await getWikibaseItem(searchitem);
@@ -114,7 +114,7 @@ export const pageRevisionsSearch = async searchitem => {
 };
 
 /*
-  pageRevisionsSearchCont: gets a json list of the last 500 page edits, along with a key to get to the next 500
+  pageRevisionsSearchCont: gets a json list of the last 20 page edits, along with a key to get to the next 20
   '' - String
   # - number
   Json format:
@@ -129,7 +129,7 @@ export const pageRevisionsSearch = async searchitem => {
   @params {searchItem, cont} - page query
                                continue key
   @returns {Promise, Promise} - first element contains a promise of a json list of page edits
-                                second element contains a key to get the next 500 page edits, -1 if end of list
+                                second element contains a key to get the next 20 page edits, -1 if end of list
 */
 export const pageRevisionsSearchCont = async (searchitem, cont) => {
   let item = await getWikibaseItem(searchitem);
@@ -217,7 +217,7 @@ const getWikibaseItem = async searchItem => {
     NUMBER_OF_RETRIES
   ).then(result => extraResult(result.query.pages));
 };
-//Grabs revisions from qid, past 500 revisions only due to limitations from api
+//Grabs revisions from qid, past 20 revisions only due to limitations from api
 // @param {string} qid - id to search revisions for
 // @returns {Object} -1 or revisions in json
 const getRevisionsOfPage = async qid => {
@@ -227,7 +227,7 @@ const getRevisionsOfPage = async qid => {
     prop: 'revisions',
     titles: qid,
     rvprops: 'ids|timestamp|flags|comment|user',
-    rvlimit: 500,
+    rvlimit: 20,
   };
   const item = await wikipediaQuery(
     WIKIDATA_ENDPOINT,
@@ -237,7 +237,7 @@ const getRevisionsOfPage = async qid => {
   return item;
 };
 
-//Grabs revisions from qid, past 500 revisions only due to limitations from api
+//Grabs revisions from qid, past 20 revisions only due to limitations from api
 // @param {string} qid - id to search revisions for
 // @param {string} cont - key to get next results
 // @returns {Object} -1 or revisions in json
@@ -248,7 +248,7 @@ const getRevisionsOfPageCont = async (qid, cont) => {
     prop: 'revisions',
     titles: qid,
     rvprops: 'ids|timestamp|flags|comment|user',
-    rvlimit: 500,
+    rvlimit: 20,
     rvcontinue: cont,
   };
   const item = await wikipediaQuery(
