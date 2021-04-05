@@ -62,6 +62,8 @@ const SearchSettings = {
     });
     return data;
   },
+  type:0
 };
 
 export default PageRevisionsPage;
+
