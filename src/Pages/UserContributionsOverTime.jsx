@@ -125,34 +125,45 @@ class UserContributionsOverTime extends Component {
   }
 
   render() {
-    return (
-      // <GraphPage
-      //   handlePause={this.handlePause}
-      //   paused={this.state.paused}
-      //   explanation={
-      //     <div>
-      //       {'Revisions over time for this page.' +
-      //         ' Hover over a section to see the number of revisions made that day.'}
-      //       <p>
-      //         <img
-      //           className="legend"
-      //           src={require('../legend.svg')}
-      //           alt="Legend"
-      //         />
-      //       </p>
-      //     </div>
-      //   }
-      //   graph={
-      <CalendarGraph
-        fullGraph={true}
-        settings={UserContributionsOverTimeSettings}
-        paused={this.state.paused}
-        value={this.state.value}
-      />
-      //     }
-      //     name="User Contributions Over Time"
-      //   />
-    );
+    if (this.state.fullGraph) {
+      return (
+        <GraphPage
+          handlePause={this.handlePause}
+          paused={this.state.paused}
+          explanation={
+            <div>
+              {'Revisions over time by this user.' +
+                ' Hover over a section to see the number of revisions made that day.'}
+              <p>
+                <img
+                  className="legend"
+                  src={require('../legend.svg')}
+                  alt="Legend"
+                />
+              </p>
+            </div>
+          }
+          graph={
+            <CalendarGraph
+              fullGraph={this.state.fullGraph}
+              settings={UserContributionsOverTimeSettings}
+              paused={this.state.paused}
+              value={this.state.value}
+            />
+          }
+          name="User Contributions Over Time"
+        />
+      );
+    } else {
+      return (
+        <CalendarGraph
+          fullGraph={this.state.fullGraph}
+          settings={UserContributionsOverTimeSettings}
+          paused={this.state.paused}
+          value={this.state.value}
+        />
+      );
+    }
   }
 }
 export default UserContributionsOverTime;

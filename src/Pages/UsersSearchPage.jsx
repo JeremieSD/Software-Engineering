@@ -58,11 +58,12 @@ class UsersSearchPage extends Component {
               />
               <CardDeck className="CardDeckRev">
                 <GraphCard
-                  title="Number of Changes"
-                  pageLink="number-of-changes"
+                  title="Number of Changes by User"
+                  pageLink="number-of-changes-user"
                   history={this.state.history}
                   graph={
                     <NumberOfChangesUser
+                      fullGraph={false}
                       history={this.state.history}
                       onRef={ref => {
                         this.changes = ref;
@@ -78,6 +79,7 @@ class UsersSearchPage extends Component {
                   history={this.state.history}
                   graph={
                     <UserContributionsOverTime
+                      fullGraph={false}
                       history={this.state.history}
                       onRef={ref => {
                         this.overTime = ref;

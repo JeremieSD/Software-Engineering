@@ -61,6 +61,7 @@ class PageRevisionsPage extends Component {
                   history={this.state.history}
                   graph={
                     <NumberOfChanges
+                      fullGraph={false}
                       history={this.state.history}
                       onRef={ref => {
                         this.changes = ref;
@@ -76,6 +77,7 @@ class PageRevisionsPage extends Component {
                   history={this.state.history}
                   graph={
                     <PageRevisionsOverTime
+                      fullGraph={false}
                       history={this.state.history}
                       onRef={ref => {
                         this.overTime = ref;

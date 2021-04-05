@@ -20,7 +20,7 @@ export const PageRevisionsOverTimeSettings = {
       // console.log('key ' + this.state.keyValue);
     });
     const myMap = new Map();
-    let a = 0;
+    const a = 0;
     this.state.values.forEach(item => {
       if (
         !myMap.has(item.timestamp.slice(0, -10)) &&
@@ -104,6 +104,7 @@ class PageRevisionsOverTime extends Component {
     super(props);
     this.state = {
       history: this.props.history,
+      fullGraph: this.props.fullGraph,
       paused: false,
       value: '',
     };
@@ -125,34 +126,45 @@ class PageRevisionsOverTime extends Component {
   }
 
   render() {
-    return (
-      // <GraphPage
-      //   handlePause={this.handlePause}
-      //   paused={this.state.paused}
-      //   explanation={
-      //     <div>
-      //       {'Revisions over time for this page.' +
-      //         ' Hover over a section to see the number of revisions made that day.'}
-      //       <p>
-      //         <img
-      //           className="legend"
-      //           src={require('../legend.svg')}
-      //           alt="Legend"
-      //         />
-      //       </p>
-      //     </div>
-      //   }
-      //   graph={
-      <CalendarGraph
-        fullGraph={true}
-        settings={PageRevisionsOverTimeSettings}
-        paused={this.state.paused}
-        value={this.state.value}
-      />
-      //     }
-      //     name="Page Revisions Over Time"
-      //   />
-    );
+    if (this.state.fullGraph) {
+      return (
+        <GraphPage
+          handlePause={this.handlePause}
+          paused={this.state.paused}
+          explanation={
+            <div>
+              {'Revisions over time for this page.' +
+                ' Hover over a section to see the number of revisions made that day.'}
+              <p>
+                <img
+                  className="legend"
+                  src={require('../legend.svg')}
+                  alt="Legend"
+                />
+              </p>
+            </div>
+          }
+          graph={
+            <CalendarGraph
+              fullGraph={true}
+              settings={PageRevisionsOverTimeSettings}
+              paused={this.state.paused}
+              value={this.state.value}
+            />
+          }
+          name="Page Revisions Over Time"
+        />
+      );
+    } else {
+      return (
+        <CalendarGraph
+          fullGraph={this.state.fullGraph}
+          settings={PageRevisionsOverTimeSettings}
+          paused={this.state.paused}
+          value={this.state.value}
+        />
+      );
+    }
   }
 }
 export default PageRevisionsOverTime;

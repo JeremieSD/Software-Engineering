@@ -7,7 +7,9 @@ export const ProportionFlaggedSettings = {
   getData: getRecentEditsWithFlags,
   refreshTime: 2000,
   refreshMethod: getRecentEditsWithFlags,
-  colorFunction: d => d.color,
+  //colorFunction: d => d.color,
+  colorBy: 'type',
+  colors: 'set1',
   name: 'Proportion Of Edits Flagged',
 };
 

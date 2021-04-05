@@ -15,6 +15,9 @@ import UsersSearchPage from './Pages/UsersSearchPage';
 import PageRevisionsPage from './Pages/PageRevisionsPage';
 import TestComponent from './Pages/TestComponent';
 import PageRevisionsOverTime from './Pages/PageRevisionsOverTime';
+import UserContributionsOverTime from './Pages/UserContributionsOverTime';
+import NumberOfChanges from './Pages/NumberOfChanges';
+import NumberOfChangesUser from './Pages/NumberOfChangesUser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
@@ -49,10 +52,21 @@ function App() {
           <Route exact path="/feed" component={FeedData} />
           <Route exact path="/user-search" component={UsersSearchPage} />
           <Route exact path="/page-revisions" component={PageRevisionsPage} />
+          <Route exact path="/number-of-changes" component={NumberOfChanges} />
+          <Route
+            exact
+            path="/number-of-changes-user"
+            component={NumberOfChangesUser}
+          />
           <Route
             exact
             path="/page-revisions-over-time"
             component={PageRevisionsOverTime}
+          />
+          <Route
+            exact
+            path="/user-contributions-over-time"
+            component={UserContributionsOverTime}
           />
         </Switch>
       </Router>

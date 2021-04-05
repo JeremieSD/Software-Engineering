@@ -21,13 +21,13 @@ export const NumberOfChangesSettings = {
         });
         this.setState({ keyValue: str[1] });
       });
-      let myMap = new Map();
+      const myMap = new Map();
       this.state.values.forEach(item => {
         if (!myMap.has(item.user)) {
           myMap.set(item.user, item);
         }
       });
-      for (let item of myMap.values()) {
+      for (const item of myMap.values()) {
         item.id = item.revid;
         item.label = item.user;
         item.value = this.state.values.reduce(function(s, o) {
@@ -37,9 +37,9 @@ export const NumberOfChangesSettings = {
           return s;
         }, 0);
       }
-      let array = [myMap.size];
+      const array = [myMap.size];
       let j = 0;
-      for (let item of myMap.values()) {
+      for (const item of myMap.values()) {
         array[j++] = item;
       }
       this.setState({ singleArray: array });
@@ -61,13 +61,13 @@ export const NumberOfChangesSettings = {
         });
         this.setState({ keyValue: str[1] });
       });
-      let myMap = new Map();
+      const myMap = new Map();
       this.state.values.forEach(item => {
         if (!myMap.has(item.user)) {
           myMap.set(item.user, item);
         }
       });
-      for (let item of myMap.values()) {
+      for (const item of myMap.values()) {
         item.id = item.revid;
         item.label = item.user;
         item.value = this.state.values.reduce(function(s, o) {
@@ -77,9 +77,9 @@ export const NumberOfChangesSettings = {
           return s;
         }, 0);
       }
-      let array = [myMap.size];
+      const array = [myMap.size];
       let j = 0;
-      for (let item of myMap.values()) {
+      for (const item of myMap.values()) {
         array[j++] = item;
       }
       this.setState({ singleArray: array });
@@ -107,6 +107,7 @@ class NumberOfChanges extends Component {
       key: '',
       recentChanges: [],
       loading: false,
+      fullGraph: this.props.fullGraph,
     };
   }
 
@@ -124,36 +125,49 @@ class NumberOfChanges extends Component {
   };
 
   render() {
-    return (
-      // <GraphPage
-      //   handlePause={this.handlePause}
-      //   paused={this.state.paused}
-      //   explanation={
-      //     <div>
-      //       {'The number of changes made by different users on this page.' +
-      //         ' Hover over a section to get a preview of the page, or click to open the page in a new tab.'}
-      //       <p>
-      //         <img
-      //           className="legend"
-      //           src={require('../legend.svg')}
-      //           alt="Legend"
-      //         />
-      //       </p>
-      //     </div>
-      //   }
-      //   graph={
-      <PieChartRefresh
-        fullGraph={true}
-        settings={NumberOfChangesSettings}
-        paused={this.state.paused}
-        recentChanges={this.state.recentChanges}
-        value={this.state.value}
-        loading={this.state.loading}
-      />
-      //     }
-      //     name="Number of Changes"
-      //   />
-    );
+    if (this.state.fullGraph) {
+      return (
+        <GraphPage
+          handlePause={this.handlePause}
+          paused={this.state.paused}
+          explanation={
+            <div>
+              {'The number of changes made by different users on this page.' +
+                ' Hover over a section to get a preview of the page, or click to open the page in a new tab.'}
+              <p>
+                <img
+                  className="legend"
+                  src={require('../legend.svg')}
+                  alt="Legend"
+                />
+              </p>
+            </div>
+          }
+          graph={
+            <PieChartRefresh
+              fullGraph={this.state.fullGraph}
+              settings={NumberOfChangesSettings}
+              paused={this.state.paused}
+              recentChanges={this.state.recentChanges}
+              value={this.state.value}
+              loading={this.state.loading}
+            />
+          }
+          name="Number of Changes"
+        />
+      );
+    } else {
+      return (
+        <PieChartRefresh
+          fullGraph={this.state.fullGraph}
+          settings={NumberOfChangesSettings}
+          paused={this.state.paused}
+          recentChanges={this.state.recentChanges}
+          value={this.state.value}
+          loading={this.state.loading}
+        />
+      );
+    }
   }
 }
 export default NumberOfChanges;
