@@ -22,10 +22,12 @@ class PageFeed extends Component {
         if (!this.state.paused && this.state.value) {
           console.log('timed task executes');
           const item = utils.pageRevisionsSearch(this.state.value).then(str => {
-            str[0].then(value => {
-              console.log(value);
-              this.setState({ recentChanges: value });
-            });
+            if(str[0]){
+              str[0].then(value => {
+                console.log(value);
+                this.setState({ recentChanges: value });
+              });
+            }
           });
         }
       }.bind(this),
@@ -37,10 +39,12 @@ class PageFeed extends Component {
     console.log(search);
     this.setState({ value: search });
     const item = utils.pageRevisionsSearch(search).then(str => {
-      str[0].then(value => {
-        console.log(value);
-        this.setState({ recentChanges: value });
-      });
+      if(str[0]){
+        str[0].then(value => {
+          console.log(value);
+          this.setState({ recentChanges: value });
+        });
+      }
     });
   }
   togglePause() {
