@@ -11,6 +11,7 @@ import RecentEditSize from './Pages/RecentEditSize';
 import LargestRecentEdits from './Pages/LargestRecentEdits';
 import ProportionFlagged from './Pages/ProportionFlagged';
 import AboutPage from './Pages/AboutPage';
+import UsersSearchPage from './Pages/UsersSearchPage';
 import PageRevisionsPage from './Pages/PageRevisionsPage';
 import TestComponent from './Pages/TestComponent';
 import PageRevisionsOverTime from './Pages/PageRevisionsOverTime';
@@ -46,6 +47,7 @@ function App() {
           />
           <Route exact path="/about-page" component={AboutPage} />
           <Route exact path="/feed" component={FeedData} />
+          <Route exact path="/user-search" component={UsersSearchPage} />
           <Route exact path="/page-revisions" component={PageRevisionsPage} />
           <Route
             exact

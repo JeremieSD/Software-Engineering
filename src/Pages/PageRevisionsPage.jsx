@@ -108,6 +108,8 @@ export const SearchSettings = {
     console.log('dataFetch ' + val);
     return await utils.getPrefixSearch(val);
   },
+  type:0
 };
 
 export default PageRevisionsPage;
+
