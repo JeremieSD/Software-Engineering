@@ -14,9 +14,9 @@ export const NumberOfChangesSettings = {
     if (searchValue) {
       const data = await pageRevisionsSearch(searchValue).then(str => {
         str[0].then(value => {
-          // console.log('first-call ' + searchValue);
-          // console.log('value over number: ');
-          // console.log(value);
+          console.log('first-call ' + searchValue);
+          console.log('value over number: ');
+          console.log(value);
           this.setState({ values: value });
         });
         this.setState({ keyValue: str[1] });
@@ -55,8 +55,8 @@ export const NumberOfChangesSettings = {
         this.state.keyValue
       ).then(str => {
         str[0].then(value => {
-          // console.log(value);
-          // console.log('cont-call: ');
+          console.log(value);
+          console.log('cont-call: ');
           this.setState({ values: this.state.values.concat(value) });
         });
         this.setState({ keyValue: str[1] });
@@ -90,10 +90,10 @@ export const NumberOfChangesSettings = {
   colorBy: 'type',
   colors: 'set2',
   onClick: function(click) {
-    window.open('https://www.wikidata.org/wiki/' + click.label, '_blank');
+    window.open('https://www.wikidata.org/wiki/User:' + click.label);
   },
   tooltip: function(click) {
-    return this.tooltip(click, 'https://www.wikidata.org/wiki/');
+    return this.tooltip(click, 'https://www.wikidata.org/wiki/User:');
   },
 };
 

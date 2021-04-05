@@ -21,20 +21,35 @@ class CalendarGraph extends Component {
 
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
+      if (!this.props.loading) {
+        this.setState({
+          loaded: false,
+          initialCall: true,
+          dataFinished: false,
+        });
+      }
+      // this.setState({ value: this.props.value });
       if (this.state.changeValue != this.props.value) {
-        this.setState({ value: this.props.value, dataFinished: false });
+        this.setState({
+          changeValue: this.props.value,
+          value: this.props.value,
+          dataFinished: false,
+          initialCall: true,
+        });
       }
       if (
         this.state.initialCall &&
         this.state.value &&
-        !this.state.dataFinished
+        !this.state.dataFinished &&
+        this.props.loading
       ) {
         this.setState({ changeValue: this.state.value });
         await this.refresh();
       } else if (
         !this.state.initialCall &&
         this.state.value &&
-        !this.state.dataFinished
+        !this.state.dataFinished &&
+        this.props.loading
       ) {
         await this.refreshCont();
       }
@@ -65,7 +80,7 @@ class CalendarGraph extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
-      console.log(data);
+      // console.log(data);
       const smlData = data;
       this.setState({
         loaded: true,
@@ -78,8 +93,8 @@ class CalendarGraph extends Component {
     const getData = this.props.settings.refreshMethod.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        console.log('New Data');
-        console.log(data);
+        // console.log('New Data');
+        // console.log(data);
         const smlData = data;
         this.setState({
           loaded: true,

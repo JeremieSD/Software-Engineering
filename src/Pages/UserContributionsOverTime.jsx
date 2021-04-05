@@ -7,13 +7,13 @@ export const UserContributionsOverTimeSettings = {
   getData: async function(searchValue) {
     const data = await userSearch(searchValue).then(str => {
       if (str[0]) {
-        console.log('first-call');
-        console.log('value Over Time: ');
+        // console.log('first-call');
+        // console.log('value Over Time: ');
         // console.log(value);
         this.setState({ values: str[0] });
         this.setState({ nextVals: str[0] });
         this.setState({ keyValue: str[1] });
-        console.log('key ' + this.state.keyValue);
+        // console.log('key ' + this.state.keyValue);
       }
     });
     const myMap = new Map();
@@ -49,13 +49,13 @@ export const UserContributionsOverTimeSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    console.log('Refresh ' + searchValue);
+    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await userSearchCont(searchValue, this.state.keyValue).then(
         str => {
           // return str;
           if (str[0]) {
-            console.log('cont-call: ');
+            // console.log('cont-call: ');
             this.setState({ values: this.state.values.concat(str[0]) });
           }
           this.setState({ keyValue: str[1] });
@@ -106,6 +106,7 @@ class UserContributionsOverTime extends Component {
       history: this.props.history,
       paused: false,
       value: '',
+      loading: false,
     };
   }
 
@@ -119,9 +120,14 @@ class UserContributionsOverTime extends Component {
   };
 
   onclick(search) {
-    console.log('S ' + search);
+    // console.log('S ' + search);
     this.setState({ value: search });
-    console.log('V ' + this.state.value);
+    // console.log('V ' + this.state.value);
+    if (search) {
+      this.setState({ loading: true });
+    } else {
+      this.setState({ loading: false });
+    }
   }
 
   render() {
@@ -149,6 +155,7 @@ class UserContributionsOverTime extends Component {
               settings={UserContributionsOverTimeSettings}
               paused={this.state.paused}
               value={this.state.value}
+              loading={this.state.loading}
             />
           }
           name="User Contributions Over Time"
@@ -161,6 +168,7 @@ class UserContributionsOverTime extends Component {
           settings={UserContributionsOverTimeSettings}
           paused={this.state.paused}
           value={this.state.value}
+          loading={this.state.loading}
         />
       );
     }

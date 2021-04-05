@@ -24,7 +24,7 @@ class PageFeed extends Component {
           const item = utils.pageRevisionsSearch(this.state.value).then(str => {
             if (str[0]) {
               str[0].then(value => {
-                console.log(value);
+                // console.log(value);
                 this.setState({ recentChanges: value });
               });
             }
@@ -41,7 +41,7 @@ class PageFeed extends Component {
     const item = utils.pageRevisionsSearch(search).then(str => {
       if (str[0]) {
         str[0].then(value => {
-          console.log(value);
+          // console.log(value);
           this.setState({ recentChanges: value });
         });
       }

@@ -107,6 +107,7 @@ class PageRevisionsOverTime extends Component {
       fullGraph: this.props.fullGraph,
       paused: false,
       value: '',
+      loading: true,
     };
   }
 

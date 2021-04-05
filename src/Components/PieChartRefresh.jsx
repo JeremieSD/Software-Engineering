@@ -22,8 +22,22 @@ class PieChartRefresh extends Component {
   }
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
+      if (!this.props.loading) {
+        this.setState({
+          loaded: false,
+          initialCall: true,
+          dataFinished: false,
+        });
+      }
+      // this.setState({ value: this.props.value });
       if (this.state.changeValue != this.props.value) {
-        this.setState({ value: this.props.value, dataFinished: false });
+        console.log('HeyaBuddyYA');
+        this.setState({
+          changeValue: this.props.value,
+          value: this.props.value,
+          dataFinished: false,
+          initialCall: true,
+        });
       }
       if (
         this.state.initialCall &&

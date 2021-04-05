@@ -9,46 +9,50 @@ export const NumberOfChangesSettings = {
     if (searchValue) {
       const data = await userSearch(searchValue).then(str => {
         if (str[0]) {
-          console.log('first-call ' + searchValue);
-          console.log('value over number: ');
+          // console.log('first-call ' + searchValue);
+          // console.log('value over number: ');
           this.setState({ values: str[0] });
           this.setState({ keyValue: str[1] });
         }
       });
-      const myMap = new Map();
-      this.state.values.forEach(item => {
-        if (!myMap.has(item.title)) {
-          myMap.set(item.title, item);
-        }
-      });
-      for (const item of myMap.values()) {
-        item.id = item.revid;
-        item.label = item.title;
-        item.value = this.state.values.reduce(function(s, o) {
-          if (o.title === item.title) {
-            s++;
+      if (this.state.keyValue != -1) {
+        console.log('I am here');
+        let myMap = new Map();
+        this.state.values.forEach(item => {
+          if (!myMap.has(item.title)) {
+            myMap.set(item.title, item);
           }
-          return s;
-        }, 0);
+        });
+        for (let item of myMap.values()) {
+          item.id = item.revid;
+          item.label = item.title;
+          item.value = this.state.values.reduce(function(s, o) {
+            if (o.title === item.title) {
+              s++;
+            }
+            return s;
+          }, 0);
+        }
+        let array = [myMap.size];
+        let j = 0;
+        for (let item of myMap.values()) {
+          array[j++] = item;
+        }
+        this.setState({ singleArray: array });
+        return array;
       }
-      const array = [myMap.size];
-      let j = 0;
-      for (const item of myMap.values()) {
-        array[j++] = item;
-      }
-      this.setState({ singleArray: array });
-      return array;
+      return -1;
     }
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    console.log('Refresh ' + searchValue);
+    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await userSearchCont(searchValue, this.state.keyValue).then(
         str => {
           if (str[0]) {
-            console.log('cont-call ' + searchValue);
-            console.log('value over number: ');
+            // console.log('cont-call ' + searchValue);
+            // console.log('value over number: ');
             this.setState({ values: this.state.values.concat(str[0]) });
             this.setState({ keyValue: str[1] });
           }
@@ -110,12 +114,17 @@ class NumberOfChanges extends Component {
 
   onclick(search) {
     this.setState({ value: search });
+    if (search) {
+      this.setState({ loading: true });
+    } else {
+      this.setState({ loading: false });
+    }
   }
 
-  handlePause = () => {
-    const paused = this.state.paused;
-    this.setState({ paused: !paused });
-  };
+  // handlePause = () => {
+  //   const paused = this.state.paused;
+  //   this.setState({ paused: !paused });
+  // };
 
   render() {
     if (this.state.fullGraph) {

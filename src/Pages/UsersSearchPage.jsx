@@ -24,16 +24,40 @@ class UsersSearchPage extends Component {
       ifConfirm: true,
       firmsList: [],
       recentChanges: [],
+      invalidSearch: false,
+      loading: false,
     };
     this.onClick = this.onClick.bind(this);
   }
 
   //Match column mouse click events
   onClick(value) {
-    this.feed.onclick(value);
-    this.overTime.onclick(value);
-    this.changes.onclick(value);
+    this.setState({ invalidSearch: false });
+    this.checkUser(value).then(bool => {
+      if (bool) {
+        this.feed.onclick(value);
+        this.overTime.onclick(value);
+        this.changes.onclick(value);
+      } else {
+        this.setState({ invalidSearch: true });
+        // this.feed.onclick("");
+        this.overTime.onclick('');
+        this.changes.onclick('');
+      }
+    });
   }
+
+  checkUser = async searchValue => {
+    let data = false;
+    data = await utils.userSearch(searchValue).then(str => {
+      if (str[0]) {
+        if (str[1] != -1) {
+          return true;
+        }
+      }
+    });
+    return data;
+  };
 
   render() {
     return (
@@ -56,6 +80,7 @@ class UsersSearchPage extends Component {
                 settings={SearchSettings}
                 searchValue={this.onClick.bind(this)}
               />
+              {this.state.invalidSearch && <p>This User does not exist.</p>}
               <CardDeck className="CardDeckRev">
                 <GraphCard
                   title="Number of Changes by User"
