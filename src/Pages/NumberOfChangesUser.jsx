@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GraphPage from './GraphPage';
-import PieChart from '../Components/PieChart';
+import PieChartRefresh from '../Components/PieChartRefresh';
 import { userSearch, userSearchCont } from '../Backend/searchingFunctionality';
 import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
@@ -135,7 +135,7 @@ class NumberOfChanges extends Component {
       //     </div>
       //   }
       //   graph={
-      <PieChart
+      <PieChartRefresh
         fullGraph={true}
         settings={NumberOfChangesSettings}
         paused={this.state.paused}

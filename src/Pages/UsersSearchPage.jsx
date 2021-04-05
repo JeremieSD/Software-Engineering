@@ -9,8 +9,6 @@ import NumberOfChangesUser, {
   NumberOfChangesSettings,
 } from './NumberOfChangesUser';
 import * as utils from '../Backend/searchingFunctionality';
-import CardDeck from 'react-bootstrap/CardDeck';
-import GraphCard from '../Components/GraphCard';
 import UserContributionsOverTime, {
   UserContributionsOverTimeSettings,
 } from './UserContributionsOverTime';
