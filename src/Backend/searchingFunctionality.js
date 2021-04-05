@@ -353,10 +353,11 @@ export const getHyperlinkedDescription = async text => {
 };
 
 // test
-// const item = pageRevisionsSearch('Albert Einstein').then(str => {
-//   str[0].then(value => {
-//     console.log(value);
-//   });
+//Tahmid02016
+// const item = userSearch('Tahmid02016').then(str => {
+//   if (str[0]) {
+//     console.log(str[0]);
+//   }
 // });
 
 // let key = 0;

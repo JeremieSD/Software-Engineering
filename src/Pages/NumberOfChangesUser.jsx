@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
 import GraphPage from './GraphPage';
 import PieChart from '../Components/PieChart';
-import {
-  pageRevisionsSearch,
-  pageRevisionsSearchCont,
-} from '../Backend/searchingFunctionality';
+import { userSearch, userSearchCont } from '../Backend/searchingFunctionality';
 import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
 export const NumberOfChangesSettings = {
   getData: async function(searchValue) {
-    // console.log('here ' + searchValue);
-
     if (searchValue) {
-      const data = await pageRevisionsSearch(searchValue).then(str => {
-        str[0].then(value => {
-          // console.log('first-call ' + searchValue);
-          // console.log('value over number: ');
-          // console.log(value);
-          this.setState({ values: value });
-        });
-        this.setState({ keyValue: str[1] });
+      const data = await userSearch(searchValue).then(str => {
+        if (str[0]) {
+          console.log('first-call ' + searchValue);
+          console.log('value over number: ');
+          this.setState({ values: str[0] });
+          this.setState({ keyValue: str[1] });
+        }
       });
       let myMap = new Map();
       this.state.values.forEach(item => {
-        if (!myMap.has(item.user)) {
-          myMap.set(item.user, item);
+        if (!myMap.has(item.title)) {
+          myMap.set(item.title, item);
         }
       });
       for (let item of myMap.values()) {
         item.id = item.revid;
-        item.label = item.user;
+        item.label = item.title;
         item.value = this.state.values.reduce(function(s, o) {
-          if (o.user === item.user) {
+          if (o.title === item.title) {
             s++;
           }
           return s;
@@ -48,30 +42,29 @@ export const NumberOfChangesSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    // console.log('Refresh ' + searchValue);
+    console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
-      const data = await pageRevisionsSearchCont(
-        searchValue,
-        this.state.keyValue
-      ).then(str => {
-        str[0].then(value => {
-          // console.log(value);
-          // console.log('cont-call: ');
-          this.setState({ values: this.state.values.concat(value) });
-        });
-        this.setState({ keyValue: str[1] });
-      });
+      const data = await userSearchCont(searchValue, this.state.keyValue).then(
+        str => {
+          if (str[0]) {
+            console.log('cont-call ' + searchValue);
+            console.log('value over number: ');
+            this.setState({ values: this.state.values.concat(str[0]) });
+            this.setState({ keyValue: str[1] });
+          }
+        }
+      );
       let myMap = new Map();
       this.state.values.forEach(item => {
-        if (!myMap.has(item.user)) {
-          myMap.set(item.user, item);
+        if (!myMap.has(item.title)) {
+          myMap.set(item.title, item);
         }
       });
       for (let item of myMap.values()) {
         item.id = item.revid;
-        item.label = item.user;
+        item.label = item.title;
         item.value = this.state.values.reduce(function(s, o) {
-          if (o.user === item.user) {
+          if (o.title === item.title) {
             s++;
           }
           return s;

@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import UserFeed from '../Components/UserFeed';
+import CardDeck from 'react-bootstrap/CardDeck';
+import GraphCard from '../Components/GraphCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NumberOfChangesUser, {
+  NumberOfChangesSettings,
+} from './NumberOfChangesUser';
 import * as utils from '../Backend/searchingFunctionality';
 import CardDeck from 'react-bootstrap/CardDeck';
 import GraphCard from '../Components/GraphCard';
@@ -29,6 +34,7 @@ class UsersSearchPage extends Component {
   onClick(value) {
     this.feed.onclick(value);
     this.overTime.onclick(value);
+    this.changes.onclick(value);
   }
 
   render() {
@@ -52,6 +58,21 @@ class UsersSearchPage extends Component {
                 settings={SearchSettings}
                 searchValue={this.onClick.bind(this)}
               />
+              <CardDeck className="CardDeckRev">
+                <GraphCard
+                  title="Number of Changes"
+                  pageLink="number-of-changes"
+                  history={this.state.history}
+                  graph={
+                    <NumberOfChangesUser
+                      history={this.state.history}
+                      onRef={ref => {
+                        this.changes = ref;
+                      }}
+                    />
+                  }
+                />
+              </CardDeck>
               <CardDeck className="CardDeckRev">
                 <GraphCard
                   title="User Contributions Over Time"

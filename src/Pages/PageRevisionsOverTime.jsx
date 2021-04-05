@@ -10,14 +10,14 @@ export const PageRevisionsOverTimeSettings = {
   getData: async function(searchValue) {
     const data = await pageRevisionsSearch(searchValue).then(str => {
       str[0].then(value => {
-        console.log('first-call');
-        console.log('value Over Time: ');
+        // console.log('first-call');
+        // console.log('value Over Time: ');
         // console.log(value);
         this.setState({ values: value });
         this.setState({ nextVals: value });
       });
       this.setState({ keyValue: str[1] });
-      console.log('key ' + this.state.keyValue);
+      // console.log('key ' + this.state.keyValue);
     });
     const myMap = new Map();
     let a = 0;
@@ -38,10 +38,6 @@ export const PageRevisionsOverTimeSettings = {
         }
         return s;
       }, 0);
-      if (a === 30) {
-        console.log(item.timestamp.slice(0, -10) + 'V:  ' + item.value);
-      }
-      a++;
     }
     const array = [myMap.size];
     let j = 0;
@@ -52,7 +48,7 @@ export const PageRevisionsOverTimeSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    console.log('Refresh ' + searchValue);
+    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await pageRevisionsSearchCont(
         searchValue,
@@ -60,7 +56,7 @@ export const PageRevisionsOverTimeSettings = {
       ).then(str => {
         // return str;
         str[0].then(value => {
-          console.log('cont-call: ');
+          // console.log('cont-call: ');
           this.setState({ values: this.state.values.concat(value) });
         });
         this.setState({ keyValue: str[1] });
@@ -123,9 +119,9 @@ class PageRevisionsOverTime extends Component {
   };
 
   onclick(search) {
-    console.log('S ' + search);
+    // console.log('S ' + search);
     this.setState({ value: search });
-    console.log('V ' + this.state.value);
+    // console.log('V ' + this.state.value);
   }
 
   render() {
