@@ -6,14 +6,14 @@ const SearchBar = props => {
   // const [results, setResults] = useState(null);
 
   const loadData = value => {
-    if(props.settings.type==0){
-    const getData = props.settings.getData.bind(this);
-    // console.log('dataToBeFetched ');
-    getData(value).then(data => {
-      // console.log('data ' + data);
-      // setResults(data);
-      parseData(data);
-    });      
+    if (props.settings.type == 0) {
+      const getData = props.settings.getData.bind(this);
+      // console.log('dataToBeFetched ');
+      getData(value).then(data => {
+        // console.log('data ' + data);
+        // setResults(data);
+        parseData(data);
+      });
     }
   };
 

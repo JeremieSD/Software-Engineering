@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import GraphPage from './GraphPage';
 import CalendarGraph from '../Components/CalendarGraph';
-import {
-  pageRevisionsSearch,
-  pageRevisionsSearchCont,
-} from '../Backend/searchingFunctionality';
+import { userSearch, userSearchCont } from '../Backend/searchingFunctionality';
 
-export const PageRevisionsOverTimeSettings = {
+export const UserContributionsOverTimeSettings = {
   getData: async function(searchValue) {
-    const data = await pageRevisionsSearch(searchValue).then(str => {
-      str[0].then(value => {
+    const data = await userSearch(searchValue).then(str => {
+      if (str[0]) {
         console.log('first-call');
         console.log('value Over Time: ');
         // console.log(value);
-        this.setState({ values: value });
-        this.setState({ nextVals: value });
-      });
-      this.setState({ keyValue: str[1] });
-      console.log('key ' + this.state.keyValue);
+        this.setState({ values: str[0] });
+        this.setState({ nextVals: str[0] });
+        this.setState({ keyValue: str[1] });
+        console.log('key ' + this.state.keyValue);
+      }
     });
     const myMap = new Map();
     let a = 0;
@@ -54,17 +51,16 @@ export const PageRevisionsOverTimeSettings = {
   refreshMethod: async function(searchValue) {
     console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
-      const data = await pageRevisionsSearchCont(
-        searchValue,
-        this.state.keyValue
-      ).then(str => {
-        // return str;
-        str[0].then(value => {
-          console.log('cont-call: ');
-          this.setState({ values: this.state.values.concat(value) });
-        });
-        this.setState({ keyValue: str[1] });
-      });
+      const data = await userSearchCont(searchValue, this.state.keyValue).then(
+        str => {
+          // return str;
+          if (str[0]) {
+            console.log('cont-call: ');
+            this.setState({ values: this.state.values.concat(str[0]) });
+          }
+          this.setState({ keyValue: str[1] });
+        }
+      );
       const myMap = new Map();
       this.state.values.forEach(item => {
         if (
@@ -103,7 +99,7 @@ export const PageRevisionsOverTimeSettings = {
   },
 };
 
-class PageRevisionsOverTime extends Component {
+class UserContributionsOverTime extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -149,14 +145,14 @@ class PageRevisionsOverTime extends Component {
       //   graph={
       <CalendarGraph
         fullGraph={true}
-        settings={PageRevisionsOverTimeSettings}
+        settings={UserContributionsOverTimeSettings}
         paused={this.state.paused}
         value={this.state.value}
       />
       //     }
-      //     name="Page Revisions Over Time"
+      //     name="User Contributions Over Time"
       //   />
     );
   }
 }
-export default PageRevisionsOverTime;
+export default UserContributionsOverTime;

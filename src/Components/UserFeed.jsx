@@ -9,8 +9,8 @@ class PageFeed extends Component {
       recentChanges: [],
       paused: false,
       value: '',
-      cont:-1,
-      max:true
+      cont: -1,
+      max: true,
     };
     this.togglePause = this.togglePause.bind(this);
   }
@@ -18,11 +18,14 @@ class PageFeed extends Component {
     this.props.onRef(this);
     setInterval(
       function() {
-        if (!this.state.paused && this.state.value&&this.state.cont!=-1) {
+        if (!this.state.paused && this.state.value && this.state.cont != -1) {
           console.log('timed task executes');
           const item = utils.userSearch(this.state.value).then(str => {
-            if(str[0]){
-                this.setState({ recentChanges: this.state.recentChanges.concat(str[0]),cont:str[1] });
+            if (str[0]) {
+              this.setState({
+                recentChanges: this.state.recentChanges.concat(str[0]),
+                cont: str[1],
+              });
             }
           });
         }
@@ -35,9 +38,9 @@ class PageFeed extends Component {
     console.log(search);
     this.setState({ value: search });
     const item = utils.userSearch(search).then(str => {
-        if(str[0]){
-            this.setState({ recentChanges: str[0],cont:str[1] });
-        }
+      if (str[0]) {
+        this.setState({ recentChanges: str[0], cont: str[1] });
+      }
     });
   }
   togglePause() {
