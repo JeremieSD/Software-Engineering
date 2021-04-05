@@ -9,6 +9,8 @@ class PageFeed extends Component {
       recentChanges: [],
       paused: false,
       value: '',
+      cont:-1,
+      max:true
     };
     this.togglePause = this.togglePause.bind(this);
   }
@@ -16,17 +18,11 @@ class PageFeed extends Component {
     this.props.onRef(this);
     setInterval(
       function() {
-        console.log(
-          'timed task starts' + this.state.paused + '----' + this.state.value
-        );
-        if (!this.state.paused && this.state.value) {
+        if (!this.state.paused && this.state.value&&this.state.cont!=-1) {
           console.log('timed task executes');
-          const item = utils.pageRevisionsSearch(this.state.value).then(str => {
+          const item = utils.userSearch(this.state.value).then(str => {
             if(str[0]){
-              str[0].then(value => {
-                console.log(value);
-                this.setState({ recentChanges: value });
-              });
+                this.setState({ recentChanges: this.state.recentChanges.concat(str[0]),cont:str[1] });
             }
           });
         }
@@ -38,13 +34,10 @@ class PageFeed extends Component {
   onclick(search) {
     console.log(search);
     this.setState({ value: search });
-    const item = utils.pageRevisionsSearch(search).then(str => {
-      if(str[0]){
-        str[0].then(value => {
-          console.log(value);
-          this.setState({ recentChanges: value });
-        });
-      }
+    const item = utils.userSearch(search).then(str => {
+        if(str[0]){
+            this.setState({ recentChanges: str[0],cont:str[1] });
+        }
     });
   }
   togglePause() {
@@ -53,7 +46,7 @@ class PageFeed extends Component {
   render() {
     return (
       <div>
-        <h3 className="text-blue text-left">Page Revisions</h3>
+        <h3 className="text-blue text-left">User Search</h3>
         <form className="text-left" onChange={this.togglePause}>
           <label>
             <input type="checkbox" /> Paused
@@ -63,7 +56,7 @@ class PageFeed extends Component {
           {this.state.recentChanges.map((item, index) => (
             <li className="list-group-item text-left" key={index}>
               <div>
-                {`User: ${item.user}`}
+                {`Title: ${item.title}`}
                 <br />
                 {`Comment: ${item.comment}`}
                 <br />
