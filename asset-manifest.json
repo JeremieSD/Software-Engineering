@@ -1,26 +1,24 @@
 {
   "files": {
-    "main.css": "/Software-Engineering/static/css/main.210fc3c1.chunk.css",
-    "main.js": "/Software-Engineering/static/js/main.de8ea454.chunk.js",
-    "main.js.map": "/Software-Engineering/static/js/main.de8ea454.chunk.js.map",
-    "runtime-main.js": "/Software-Engineering/static/js/runtime-main.52962855.js",
-    "runtime-main.js.map": "/Software-Engineering/static/js/runtime-main.52962855.js.map",
-    "static/css/2.47e06e2e.chunk.css": "/Software-Engineering/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.7bf891d3.chunk.js": "/Software-Engineering/static/js/2.7bf891d3.chunk.js",
-    "static/js/2.7bf891d3.chunk.js.map": "/Software-Engineering/static/js/2.7bf891d3.chunk.js.map",
+    "main.css": "/Software-Engineering/static/css/main.cdb601ad.chunk.css",
+    "main.js": "/Software-Engineering/static/js/main.e18339a2.chunk.js",
+    "main.js.map": "/Software-Engineering/static/js/main.e18339a2.chunk.js.map",
+    "runtime-main.js": "/Software-Engineering/static/js/runtime-main.60537f40.js",
+    "runtime-main.js.map": "/Software-Engineering/static/js/runtime-main.60537f40.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/Software-Engineering/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.7f8ae5c5.chunk.js": "/Software-Engineering/static/js/2.7f8ae5c5.chunk.js",
+    "static/js/2.7f8ae5c5.chunk.js.map": "/Software-Engineering/static/js/2.7f8ae5c5.chunk.js.map",
     "index.html": "/Software-Engineering/index.html",
-    "precache-manifest.6e4592af5117a74ae8eb9e01cfee42cb.js": "/Software-Engineering/precache-manifest.6e4592af5117a74ae8eb9e01cfee42cb.js",
-    "service-worker.js": "/Software-Engineering/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "/Software-Engineering/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.210fc3c1.chunk.css.map": "/Software-Engineering/static/css/main.210fc3c1.chunk.css.map",
-    "static/js/2.7bf891d3.chunk.js.LICENSE": "/Software-Engineering/static/js/2.7bf891d3.chunk.js.LICENSE",
-    "static/media/legend.svg": "/Software-Engineering/static/media/legend.ee93b5bb.svg"
+    "static/css/2.4c97ca4f.chunk.css.map": "/Software-Engineering/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.cdb601ad.chunk.css.map": "/Software-Engineering/static/css/main.cdb601ad.chunk.css.map",
+    "static/js/2.7f8ae5c5.chunk.js.LICENSE.txt": "/Software-Engineering/static/js/2.7f8ae5c5.chunk.js.LICENSE.txt",
+    "static/media/legend.svg": "/Software-Engineering/static/media/legend.9527bbb6.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.52962855.js",
-    "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.7bf891d3.chunk.js",
-    "static/css/main.210fc3c1.chunk.css",
-    "static/js/main.de8ea454.chunk.js"
+    "static/js/runtime-main.60537f40.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.7f8ae5c5.chunk.js",
+    "static/css/main.cdb601ad.chunk.css",
+    "static/js/main.e18339a2.chunk.js"
   ]
 }
