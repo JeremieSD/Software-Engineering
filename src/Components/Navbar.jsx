@@ -28,18 +28,6 @@ class NavbarLocal extends Component {
 
             <Nav.Link
               as={Link}
-              to="/about-page"
-              className={
-                activePage.endsWith('/about-page')
-                  ? 'nav-link--active'
-                  : 'nav-link'
-              }
-            >
-              About Us
-            </Nav.Link>
-
-            <Nav.Link
-              as={Link}
               to="/page"
               className={
                 activePage.endsWith('/page') ? 'nav-link--active' : 'nav-link'
@@ -58,17 +46,6 @@ class NavbarLocal extends Component {
               Feed
             </Nav.Link>
 
-            <a
-              as={Link}
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/JeremieSD/Software-Engineering"
-              className={
-                activePage.endsWith('/ksknc') ? 'nav-link--active' : 'nav-link'
-              }
-            >
-              Github Project
-            </a>
             <Nav.Link
               as={Link}
               to="/user-search"
@@ -80,6 +57,7 @@ class NavbarLocal extends Component {
             >
               User Search
             </Nav.Link>
+
             <Nav.Link
               as={Link}
               to="/page-revisions"
@@ -91,6 +69,31 @@ class NavbarLocal extends Component {
             >
               Page Revisions
             </Nav.Link>
+
+            <Nav.Link
+              as={Link}
+              to="/about-page"
+              className={
+                activePage.endsWith('/about-page')
+                  ? 'nav-link--active'
+                  : 'nav-link'
+              }
+            >
+              About Us
+            </Nav.Link>
+
+            <a
+              as={Link}
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/JeremieSD/Software-Engineering"
+              className={
+                activePage.endsWith('/ksknc') ? 'nav-link--active' : 'nav-link'
+              }
+            >
+              Github Project
+            </a>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>
