@@ -34,6 +34,19 @@ class HomePage extends Component {
             <div className="feedContainer">
               <FeedData />
             </div>
+            <div>
+              <button
+                className="feed-button button-position"
+                onClick={e => { this.props.history.push("/user-search") }}
+              >
+                User Search
+                </button>
+              <button
+                className="feed-button button-position"
+                onClick={e => { this.props.history.push("/page-revisions") }}>
+                Page Search
+                </button>
+            </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div className="deck-container">
