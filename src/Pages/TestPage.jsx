@@ -38,6 +38,7 @@ class HomePage extends Component {
               <button
                 className="feed-button button-position"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 onClick={e => {
                   this.props.history.push('/user-search');
                 }}
@@ -54,15 +55,27 @@ class HomePage extends Component {
               </button>
 =======
                 onClick={e => { this.props.history.push("/user-search") }}
+=======
+                onClick={e => {
+                  this.props.history.push('/user-search');
+                }}
+>>>>>>> df376bd... prettier
               >
                 User Search
-                </button>
+              </button>
               <button
                 className="feed-button button-position"
-                onClick={e => { this.props.history.push("/page-revisions") }}>
+                onClick={e => {
+                  this.props.history.push('/page-revisions');
+                }}
+              >
                 Page Search
+<<<<<<< HEAD
                 </button>
 >>>>>>> 17520d8... add buttons
+=======
+              </button>
+>>>>>>> df376bd... prettier
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
