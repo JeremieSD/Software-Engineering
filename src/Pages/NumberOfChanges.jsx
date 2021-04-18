@@ -112,7 +112,7 @@ class NumberOfChanges extends Component {
   }
 
   componentDidMount() {
-    console.log('HELLO ' + this.state.value);
+    console.log('Hello');
     if (this.state.fullGraph == false) {
       this.props.onRef(this);
     }

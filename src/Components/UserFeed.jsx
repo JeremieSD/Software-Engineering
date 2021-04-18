@@ -41,12 +41,14 @@ class PageFeed extends Component {
 
   onclick(search) {
     // console.log(search);
-    this.setState({ value: search });
-    const item = utils.userSearch(search).then(str => {
-      if (str[0]) {
-        this.setState({ recentChanges: str[0], cont: str[1] });
-      }
-    });
+    if (search) {
+      this.setState({ value: search });
+      const item = utils.userSearch(search).then(str => {
+        if (str[0]) {
+          this.setState({ recentChanges: str[0], cont: str[1] });
+        }
+      });
+    }
   }
   togglePause() {
     this.state.paused = !this.state.paused;

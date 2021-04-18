@@ -105,13 +105,18 @@ class UserContributionsOverTime extends Component {
     this.state = {
       history: this.props.history,
       paused: false,
-      value: '',
+      value: this.props.value,
       loading: false,
+      fullGraph: this.props.fullGraph,
     };
   }
 
   componentDidMount() {
-    this.props.onRef(this);
+    if (this.state.fullGraph == false) {
+      this.props.onRef(this);
+    } else if (this.state.value) {
+      this.setState({ loading: true });
+    }
   }
 
   handlePause = event => {
@@ -162,7 +167,7 @@ class UserContributionsOverTime extends Component {
         />
       );
     } else {
-      if (this.state.value === '') {
+      if (this.state.value == '') {
         return (
           <div>
             <p>Search For a Graph</p>

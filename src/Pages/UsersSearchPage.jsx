@@ -26,6 +26,7 @@ class UsersSearchPage extends Component {
       recentChanges: [],
       invalidSearch: false,
       loading: false,
+      value: '',
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -38,6 +39,7 @@ class UsersSearchPage extends Component {
         this.feed.onclick(value);
         this.overTime.onclick(value);
         this.changes.onclick(value);
+        this.setState({ value: value });
       } else {
         this.setState({ invalidSearch: true });
         this.feed.onclick('');
@@ -84,7 +86,7 @@ class UsersSearchPage extends Component {
               <CardDeck className="CardDeckRev">
                 <GraphCard
                   title="Number of Changes by User"
-                  pageLink="number-of-changes-user"
+                  pageLink="user-number-of-changes"
                   history={this.state.history}
                   graph={
                     <NumberOfChangesUser
@@ -93,8 +95,10 @@ class UsersSearchPage extends Component {
                       onRef={ref => {
                         this.changes = ref;
                       }}
+                      value=""
                     />
                   }
+                  value={this.state.value}
                 />
               </CardDeck>
               <CardDeck className="CardDeckRev">
@@ -109,8 +113,10 @@ class UsersSearchPage extends Component {
                       onRef={ref => {
                         this.overTime = ref;
                       }}
+                      value=""
                     />
                   }
+                  value={this.state.value}
                 />
               </CardDeck>
             </div>

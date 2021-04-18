@@ -106,13 +106,15 @@ class PageRevisionsOverTime extends Component {
       history: this.props.history,
       fullGraph: this.props.fullGraph,
       paused: false,
-      value: '',
+      value: this.props.value,
       loading: true,
     };
   }
 
   componentDidMount() {
-    this.props.onRef(this);
+    if (this.state.fullGraph == false) {
+      this.props.onRef(this);
+    }
   }
 
   handlePause = event => {

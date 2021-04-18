@@ -53,24 +53,42 @@ function App() {
           <Route exact path="/user-search" component={UsersSearchPage} />
           <Route exact path="/page-revisions" component={PageRevisionsPage} />
           <Route
-            exact
-            path="/number-of-changes"
-            render={() => <NumberOfChanges fullGraph={true} />}
+            path="/number-of-changes:id"
+            render={props => {
+              let name = props.match.url;
+              name = name.split(':')[1];
+              console.log(name);
+              return <NumberOfChanges fullGraph={true} value={name} />;
+            }}
           />
           <Route
-            exact
-            path="/number-of-changes-user"
-            component={NumberOfChangesUser}
+            path="/user-number-of-changes:id"
+            render={props => {
+              let name = props.match.url;
+              name = name.split(':')[1];
+              console.log(name);
+              return <NumberOfChangesUser fullGraph={true} value={name} />;
+            }}
           />
           <Route
-            exact
-            path="/page-revisions-over-time"
-            component={PageRevisionsOverTime}
+            path="/page-revisions-over-time:id"
+            render={props => {
+              let name = props.match.url;
+              name = name.split(':')[1];
+              console.log(name);
+              return <PageRevisionsOverTime fullGraph={true} value={name} />;
+            }}
           />
           <Route
-            exact
-            path="/user-contributions-over-time"
-            component={UserContributionsOverTime}
+            path="/user-contributions-over-time:id"
+            render={props => {
+              let name = props.match.url;
+              name = name.split(':')[1];
+              console.log(name);
+              return (
+                <UserContributionsOverTime fullGraph={true} value={name} />
+              );
+            }}
           />
         </Switch>
       </Router>
