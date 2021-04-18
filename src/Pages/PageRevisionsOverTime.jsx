@@ -151,6 +151,7 @@ class PageRevisionsOverTime extends Component {
               settings={PageRevisionsOverTimeSettings}
               paused={this.state.paused}
               value={this.state.value}
+              loading={this.state.loading}
             />
           }
           name="Page Revisions Over Time"
@@ -163,6 +164,7 @@ class PageRevisionsOverTime extends Component {
           settings={PageRevisionsOverTimeSettings}
           paused={this.state.paused}
           value={this.state.value}
+          loading={this.state.loading}
         />
       );
     }

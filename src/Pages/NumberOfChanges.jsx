@@ -106,7 +106,7 @@ class NumberOfChanges extends Component {
       value: '',
       key: '',
       recentChanges: [],
-      loading: false,
+      loading: true,
       fullGraph: this.props.fullGraph,
     };
   }
