@@ -18,7 +18,7 @@ You will need to have installed:
 1. Clone the GitHub repository
 
 ```
-git clone https://github.com/isobelm/Software-Engineering.git
+git clone https://github.com/JeremieSD/Software-Engineering.git
 ```
 
 2. Navigate into the cloned GitHub repository
@@ -49,6 +49,12 @@ The website should now have opened on your default browser. The server is hosted
 * [Nivo](https://nivo.rocks/) - Graphing framework used
 
 ## Authors
+* [Jeremie Sajeev Daniel](https://github.com/JeremieSD)
+* [Conor Brian O'Neill](https://github.com/conoro24)
+* [Aoife Alena Khan](https://github.com/aoife-K)
+* [Xiaolei Zhang](https://github.com/Xiaoleiii)
+* [Matteo Luciano McGuinness](https://github.com/m477301)
+* [Emmet Morrin](https://github.com/Unimuspanet)
 * [Isobel Mahon](https://github.com/isobelm)
 * [Brian Lynch](https://github.com/brianlunch)
 * [Odhran Mullan](https://github.com/omullan)
