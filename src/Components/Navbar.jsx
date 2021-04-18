@@ -93,7 +93,6 @@ class NavbarLocal extends Component {
             >
               Github Project
             </a>
-
           </Nav>
         </Navbar.Collapse>
       </Navbar>
