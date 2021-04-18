@@ -157,6 +157,13 @@ class NumberOfChanges extends Component {
         />
       );
     } else {
+      if (this.state.value === '') {
+        return (
+          <div>
+            <p>Search For a Graph</p>
+          </div>
+        );
+      }
       return (
         <PieChartRefresh
           fullGraph={this.state.fullGraph}

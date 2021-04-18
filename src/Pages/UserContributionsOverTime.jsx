@@ -162,6 +162,13 @@ class UserContributionsOverTime extends Component {
         />
       );
     } else {
+      if (this.state.value === '') {
+        return (
+          <div>
+            <p>Search For a Graph</p>
+          </div>
+        );
+      }
       return (
         <CalendarGraph
           fullGraph={this.state.fullGraph}
