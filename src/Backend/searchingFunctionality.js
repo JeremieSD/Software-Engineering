@@ -1,3 +1,8 @@
+//import {
+//  getWikibaseItemCache,
+//  setWikibaseItemCache,
+//} from './WikibaseItemCache';
+
 const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const DESCRIPTION_REST_API =
@@ -6,7 +11,8 @@ const DBPEDIA_SPOTLIGHT_API = 'api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-
+//const cache = getWikibaseItemCache('WIKIBASEITEM_CACHE');
+const cache = {};
 /*
   userSearch: gets a json list of the 20 most recent contributions made my a user, along with a key to get the next 20
   '' - String
@@ -36,7 +42,7 @@ export const userSearch = async name => {
     uclimit: 20,
     ucuser: name,
   };
-  let item = await wikipediaQuery(
+  const item = await wikipediaQuery(
     WIKIPEDIA_ENDPOINT_SEARCH,
     params,
     NUMBER_OF_RETRIES
@@ -205,17 +211,23 @@ const userContributionsSeperator = async (usercontribs, result) => {
 //@param {string} searchItem - Item to search Qid for
 //@returns {Object} -1 or QID
 const getWikibaseItem = async searchItem => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    prop: 'pageprops',
-    titles: searchItem,
-  };
-  return await wikipediaQuery(
-    WIKIPEDIA_ENDPOINT_SEARCH,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result => extraResult(result.query.pages));
+  if (!cache[searchItem]) {
+    const params = {
+      action: 'query',
+      format: 'json',
+      prop: 'pageprops',
+      titles: searchItem,
+    };
+    const result = await wikipediaQuery(
+      WIKIPEDIA_ENDPOINT_SEARCH,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result => extraResult(result.query.pages));
+    cache[searchItem] = result;
+    return result;
+  } else {
+    return cache[searchItem];
+  }
 };
 //Grabs revisions from qid, past 20 revisions only due to limitations from api
 // @param {string} qid - id to search revisions for
