@@ -52,7 +52,11 @@ function App() {
           <Route exact path="/feed" component={FeedData} />
           <Route exact path="/user-search" component={UsersSearchPage} />
           <Route exact path="/page-revisions" component={PageRevisionsPage} />
-          <Route exact path="/number-of-changes" component={NumberOfChanges} />
+          <Route
+            exact
+            path="/number-of-changes"
+            render={() => <NumberOfChanges fullGraph={true} />}
+          />
           <Route
             exact
             path="/number-of-changes-user"

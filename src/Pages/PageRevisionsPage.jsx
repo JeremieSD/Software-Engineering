@@ -66,6 +66,7 @@ class PageRevisionsPage extends Component {
                       onRef={ref => {
                         this.changes = ref;
                       }}
+                      value=""
                     />
                   }
                 />
