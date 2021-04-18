@@ -165,7 +165,7 @@ class NumberOfChanges extends Component {
         />
       );
     } else {
-      if (this.state.value == '') {
+      if (this.state.value === '') {
         return (
           <div>
             <p>Search For a Graph</p>

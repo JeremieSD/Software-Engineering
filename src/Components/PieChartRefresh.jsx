@@ -25,6 +25,7 @@ class PieChartRefresh extends Component {
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
       if (!this.props.loading) {
+        console.log('Loading + false');
         this.setState({
           loaded: false,
           initialCall: true,
