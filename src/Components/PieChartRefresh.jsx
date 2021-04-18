@@ -12,6 +12,8 @@ class PieChartRefresh extends Component {
       initialCall: true,
       dataFinished: false,
       changeValue: '',
+      initialWait: true,
+
       // paused: false,
     };
 
@@ -23,6 +25,7 @@ class PieChartRefresh extends Component {
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
       if (!this.props.loading) {
+        console.log('Loading + false');
         this.setState({
           loaded: false,
           initialCall: true,
@@ -54,6 +57,11 @@ class PieChartRefresh extends Component {
         await this.refreshCont();
       }
     }, this.props.settings.refreshTime);
+  }
+
+  componentWillUnmount() {
+    console.log('change');
+    clearInterval(this.refreshInterval);
   }
 
   tooltip = function(click, url) {

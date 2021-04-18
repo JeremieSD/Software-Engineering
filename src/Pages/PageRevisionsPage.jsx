@@ -22,6 +22,7 @@ class PageRevisionsPage extends Component {
       ifConfirm: true,
       firmsList: [],
       recentChanges: [],
+      value: '',
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -31,6 +32,7 @@ class PageRevisionsPage extends Component {
     this.feed.onclick(value);
     this.changes.onclick(value);
     this.overTime.onclick(value);
+    this.setState({ value: value });
   }
 
   render() {
@@ -66,8 +68,10 @@ class PageRevisionsPage extends Component {
                       onRef={ref => {
                         this.changes = ref;
                       }}
+                      value=""
                     />
                   }
+                  value={this.state.value}
                 />
               </CardDeck>
               <CardDeck className="CardDeckRev">
@@ -82,8 +86,10 @@ class PageRevisionsPage extends Component {
                       onRef={ref => {
                         this.overTime = ref;
                       }}
+                      value=""
                     />
                   }
+                  value={this.state.value}
                 />
               </CardDeck>
             </div>

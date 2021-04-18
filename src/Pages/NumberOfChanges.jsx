@@ -103,7 +103,7 @@ class NumberOfChanges extends Component {
     this.state = {
       history: this.props.history,
       paused: false,
-      value: '',
+      value: this.props.value,
       key: '',
       recentChanges: [],
       loading: true,
@@ -112,7 +112,10 @@ class NumberOfChanges extends Component {
   }
 
   componentDidMount() {
-    this.props.onRef(this);
+    console.log('Hello');
+    if (this.state.fullGraph == false) {
+      this.props.onRef(this);
+    }
   }
 
   onclick(search) {
@@ -125,7 +128,7 @@ class NumberOfChanges extends Component {
   };
 
   render() {
-    if (this.state.fullGraph) {
+    if (this.props.fullGraph) {
       return (
         <GraphPage
           handlePause={this.handlePause}
@@ -145,7 +148,7 @@ class NumberOfChanges extends Component {
           }
           graph={
             <PieChartRefresh
-              fullGraph={this.state.fullGraph}
+              fullGraph={this.props.fullGraph}
               settings={NumberOfChangesSettings}
               paused={this.state.paused}
               recentChanges={this.state.recentChanges}
@@ -157,9 +160,16 @@ class NumberOfChanges extends Component {
         />
       );
     } else {
+      if (this.state.value === '') {
+        return (
+          <div>
+            <p>Search For a Graph</p>
+          </div>
+        );
+      }
       return (
         <PieChartRefresh
-          fullGraph={this.state.fullGraph}
+          fullGraph={this.props.fullGraph}
           settings={NumberOfChangesSettings}
           paused={this.state.paused}
           recentChanges={this.state.recentChanges}

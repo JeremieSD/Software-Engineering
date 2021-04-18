@@ -16,7 +16,7 @@ class PageFeed extends Component {
   }
   componentDidMount() {
     this.props.onRef(this);
-    setInterval(
+    this.refreshInterval = setInterval(
       function() {
         if (!this.state.paused && this.state.value && this.state.cont != -1) {
           // console.log('timed task executes');
@@ -34,14 +34,21 @@ class PageFeed extends Component {
     );
   }
 
+  componentWillUnmount() {
+    console.log('changeFeed');
+    clearInterval(this.refreshInterval);
+  }
+
   onclick(search) {
     // console.log(search);
-    this.setState({ value: search });
-    const item = utils.userSearch(search).then(str => {
-      if (str[0]) {
-        this.setState({ recentChanges: str[0], cont: str[1] });
-      }
-    });
+    if (search) {
+      this.setState({ value: search });
+      const item = utils.userSearch(search).then(str => {
+        if (str[0]) {
+          this.setState({ recentChanges: str[0], cont: str[1] });
+        }
+      });
+    }
   }
   togglePause() {
     this.state.paused = !this.state.paused;

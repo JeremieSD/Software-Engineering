@@ -14,7 +14,7 @@ class PageFeed extends Component {
   }
   componentDidMount() {
     this.props.onRef(this);
-    setInterval(
+    this.refreshInterval = setInterval(
       function() {
         // console.log(
         //   'timed task starts' + this.state.paused + '----' + this.state.value
@@ -33,6 +33,11 @@ class PageFeed extends Component {
       }.bind(this),
       1000
     );
+  }
+
+  componentWillUnmount() {
+    console.log('changeFeed');
+    clearInterval(this.refreshInterval);
   }
 
   onclick(search) {

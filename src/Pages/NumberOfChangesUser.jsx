@@ -4,7 +4,7 @@ import PieChartRefresh from '../Components/PieChartRefresh';
 import { userSearch, userSearchCont } from '../Backend/searchingFunctionality';
 import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
-export const NumberOfChangesSettings = {
+export const NumberOfChangesUserSettings = {
   getData: async function(searchValue) {
     if (searchValue) {
       const data = await userSearch(searchValue).then(str => {
@@ -100,7 +100,7 @@ class NumberOfChanges extends Component {
     this.state = {
       history: this.props.history,
       paused: false,
-      value: '',
+      value: this.props.value,
       key: '',
       recentChanges: [],
       loading: false,
@@ -109,15 +109,21 @@ class NumberOfChanges extends Component {
   }
 
   componentDidMount() {
-    this.props.onRef(this);
+    if (this.state.fullGraph == false) {
+      this.props.onRef(this);
+    } else if (this.state.value) {
+      this.setState({ loading: true });
+    }
   }
 
   onclick(search) {
     this.setState({ value: search });
     if (search) {
+      console.log('SEARCH');
       this.setState({ loading: true });
     } else {
       this.setState({ loading: false });
+      console.log('NO SEARCH');
     }
   }
 
@@ -148,21 +154,28 @@ class NumberOfChanges extends Component {
           graph={
             <PieChartRefresh
               fullGraph={this.state.fullGraph}
-              settings={NumberOfChangesSettings}
+              settings={NumberOfChangesUserSettings}
               paused={this.state.paused}
               recentChanges={this.state.recentChanges}
               value={this.state.value}
               loading={this.state.loading}
             />
           }
-          name="Number of Changes"
+          name="User Number of Changes"
         />
       );
     } else {
+      if (this.state.value === '') {
+        return (
+          <div>
+            <p>Search For a Graph</p>
+          </div>
+        );
+      }
       return (
         <PieChartRefresh
           fullGraph={this.state.fullGraph}
-          settings={NumberOfChangesSettings}
+          settings={NumberOfChangesUserSettings}
           paused={this.state.paused}
           recentChanges={this.state.recentChanges}
           value={this.state.value}
