@@ -56,6 +56,11 @@ class CalendarGraph extends Component {
     }, this.props.settings.refreshTime);
   }
 
+  componentWillUnmount() {
+    console.log('change');
+    clearInterval(this.refreshInterval);
+  }
+
   refresh = async () => {
     this.setState({ initialCall: false });
     this.loadData();

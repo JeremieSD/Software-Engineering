@@ -40,7 +40,7 @@ class UsersSearchPage extends Component {
         this.changes.onclick(value);
       } else {
         this.setState({ invalidSearch: true });
-        // this.feed.onclick("");
+        this.feed.onclick('');
         this.overTime.onclick('');
         this.changes.onclick('');
       }
