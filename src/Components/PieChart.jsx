@@ -12,7 +12,6 @@ class PieChart extends Component {
       data: null,
       fullGraph: this.props.fullGraph,
     };
-
     this.loadData();
   }
 
