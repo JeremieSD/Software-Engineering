@@ -13,7 +13,6 @@ class GraphCardSearch extends Component {
   }
 
   onClick = () => {
-    console.log('HIIII ' + this.props.value);
     this.state.history.push(this.state.pageLink + ':' + this.props.value);
   };
 
