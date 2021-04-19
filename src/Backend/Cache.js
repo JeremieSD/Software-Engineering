@@ -5,7 +5,7 @@ class Data {
   }
 }
 
-class Cache {
+export class Cache {
   constructor() {
     this.data = {};
     this.length = 0;
