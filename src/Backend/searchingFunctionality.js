@@ -33,7 +33,7 @@ export const userSearch = async name => {
     action: 'query',
     format: 'json',
     list: 'usercontribs',
-    uclimit: 20,
+    uclimit: 500,
     ucuser: name,
   };
   let item = await wikipediaQuery(
@@ -73,7 +73,7 @@ export const userSearchCont = async (name, cont) => {
     action: 'query',
     format: 'json',
     list: 'usercontribs',
-    uclimit: 20,
+    uclimit: 500,
     ucuser: name,
     uccontinue: cont,
   };
@@ -195,10 +195,23 @@ const getRevisions = async json1 => {
 //@returns {promise} returns -1 if it fails to find it and otherwise returns revisions
 const userContributionsSeperator = async (usercontribs, result) => {
   if (result.hasOwnProperty('continue')) {
-    return [usercontribs, result['continue'].uccontinue];
+    console.log(usercontribs);
+    return [eliminateNonWikidata(usercontribs), result['continue'].uccontinue];
   } else {
     return [usercontribs, -1];
   }
+};
+
+const eliminateNonWikidata = async usercontribs => {
+  let data = [];
+  let index = 0;
+  for (const uc of usercontribs) {
+    if (uc['ns'] == 4) {
+      data[index++] = uc;
+    }
+  }
+  console.log(data);
+  return data;
 };
 
 //Grabs wikibase_id from a search
