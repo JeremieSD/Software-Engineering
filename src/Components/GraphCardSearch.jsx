@@ -1,7 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import React, { Component } from 'react';
-
-class GraphCard extends Component {
+class GraphCardSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,4 +29,4 @@ class GraphCard extends Component {
   }
 }
 
-export default GraphCard;
+export default GraphCardSearch;
