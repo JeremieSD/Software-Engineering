@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as utils from '../Backend/searchingFunctionality';
 import CardDeck from 'react-bootstrap/CardDeck';
 import NumberOfChanges, { NumberOfChangesSettings } from './NumberOfChanges';
-import GraphCard from '../Components/GraphCard';
+import GraphCardSearch from '../Components/GraphCardSearch';
 import PageRevisionsOverTime, {
   PageRevisionsOverTimeSettings,
 } from './PageRevisionsOverTime';
@@ -57,7 +57,7 @@ class PageRevisionsPage extends Component {
                 searchValue={this.onClick.bind(this)}
               />
               <CardDeck className="CardDeckRev">
-                <GraphCard
+                <GraphCardSearch
                   title="Number of Changes"
                   pageLink="number-of-changes"
                   history={this.state.history}
@@ -75,7 +75,7 @@ class PageRevisionsPage extends Component {
                 />
               </CardDeck>
               <CardDeck className="CardDeckRev">
-                <GraphCard
+                <GraphCardSearch
                   title="Page Revisions Over Time"
                   pageLink="page-revisions-over-time"
                   history={this.state.history}
