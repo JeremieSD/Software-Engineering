@@ -100,20 +100,8 @@ class PageRevisionsPage extends Component {
   }
 }
 
-// export const SearchSettings = {
-//   getData: async value => {
-//     let data;
-//     const item = await utils.getPrefixSearch(value).then(str => {
-//       console.log(str);
-//       data = str;
-//     });
-//     return data;
-//   },
-// };
-
 export const SearchSettings = {
   getData: async function(val) {
-    // console.log('dataFetch ' + val);
     return await utils.getPrefixSearch(val);
   },
   type: 0,

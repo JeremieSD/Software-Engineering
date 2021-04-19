@@ -57,7 +57,6 @@ class CalendarGraph extends Component {
   }
 
   componentWillUnmount() {
-    console.log('change');
     clearInterval(this.refreshInterval);
   }
 
@@ -85,7 +84,6 @@ class CalendarGraph extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
-      // console.log(data);
       const smlData = data;
       this.setState({
         loaded: true,
@@ -98,15 +96,12 @@ class CalendarGraph extends Component {
     const getData = this.props.settings.refreshMethod.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        // console.log('New Data');
-        // console.log(data);
         const smlData = data;
         this.setState({
           loaded: true,
           data: smlData,
         });
       } else {
-        console.log('Error No Data');
         this.setState({
           dataFinished: true,
           // value: '',

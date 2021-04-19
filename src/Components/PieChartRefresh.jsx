@@ -13,19 +13,11 @@ class PieChartRefresh extends Component {
       dataFinished: false,
       changeValue: '',
       initialWait: true,
-
-      // paused: false,
     };
-
-    // if (this.state.value) {
-    //   this.loadData();
-    // }
-    // this.togglePause = this.togglePause.bind(this);
   }
   componentDidMount() {
     this.refreshInterval = setInterval(async () => {
       if (!this.props.loading) {
-        console.log('Loading + false');
         this.setState({
           loaded: false,
           initialCall: true,
@@ -34,7 +26,6 @@ class PieChartRefresh extends Component {
       }
       // this.setState({ value: this.props.value });
       if (this.state.changeValue != this.props.value) {
-        console.log('HeyaBuddyYA');
         this.setState({
           changeValue: this.props.value,
           value: this.props.value,
@@ -60,7 +51,6 @@ class PieChartRefresh extends Component {
   }
 
   componentWillUnmount() {
-    console.log('change');
     clearInterval(this.refreshInterval);
   }
 
@@ -80,14 +70,12 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        console.log(data);
         const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
         this.setState({
           loaded: true,
           data: smlData,
         });
       } else {
-        console.log('Error No Data');
         this.setState({ dataFinished: true });
       }
     });
@@ -97,14 +85,12 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.refreshMethod.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        console.log(data);
         const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
         this.setState({
           loaded: true,
           data: smlData,
         });
       } else {
-        console.log('Error No Data');
         this.setState({
           dataFinished: true,
           // value: '',

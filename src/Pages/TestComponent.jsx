@@ -5,8 +5,6 @@ import SearchBar from '../Components/SearchBar';
 
 export const searchSuggestions = {
   getData: async function(val) {
-    console.log('dataFetch');
-    // return await pageRevisionsSearch(val);
     return await getPrefixSearch(val);
   },
 };

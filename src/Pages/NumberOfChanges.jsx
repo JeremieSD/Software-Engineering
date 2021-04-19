@@ -9,14 +9,9 @@ import { getRecentActiveUsers } from '../Backend/APIWrapper';
 
 export const NumberOfChangesSettings = {
   getData: async function(searchValue) {
-    // console.log('here ' + searchValue);
-
     if (searchValue) {
       const data = await pageRevisionsSearch(searchValue).then(str => {
         str[0].then(value => {
-          console.log('first-call ' + searchValue);
-          console.log('value over number: ');
-          console.log(value);
           this.setState({ values: value });
         });
         this.setState({ keyValue: str[1] });
@@ -48,15 +43,12 @@ export const NumberOfChangesSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await pageRevisionsSearchCont(
         searchValue,
         this.state.keyValue
       ).then(str => {
         str[0].then(value => {
-          console.log(value);
-          console.log('cont-call: ');
           this.setState({ values: this.state.values.concat(value) });
         });
         this.setState({ keyValue: str[1] });
@@ -112,7 +104,6 @@ class NumberOfChanges extends Component {
   }
 
   componentDidMount() {
-    console.log('Hello');
     if (this.state.fullGraph == false) {
       this.props.onRef(this);
     }

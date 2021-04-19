@@ -36,17 +36,14 @@ class PageFeed extends Component {
   }
 
   componentWillUnmount() {
-    console.log('changeFeed');
     clearInterval(this.refreshInterval);
   }
 
   onclick(search) {
-    // console.log(search);
     this.setState({ value: search });
     const item = utils.pageRevisionsSearch(search).then(str => {
       if (str[0]) {
         str[0].then(value => {
-          // console.log(value);
           this.setState({ recentChanges: value });
         });
       }

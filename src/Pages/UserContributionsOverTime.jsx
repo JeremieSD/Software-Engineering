@@ -7,17 +7,12 @@ export const UserContributionsOverTimeSettings = {
   getData: async function(searchValue) {
     const data = await userSearch(searchValue).then(str => {
       if (str[0]) {
-        // console.log('first-call');
-        // console.log('value Over Time: ');
-        // console.log(value);
         this.setState({ values: str[0] });
         this.setState({ nextVals: str[0] });
         this.setState({ keyValue: str[1] });
-        // console.log('key ' + this.state.keyValue);
       }
     });
     const myMap = new Map();
-    let a = 0;
     this.state.values.forEach(item => {
       if (
         !myMap.has(item.timestamp.slice(0, -10)) &&
@@ -35,10 +30,6 @@ export const UserContributionsOverTimeSettings = {
         }
         return s;
       }, 0);
-      if (a === 30) {
-        console.log(item.timestamp.slice(0, -10) + 'V:  ' + item.value);
-      }
-      a++;
     }
     const array = [myMap.size];
     let j = 0;
@@ -49,13 +40,10 @@ export const UserContributionsOverTimeSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await userSearchCont(searchValue, this.state.keyValue).then(
         str => {
-          // return str;
           if (str[0]) {
-            // console.log('cont-call: ');
             this.setState({ values: this.state.values.concat(str[0]) });
           }
           this.setState({ keyValue: str[1] });
@@ -125,9 +113,7 @@ class UserContributionsOverTime extends Component {
   };
 
   onclick(search) {
-    // console.log('S ' + search);
     this.setState({ value: search });
-    // console.log('V ' + this.state.value);
     if (search) {
       this.setState({ loading: true });
     } else {
