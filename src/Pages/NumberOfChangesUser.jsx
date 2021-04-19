@@ -9,14 +9,11 @@ export const NumberOfChangesUserSettings = {
     if (searchValue) {
       const data = await userSearch(searchValue).then(str => {
         if (str[0]) {
-          // console.log('first-call ' + searchValue);
-          // console.log('value over number: ');
           this.setState({ values: str[0] });
           this.setState({ keyValue: str[1] });
         }
       });
       if (this.state.keyValue != -1) {
-        console.log('I am here');
         let myMap = new Map();
         this.state.values.forEach(item => {
           if (!myMap.has(item.title)) {
@@ -46,13 +43,10 @@ export const NumberOfChangesUserSettings = {
   },
   refreshTime: 2000,
   refreshMethod: async function(searchValue) {
-    // console.log('Refresh ' + searchValue);
     if (this.state.keyValue != -1) {
       const data = await userSearchCont(searchValue, this.state.keyValue).then(
         str => {
           if (str[0]) {
-            // console.log('cont-call ' + searchValue);
-            // console.log('value over number: ');
             this.setState({ values: this.state.values.concat(str[0]) });
             this.setState({ keyValue: str[1] });
           }
@@ -119,11 +113,9 @@ class NumberOfChanges extends Component {
   onclick(search) {
     this.setState({ value: search });
     if (search) {
-      console.log('SEARCH');
       this.setState({ loading: true });
     } else {
       this.setState({ loading: false });
-      console.log('NO SEARCH');
     }
   }
 

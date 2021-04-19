@@ -57,7 +57,6 @@ function App() {
             render={props => {
               let name = props.match.url;
               name = name.split(':')[1];
-              console.log(name);
               return <NumberOfChanges fullGraph={true} value={name} />;
             }}
           />
@@ -66,7 +65,6 @@ function App() {
             render={props => {
               let name = props.match.url;
               name = name.split(':')[1];
-              console.log(name);
               return <NumberOfChangesUser fullGraph={true} value={name} />;
             }}
           />
@@ -75,7 +73,6 @@ function App() {
             render={props => {
               let name = props.match.url;
               name = name.split(':')[1];
-              console.log(name);
               return <PageRevisionsOverTime fullGraph={true} value={name} />;
             }}
           />
@@ -84,7 +81,6 @@ function App() {
             render={props => {
               let name = props.match.url;
               name = name.split(':')[1];
-              console.log(name);
               return (
                 <UserContributionsOverTime fullGraph={true} value={name} />
               );

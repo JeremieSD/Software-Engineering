@@ -19,7 +19,6 @@ class PageFeed extends Component {
     this.refreshInterval = setInterval(
       function() {
         if (!this.state.paused && this.state.value && this.state.cont != -1) {
-          // console.log('timed task executes');
           const item = utils.userSearch(this.state.value).then(str => {
             if (str[0]) {
               this.setState({
@@ -35,12 +34,10 @@ class PageFeed extends Component {
   }
 
   componentWillUnmount() {
-    console.log('changeFeed');
     clearInterval(this.refreshInterval);
   }
 
   onclick(search) {
-    // console.log(search);
     if (search) {
       this.setState({ value: search });
       const item = utils.userSearch(search).then(str => {
