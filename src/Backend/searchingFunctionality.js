@@ -1,3 +1,5 @@
+import { Cache } from './Cache';
+
 const WIKIDATA_ENDPOINT = 'https://www.wikidata.org/w/api.php';
 const WIKIPEDIA_ENDPOINT_SEARCH = 'https://en.wikipedia.org/w/api.php';
 const DESCRIPTION_REST_API =
@@ -6,7 +8,12 @@ const DBPEDIA_SPOTLIGHT_API = 'api.dbpedia-spotlight.org/en/annotate';
 const NUMBER_OF_RETRIES = 5;
 const fetch = require('node-fetch');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+//const cache = getWikibaseItemCache('WIKIBASEITEM_CACHE');
 
+const userSearchCache = new Cache();
+const pageRevCache = new Cache();
+const wikibaseCache = new Cache();
+const prefixCache = new Cache();
 /*
   userSearch: gets a json list of the 20 most recent contributions made my a user, along with a key to get the next 20
   '' - String
@@ -29,21 +36,27 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
                                 second element contains a key to get the next 20 contributions made by the user, -1 if end of list
 */
 export const userSearch = async name => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    list: 'usercontribs',
-    uclimit: 20,
-    ucuser: name,
-  };
-  let item = await wikipediaQuery(
-    WIKIPEDIA_ENDPOINT_SEARCH,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result =>
-    userContributionsSeperator(result.query.usercontribs, result)
-  );
-  return item;
+  const cacheResult = userSearchCache.getCache(name);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      list: 'usercontribs',
+      uclimit: 20,
+      ucuser: name,
+    };
+    const item = await wikipediaQuery(
+      WIKIPEDIA_ENDPOINT_SEARCH,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result =>
+      userContributionsSeperator(result.query.usercontribs, result)
+    );
+    userSearchCache.addCache(item);
+    return item;
+  }
 };
 
 /*
@@ -69,22 +82,28 @@ export const userSearch = async name => {
                                 second element contains a key to get the next 20 contributions made by the user, -1 if end of list
 */
 export const userSearchCont = async (name, cont) => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    list: 'usercontribs',
-    uclimit: 20,
-    ucuser: name,
-    uccontinue: cont,
-  };
-  const item = await wikipediaQuery(
-    WIKIPEDIA_ENDPOINT_SEARCH,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result =>
-    userContributionsSeperator(result.query.usercontribs, result)
-  );
-  return item;
+  const cacheResult = userSearchCache.getCache(cont);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      list: 'usercontribs',
+      uclimit: 20,
+      ucuser: name,
+      uccontinue: cont,
+    };
+    const item = await wikipediaQuery(
+      WIKIPEDIA_ENDPOINT_SEARCH,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result =>
+      userContributionsSeperator(result.query.usercontribs, result)
+    );
+    userSearchCache.addCache(cont, item);
+    return item;
+  }
 };
 
 /*
@@ -205,36 +224,49 @@ const userContributionsSeperator = async (usercontribs, result) => {
 //@param {string} searchItem - Item to search Qid for
 //@returns {Object} -1 or QID
 const getWikibaseItem = async searchItem => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    prop: 'pageprops',
-    titles: searchItem,
-  };
-  return await wikipediaQuery(
-    WIKIPEDIA_ENDPOINT_SEARCH,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result => extraResult(result.query.pages));
+  const cacheResult = wikibaseCache.getCache(searchItem);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      prop: 'pageprops',
+      titles: searchItem,
+    };
+    const result = await wikipediaQuery(
+      WIKIPEDIA_ENDPOINT_SEARCH,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result => extraResult(result.query.pages));
+    wikibaseCache.addCache(searchItem, result);
+    return result;
+  }
 };
 //Grabs revisions from qid, past 20 revisions only due to limitations from api
 // @param {string} qid - id to search revisions for
 // @returns {Object} -1 or revisions in json
 const getRevisionsOfPage = async qid => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    prop: 'revisions',
-    titles: qid,
-    rvprops: 'ids|timestamp|flags|comment|user',
-    rvlimit: 20,
-  };
-  const item = await wikipediaQuery(
-    WIKIDATA_ENDPOINT,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages, result));
-  return item;
+  const cacheResult = pageRevCache.getCache(qid);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      prop: 'revisions',
+      titles: qid,
+      rvprops: 'ids|timestamp|flags|comment|user',
+      rvlimit: 20,
+    };
+    const item = await wikipediaQuery(
+      WIKIDATA_ENDPOINT,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result => getRevisionsHelper(result.query.pages, result));
+    pageRevCache.addCache(qid, item);
+    return item;
+  }
 };
 
 //Grabs revisions from qid, past 20 revisions only due to limitations from api
@@ -242,21 +274,27 @@ const getRevisionsOfPage = async qid => {
 // @param {string} cont - key to get next results
 // @returns {Object} -1 or revisions in json
 const getRevisionsOfPageCont = async (qid, cont) => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    prop: 'revisions',
-    titles: qid,
-    rvprops: 'ids|timestamp|flags|comment|user',
-    rvlimit: 20,
-    rvcontinue: cont,
-  };
-  const item = await wikipediaQuery(
-    WIKIDATA_ENDPOINT,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result => getRevisionsHelper(result.query.pages, result));
-  return item;
+  const cacheResult = pageRevCache.getCache(cont);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      prop: 'revisions',
+      titles: qid,
+      rvprops: 'ids|timestamp|flags|comment|user',
+      rvlimit: 20,
+      rvcontinue: cont,
+    };
+    const item = await wikipediaQuery(
+      WIKIDATA_ENDPOINT,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result => getRevisionsHelper(result.query.pages, result));
+    pageRevCache.addCache(cont, item);
+    return item;
+  }
 };
 
 const getRevisionsHelper = async (pages, result) => {
@@ -282,20 +320,26 @@ const getRevisionsHelper = async (pages, result) => {
   @returns {Promise} - promise of 10 prefix search results
 */
 export const getPrefixSearch = async searchItem => {
-  const params = {
-    action: 'query',
-    format: 'json',
-    list: 'prefixsearch',
-    pssearch: searchItem,
-  };
-  const item = await wikipediaQuery(
-    WIKIPEDIA_ENDPOINT_SEARCH,
-    params,
-    NUMBER_OF_RETRIES
-  ).then(result => {
-    return result;
-  });
-  return item;
+  const cacheResult = prefixCache.getCache(searchItem);
+  if (cacheResult != -1) {
+    return cacheResult;
+  } else {
+    const params = {
+      action: 'query',
+      format: 'json',
+      list: 'prefixsearch',
+      pssearch: searchItem,
+    };
+    const item = await wikipediaQuery(
+      WIKIPEDIA_ENDPOINT_SEARCH,
+      params,
+      NUMBER_OF_RETRIES
+    ).then(result => {
+      return result;
+    });
+    prefixCache.addCache(searchItem, item);
+    return item;
+  }
 };
 
 /*
