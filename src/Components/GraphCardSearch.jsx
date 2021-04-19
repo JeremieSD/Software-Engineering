@@ -9,11 +9,13 @@ class GraphCard extends Component {
       title: this.props.title,
       pageLink: this.props.pageLink,
       graph: this.props.graph,
+      value: this.props.value,
     };
   }
 
   onClick = () => {
-    this.state.history.push(this.state.pageLink);
+    console.log('HIIII ' + this.props.value);
+    this.state.history.push(this.state.pageLink + ':' + this.props.value);
   };
 
   render() {
