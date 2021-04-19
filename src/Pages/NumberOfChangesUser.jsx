@@ -161,7 +161,7 @@ class NumberOfChanges extends Component {
               loading={this.state.loading}
             />
           }
-          name="User Number of Changes"
+          name={'Number of Changes by ' + this.state.value}
         />
       );
     } else {

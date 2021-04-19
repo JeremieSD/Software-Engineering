@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import SearchBar from '../Components/SearchBar';
 import UserFeed from '../Components/UserFeed';
 import CardDeck from 'react-bootstrap/CardDeck';
-import GraphCard from '../Components/GraphCard';
+import GraphCardSearch from '../Components/GraphCardSearch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NumberOfChangesUser, {
   NumberOfChangesSettings,
@@ -84,7 +84,7 @@ class UsersSearchPage extends Component {
               />
               {this.state.invalidSearch && <p>This User does not exist.</p>}
               <CardDeck className="CardDeckRev">
-                <GraphCard
+                <GraphCardSearch
                   title="Number of Changes by User"
                   pageLink="user-number-of-changes"
                   history={this.state.history}
@@ -102,7 +102,7 @@ class UsersSearchPage extends Component {
                 />
               </CardDeck>
               <CardDeck className="CardDeckRev">
-                <GraphCard
+                <GraphCardSearch
                   title="User Contributions Over Time"
                   pageLink="user-contributions-over-time"
                   history={this.state.history}
