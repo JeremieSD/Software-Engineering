@@ -1,4 +1,4 @@
-# [Wikidata Live Changes](https://isobelm.github.io/Software-Engineering/)
+# [Wikidata Live Changes](https://jeremiesd.github.io/Software-Engineering/)
 
 ![banner](data/Dashboard.gif)
 
