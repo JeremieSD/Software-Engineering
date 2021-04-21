@@ -43,7 +43,7 @@ class AboutPage extends Component {
         {
           firstName: 'Aoife',
           lastName: 'Khan',
-          year: '2rd Year CSB',
+          year: '2nd Year CSB',
           team: 'Frontend Team',
           github: 'https://github.com/aoife-K',
         },
