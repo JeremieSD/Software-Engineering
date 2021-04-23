@@ -1,0 +1,5 @@
+Description box using the backend functions in searchingFunctionality
+Custom parameters to look for to get more percise queries
+APIs to look at:
+https://en.wikipedia.org/wiki/Help:User_contributions
+https://www.mediawiki.org/wiki/API:Revisions
