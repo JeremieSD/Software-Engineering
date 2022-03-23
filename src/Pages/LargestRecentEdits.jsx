@@ -8,7 +8,7 @@ export const LargestRecentEditsSettings = {
   refreshTime: 2000,
   refreshMethod: getRecentLargestEdits,
   colorBy: 'type',
-  colors: 'set2',
+  colors: 'set1',
   onClick: function(click) {
     window.open('https://www.wikidata.org/wiki/' + click.label, '_blank');
   },
