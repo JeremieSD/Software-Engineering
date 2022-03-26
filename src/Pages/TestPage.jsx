@@ -54,6 +54,9 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <label>
+              <input type="checkbox" value="memory" /> Memory saving mode
+            </label>
             <div className="deck-container">
               <CardDeck className="deck">
                 <GraphCard
