@@ -34,7 +34,7 @@ class PieChart extends Component {
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData().then(data => {
-      const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+      const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
       this.setState({
         loaded: true,
         data: smlData,
