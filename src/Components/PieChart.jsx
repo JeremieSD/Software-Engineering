@@ -21,13 +21,14 @@ class PieChart extends Component {
 
   tooltip = function(click, url) {
     return (
-      <div className="iframe-container">
-        <iframe
-          src={url + click.label}
-          className="iframe"
-          title="tooltip-option-2"
-        />
-      </div>
+      <span />
+      //<div className="iframe-container">
+      //  <iframe
+      //    src={url + click.label}
+      //    className="iframe"
+      //   title="tooltip-option-2"
+      //  />
+      //</div>
     );
   };
 
