@@ -71,7 +71,7 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
         this.setState({
           loaded: true,
           data: smlData,
@@ -86,7 +86,7 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.refreshMethod.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
         this.setState({
           loaded: true,
           data: smlData,
