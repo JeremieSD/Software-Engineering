@@ -50,11 +50,12 @@ export const UserContributionsOverTimeSettings = {
         }
       );
       const myMap = new Map();
+      var today = new Date();
       this.state.values.forEach(item => {
         if (
           !myMap.has(item.timestamp.slice(0, -10)) &&
           item.timestamp.slice(0, -10) > '2020-01-01' &&
-          item.timestamp.slice(0, -10) < '2021-07-01'
+          item.timestamp.slice(0, -10) < today
         ) {
           myMap.set(item.timestamp.slice(0, -10), item);
         }
