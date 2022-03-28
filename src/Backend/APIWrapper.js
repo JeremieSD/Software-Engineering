@@ -3,11 +3,6 @@ const SCORING_ENDPOINT = 'https://ores.wikimedia.org/v3/scores/wikidatawiki/';
 const MAX_QUERY_SIZE = 50;
 const NUM_RETRIES = 5;
 
-let MEMORY_MODE = {
-  mode: false
-}
-export {MEMORY_MODE};
-
 /**
  * @typedef {Object} User
  * @property {number} userid - The user's id
