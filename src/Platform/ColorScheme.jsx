@@ -4,7 +4,7 @@ import createPersistedState from 'use-persisted-state';
 
 const useColorSchemeState = createPersistedState('colorScheme');
 
-export function useColorScheme(): {
+/*export function useColorScheme(): {
   isDark: boolean,
   setIsDark: (value: boolean) => void,
 } {
@@ -30,4 +30,14 @@ export function useColorScheme(): {
     isDark: value,
     setIsDark,
   };
-}
+}*/
+
+export const useColorScheme = initialColorScheme => {
+  const [colorScheme, setColorScheme] = useColorSchemeState(initialColorScheme);
+  return {
+    colorScheme,
+    toggle: () =>
+      setColorScheme(color => (color === 'light' ? 'dark' : 'light')),
+  };
+};
+//export default useColorScheme;
