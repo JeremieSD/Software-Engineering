@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { DarkModeToggle } from './DarkModeToggle';
 
 //Creates the Navbar shown on all pages
 
@@ -93,6 +94,7 @@ class NavbarLocal extends Component {
             >
               Github Project
             </a>
+            <DarkModeToggle />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

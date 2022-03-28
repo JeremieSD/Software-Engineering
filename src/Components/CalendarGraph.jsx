@@ -13,13 +13,10 @@ class CalendarGraph extends Component {
       dataFinished: false,
       changeValue: '',
     };
-
-    // if (this.state.value) {
-    //   this.loadData();
-    // }
   }
 
   componentDidMount() {
+    // once mounted, the window will set an interval to refresh, when not loading
     this.refreshInterval = setInterval(async () => {
       if (!this.props.loading) {
         this.setState({
@@ -28,7 +25,7 @@ class CalendarGraph extends Component {
           dataFinished: false,
         });
       }
-      // this.setState({ value: this.props.value });
+      // On value change update the props to propogate changes throughout the program
       if (this.state.changeValue != this.props.value) {
         this.setState({
           changeValue: this.props.value,

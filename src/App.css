@@ -31,6 +31,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App-header.dark {
+  color: #172b4d;
+  background-color: #ffffff;
+}
+
+body.dark {
+  background-color: #172b4d;
+  color: #ffffff;
+}
 
 .App-link {
   color: #61dafb;
@@ -51,12 +60,18 @@
   padding: 0;
   background-color: #fff;
 }
+.Graph-Container-Card-Dark {
+  background-color: #172b4d;
+}
 
 .full-graph-container {
   width: 75vw;
   height: 90vh;
   padding: 0;
   background-color: #fff;
+}
+.full-graph-container-dark {
+  background-color: #172b4d;
 }
 
 @media screen and (max-width: 992px) {
@@ -84,6 +99,9 @@
   color: var(--p);
   font-size: 1.12rem;
   font-weight: 500;
+}
+.navbar-dark {
+  color: #172b4d;
 }
 
 .nav-link--active,
