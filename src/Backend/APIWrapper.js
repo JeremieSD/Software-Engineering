@@ -4,9 +4,9 @@ const MAX_QUERY_SIZE = 50;
 const NUM_RETRIES = 5;
 
 let MEMORY_MODE = {
-  mode: false
-}
-export {MEMORY_MODE};
+  mode: false,
+};
+export { MEMORY_MODE };
 
 /**
  * @typedef {Object} User

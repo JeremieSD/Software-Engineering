@@ -11,7 +11,7 @@ import { MostActivePagesGraphSettings } from './MostActivePages';
 import { LargestRecentEditsSettings } from './LargestRecentEdits';
 import { RecentEditSizeSettings } from './RecentEditSize';
 import { ProportionFlaggedSettings } from './ProportionFlagged';
-import { MEMORY_MODE } from '../Backend/APIWrapper'
+import { MEMORY_MODE } from '../Backend/APIWrapper';
 
 import { NumberOfChangesSettings } from './NumberOfChanges';
 
@@ -56,10 +56,15 @@ class HomePage extends Component {
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <label>
-              <input type="checkbox" value="memory" onInput={e => {
-                  MEMORY_MODE.mode = !MEMORY_MODE.mode; console.log("Memory mode toggled");
-              }}
-              /> Memory saving mode
+              <input
+                type="checkbox"
+                value="memory"
+                onInput={e => {
+                  MEMORY_MODE.mode = !MEMORY_MODE.mode;
+                  console.log('Memory mode toggled');
+                }}
+              />
+              Memory saving mode
             </label>
             <div className="deck-container">
               <CardDeck className="deck">
