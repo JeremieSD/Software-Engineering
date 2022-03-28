@@ -20,8 +20,8 @@ export const PageRevisionsOverTimeSettings = {
     this.state.values.forEach(item => {
       if (
         !myMap.has(item.timestamp.slice(0, -10)) &&
-        item.timestamp.slice(0, -10) > '2020-01-01' &&
-        item.timestamp.slice(0, -10) < '2021-07-01'
+        item.timestamp.slice(0, -10) > '2021-01-01' &&
+        item.timestamp.slice(0, -10) < '2022-12-31'
       ) {
         myMap.set(item.timestamp.slice(0, -10), item);
       }
@@ -58,8 +58,8 @@ export const PageRevisionsOverTimeSettings = {
       this.state.values.forEach(item => {
         if (
           !myMap.has(item.timestamp.slice(0, -10)) &&
-          item.timestamp.slice(0, -10) > '2020-01-01' &&
-          item.timestamp.slice(0, -10) < '2021-07-01'
+          item.timestamp.slice(0, -10) > '2021-01-01' &&
+          item.timestamp.slice(0, -10) < '2022-12-31'
         ) {
           myMap.set(item.timestamp.slice(0, -10), item);
         }
