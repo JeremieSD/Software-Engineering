@@ -1,5 +1,5 @@
 import React from 'react';
-import { useColorScheme } from '../Platform/ColorState';
+import { useColorScheme } from '../Platform/ColorScheme';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 
@@ -15,3 +15,5 @@ export const DarkModeToggle: React.FC = () => {
     />
   );
 };
+
+export default DarkModeToggle;
