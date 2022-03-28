@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import React from 'react';
+import { useColorScheme } from '../Platform/ColorState';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 
 export const DarkModeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState(true);
-  const systemPrefDark = useMediaQuery(
-    {
-      query: '(prefers-color-scheme: dark)',
-    },
-    undefined,
-    (isSystemDark: boolean) => setIsDark(isSystemDark)
-  );
-  useEffect(() => {
-    if (isDark) {
-      document.body.classList.add('dark');
-
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [isDark]);
-
+  const { value, setValue } = useColorScheme();
   return (
     <Toggle
       className="dark-mode-toggle"
-      checked={isDark}
-      onChange={({ target }) => setIsDark(target.checked)}
+      checked={value === 'dark'}
+      onChange={event => setValue(event.target.checked ? 'dark' : 'light')}
       icons={{ checked: '🌙', unchecked: '🔆' }}
       aria-label="Dark mode toggle"
     />
