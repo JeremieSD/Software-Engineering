@@ -13,7 +13,6 @@ class CalendarGraph extends Component {
       dataFinished: false,
       changeValue: '',
     };
-
     // if (this.state.value) {
     //   this.loadData();
     // }
@@ -59,6 +58,9 @@ class CalendarGraph extends Component {
   componentWillUnmount() {
     clearInterval(this.refreshInterval);
   }
+
+  startDate = this.findStartDate();
+  todaysDate = this.findTodaysDate();
 
   refresh = async () => {
     this.setState({ initialCall: false });
@@ -114,7 +116,7 @@ class CalendarGraph extends Component {
   };
 
   // this method sets up the day for today in the calendar graph!
-  todaysDate() {
+  findTodaysDate() {
     const today = new Date();
     const date =
       today.getFullYear() +
@@ -122,6 +124,13 @@ class CalendarGraph extends Component {
       (today.getMonth() + 1) +
       '-' +
       today.getDate();
+    return date;
+  }
+
+  //this method sets the start date of the calendar to January 1st 1 year before the current year
+  findStartDate() {
+    const today = new Date();
+    const date = today.getFullYear() - 1 + '-01-01';
     return date;
   }
 
@@ -144,8 +153,8 @@ class CalendarGraph extends Component {
         ) : (
           <ResponsiveCalendar
             data={this.state.data}
-            from="2020-01-01"
-            to={this.todaysDate()}
+            from={this.startDate}
+            to={this.todaysDate}
             emptyColor="#eeeeee"
             colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
