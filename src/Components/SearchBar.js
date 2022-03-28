@@ -44,7 +44,7 @@ const SearchBar = props => {
       setSuggestions([]);
       setPub(false);
     }
-  }, [loadData, pub, search]);
+  }, [search]);
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit} style={{ height: '100%' }}>
