@@ -113,6 +113,12 @@ class CalendarGraph extends Component {
     });
   };
 
+  function todaysDate() {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    return(date);
+  }
+
   render = () => {
     let margin = {};
     let classname = '';
@@ -133,7 +139,7 @@ class CalendarGraph extends Component {
           <ResponsiveCalendar
             data={this.state.data}
             from="2020-01-01"
-            to="2021-07-12"
+            to=todaysDate()
             emptyColor="#eeeeee"
             colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
