@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 /* Author: Jay Cowan
 This component provides the context to the app to determine the color scheme of the application currently implemented
@@ -12,6 +12,12 @@ function ColorSchemeProvider(props) {
   const [colorScheme, setColorScheme] = useState('light');
   const toggleColorScheme = () => {
     setColorScheme(colorScheme === 'dark' ? 'light' : 'dark');
+    // No clue why but for some reason the inverse works on toggle for switching the background
+    if (colorScheme === 'dark') {
+      document.body.classList.remove('dark');
+    } else {
+      document.body.classList.add('dark');
+    }
   };
   return (
     <div>

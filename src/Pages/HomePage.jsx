@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import TitleContainer from '../Components/TitleContainer';
-
+import {
+  ColorSchemeProvider,
+  ColorSchemeContext,
+} from '../Platform/ColorScheme';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../Components/Navbar';
 import HomeNavContainer from '../Components/HomeNavContainer';
@@ -16,7 +19,6 @@ homeNavContainer, homeStatsContainer and TitleContainer components */
 class HomePage extends Component {
   constructor(props) {
     super(props);
-
     this.state = { history: this.props.history };
   }
 

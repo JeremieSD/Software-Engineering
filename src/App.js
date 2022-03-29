@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import history from './Utils/History';
