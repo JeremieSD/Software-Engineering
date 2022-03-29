@@ -32,6 +32,11 @@
   color: white;
 }
 
+body.dark {
+  background-color: #172b4d;
+  color: #ffffff;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -51,12 +56,18 @@
   padding: 0;
   background-color: #fff;
 }
+.Graph-Container-Card-Dark {
+  background-color: #172b4d;
+}
 
 .full-graph-container {
   width: 75vw;
   height: 90vh;
   padding: 0;
   background-color: #fff;
+}
+.full-graph-container-dark {
+  background-color: #172b4d;
 }
 
 @media screen and (max-width: 992px) {
@@ -79,6 +90,11 @@
     border-radius: 2%;
   }
 }
+.navbar-light .navbar-nav .nav-link.dark {
+  color: #ffffff;
+  font-size: 1.12rem;
+  font-weight: 500;
+}
 
 .navbar-light .navbar-nav .nav-link {
   color: var(--p);
@@ -93,6 +109,16 @@
 .navbar-light .navbar-nav .show > .nav-link {
   color: var(--p) !important;
   border-bottom: 3px solid var(--p);
+
+}
+.nav-link--active.dark,
+.navbar-light .navbar-nav .active > .nav-link.dark,
+.navbar-light .navbar-nav .nav-link.active.dark,
+.navbar-light .navbar-nav .nav-link.show.dark,
+.navbar-light .navbar-nav .show > .nav-link.dark {
+  color: #ffffff !important;
+  border-bottom: 3px solid #ffffff;
+
 }
 
 .navbar {
