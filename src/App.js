@@ -21,73 +21,84 @@ import NumberOfChangesUser from './Pages/NumberOfChangesUser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
+import { ColorSchemeProvider } from './Platform/ColorScheme';
 
 function App() {
   return (
     <div className="App">
-      <Router basename={process.env.PUBLIC_URL} history={history}>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/page" component={TestPage} />
-          <Route exact path="/testComponent" component={TestComponent} />
-          <Route
-            exact
-            path="/users-by-most-edits"
-            component={UsersByMostEditsPage}
-          />
-          <Route exact path="/most-active-users" component={MostActiveUsers} />
-          <Route exact path="/recent-edit-size" component={RecentEditSize} />
-          <Route
-            exact
-            path="/largest-recent-edits"
-            component={LargestRecentEdits}
-          />
-          <Route exact path="/most-active-pages" component={MostActivePages} />
-          <Route
-            exact
-            path="/proportion-flagged"
-            component={ProportionFlagged}
-          />
-          <Route exact path="/about-page" component={AboutPage} />
-          <Route exact path="/feed" component={FeedData} />
-          <Route exact path="/user-search" component={UsersSearchPage} />
-          <Route exact path="/page-revisions" component={PageRevisionsPage} />
-          <Route
-            path="/number-of-changes:id"
-            render={props => {
-              let name = props.match.url;
-              name = name.split(':')[1];
-              return <NumberOfChanges fullGraph={true} value={name} />;
-            }}
-          />
-          <Route
-            path="/user-number-of-changes:id"
-            render={props => {
-              let name = props.match.url;
-              name = name.split(':')[1];
-              return <NumberOfChangesUser fullGraph={true} value={name} />;
-            }}
-          />
-          <Route
-            path="/page-revisions-over-time:id"
-            render={props => {
-              let name = props.match.url;
-              name = name.split(':')[1];
-              return <PageRevisionsOverTime fullGraph={true} value={name} />;
-            }}
-          />
-          <Route
-            path="/user-contributions-over-time:id"
-            render={props => {
-              let name = props.match.url;
-              name = name.split(':')[1];
-              return (
-                <UserContributionsOverTime fullGraph={true} value={name} />
-              );
-            }}
-          />
-        </Switch>
-      </Router>
+      <ColorSchemeProvider>
+        <Router basename={process.env.PUBLIC_URL} history={history}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/page" component={TestPage} />
+            <Route exact path="/testComponent" component={TestComponent} />
+            <Route
+              exact
+              path="/users-by-most-edits"
+              component={UsersByMostEditsPage}
+            />
+            <Route
+              exact
+              path="/most-active-users"
+              component={MostActiveUsers}
+            />
+            <Route exact path="/recent-edit-size" component={RecentEditSize} />
+            <Route
+              exact
+              path="/largest-recent-edits"
+              component={LargestRecentEdits}
+            />
+            <Route
+              exact
+              path="/most-active-pages"
+              component={MostActivePages}
+            />
+            <Route
+              exact
+              path="/proportion-flagged"
+              component={ProportionFlagged}
+            />
+            <Route exact path="/about-page" component={AboutPage} />
+            <Route exact path="/feed" component={FeedData} />
+            <Route exact path="/user-search" component={UsersSearchPage} />
+            <Route exact path="/page-revisions" component={PageRevisionsPage} />
+            <Route
+              path="/number-of-changes:id"
+              render={props => {
+                let name = props.match.url;
+                name = name.split(':')[1];
+                return <NumberOfChanges fullGraph={true} value={name} />;
+              }}
+            />
+            <Route
+              path="/user-number-of-changes:id"
+              render={props => {
+                let name = props.match.url;
+                name = name.split(':')[1];
+                return <NumberOfChangesUser fullGraph={true} value={name} />;
+              }}
+            />
+            <Route
+              path="/page-revisions-over-time:id"
+              render={props => {
+                let name = props.match.url;
+                name = name.split(':')[1];
+                return <PageRevisionsOverTime fullGraph={true} value={name} />;
+              }}
+            />
+            <Route
+              path="/user-contributions-over-time:id"
+              render={props => {
+                let name = props.match.url;
+                name = name.split(':')[1];
+                return (
+                  <UserContributionsOverTime fullGraph={true} value={name} />
+                );
+              }}
+            />
+          </Switch>
+        </Router>
+      </ColorSchemeProvider>
     </div>
   );
 }

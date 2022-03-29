@@ -1,43 +1,25 @@
-import { useEffect, useMemo } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import createPersistedState from 'use-persisted-state';
+import React, { createContext, useState } from 'react';
 
-const useColorSchemeState = createPersistedState('colorScheme');
+/* Author: Jay Cowan
+This component provides the context to the app to determine the color scheme of the application currently implemented
+using strings so that themes other than dark or light may be implemented.
+Uses React Provider to pass state to its children, and thus is one of the parent components of the application
+ */
 
-/*export function useColorScheme(): {
-  isDark: boolean,
-  setIsDark: (value: boolean) => void,
-} {
-  const systemPrefersDark = useMediaQuery(
-    {
-      query: '(prefers-color-scheme: dark)',
-    },
-    undefined
-  );
-  const [isDark, setIsDark] = useColorSchemeState();
-  const value = useMemo(
-    () => (isDark === undefined ? !!systemPrefersDark : isDark),
-    [isDark, systemPrefersDark]
-  );
-  useEffect(() => {
-    if (value) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [value]);
-  return {
-    isDark: value,
-    setIsDark,
+const ColorSchemeContext = createContext();
+
+function ColorSchemeProvider(props) {
+  const [colorScheme, setColorScheme] = useState('light');
+  const toggleColorScheme = () => {
+    setColorScheme(colorScheme === 'dark' ? 'light' : 'dark');
   };
-}*/
+  return (
+    <div>
+      <ColorSchemeContext.Provider value={{ colorScheme, toggleColorScheme }}>
+        {props.children}
+      </ColorSchemeContext.Provider>
+    </div>
+  );
+}
 
-export const useColorScheme = initialColorScheme => {
-  const [colorScheme, setColorScheme] = useColorSchemeState(initialColorScheme);
-  return {
-    colorScheme,
-    toggle: () =>
-      setColorScheme(color => (color === 'light' ? 'dark' : 'light')),
-  };
-};
-//export default useColorScheme;
+export { ColorSchemeContext, ColorSchemeProvider };
