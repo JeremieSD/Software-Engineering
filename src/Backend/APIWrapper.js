@@ -34,7 +34,7 @@ export const getMostEditsUsers = async () => {
     format: 'json',
     list: 'allusers',
     auprop: 'editcount|groups',
-    aulimit: 'max',
+    aulimit: MEMORY_MODE.mode ? 100 : 'max',
     auwitheditsonly: '1',
     auactiveusers: '1',
   };
@@ -57,7 +57,7 @@ export const getMostActiveUsers = async () => {
     format: 'json',
     list: 'allusers',
     auprop: 'editcount|groups',
-    aulimit: 'max',
+    aulimit: MEMORY_MODE.mode ? 100 : 'max',
     auwitheditsonly: '1',
     auactiveusers: '1',
   };
@@ -73,7 +73,7 @@ export const getRecentEditsWithSize = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'title|ids|sizes|timestamp',
-    rclimit: '500',
+    rclimit: MEMORY_MODE.mode ? 100 : 'max',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
@@ -87,7 +87,7 @@ export const getRecentEditsWithFlags = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'ids',
-    rclimit: '50',
+    rclimit: MEMORY_MODE.mode ? 10 : 'max',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
@@ -238,7 +238,7 @@ export const queryRecentChanges = prevTimestamp => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'title|ids|timestamp|user|sizes',
-    rclimit: 'max',
+    rclimit: MEMORY_MODE.mode ? 100 : 'max',
     rcstart: tmpTimestamp,
     rcend: prevTimestamp,
   };
