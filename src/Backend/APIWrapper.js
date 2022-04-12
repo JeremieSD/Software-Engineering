@@ -87,7 +87,7 @@ export const getRecentEditsWithFlags = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'ids',
-    rclimit: MEMORY_MODE.mode ? 10 : 'max',
+    rclimit: MEMORY_MODE.mode ? 10 : '50',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
