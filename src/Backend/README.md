@@ -1,5 +1,9 @@
 # /src/Backend/
 
+## MEMORY_MODE.md
+
+Information about the app's memory saving mode.
+
 ## APIWrapper.js
 
 Numerous functions that access the Wikidata API. Many are already documented.
