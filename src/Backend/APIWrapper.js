@@ -73,7 +73,7 @@ export const getRecentEditsWithSize = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'title|ids|sizes|timestamp',
-    rclimit: MEMORY_MODE.mode ? 100 : 'max',
+    rclimit: MEMORY_MODE.mode ? 100 : '500',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
