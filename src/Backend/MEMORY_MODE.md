@@ -29,3 +29,4 @@ Memory saving mode applies restrictions on the API level, limiting the amount of
 * `getMostActiveUsers()`: Requests limit changed from `max` to `100`.
 * `getRecentEditsWithSize()`: Requests limit changed from `500` to `100`.
 * `getRecentEditsWithFlags()`: Requests limit changed from `50` to `10`.
+* `queryRecentChanges()`: Requests limit changed from `max` to `100`.
