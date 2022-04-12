@@ -3,10 +3,16 @@ const SCORING_ENDPOINT = 'https://ores.wikimedia.org/v3/scores/wikidatawiki/';
 const MAX_QUERY_SIZE = 50;
 const NUM_RETRIES = 5;
 
+/* Memory saving mode state object. See Backend/MEMORY_MODE.md */
 let MEMORY_MODE = {
   mode: false,
 };
 export { MEMORY_MODE };
+
+/* Function that changes graph refresh rate based on memory saving mode. Needs proper state management to work */
+export const getRefreshTime = () => {
+  return MEMORY_MODE.mode ? 2000 : 5000;
+};
 
 /**
  * @typedef {Object} User
