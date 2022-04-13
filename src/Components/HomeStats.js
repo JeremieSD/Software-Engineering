@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup } from 'react-bootstrap';
 import $ from 'jquery';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 
 //These load the statistics from a server we set up and displays them on the homepage
 
@@ -18,7 +19,7 @@ class HomeStats extends Component {
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
-
+  static contextType = ColorSchemeContext;
   updateStats = () => {
     $.ajax({
       url:
@@ -50,24 +51,49 @@ class HomeStats extends Component {
   };
 
   render() {
+    const { colorScheme, toggleColorScheme } = this.context;
     return (
       <div className="row col-lg-12 mx-auto col-12 justify-content-center  homeStatContainer text-left">
-        <div className="col-lg-3 col-12 homeStat">
+        <div
+          className={
+            colorScheme === 'dark'
+              ? 'col-lg-3 col-12 homeStatDark'
+              : 'col-lg-3 col-12 homeStat'
+          }
+        >
           <h1 id="div1">{this.state.errorCode}</h1>
           <h1>Items</h1>
         </div>
 
-        <div className="col-lg-3 col-12 homeStat">
+        <div
+          className={
+            colorScheme === 'dark'
+              ? 'col-lg-3 col-12 homeStatDark'
+              : 'col-lg-3 col-12 homeStat'
+          }
+        >
           <h1 id="div2">{this.state.errorCode}</h1>
           <h1>Edits</h1>
         </div>
 
-        <div className="col-lg-3 col-12 homeStat">
+        <div
+          className={
+            colorScheme === 'dark'
+              ? 'col-lg-3 col-12 homeStatDark'
+              : 'col-lg-3 col-12 homeStat'
+          }
+        >
           <h1 id="div3">{this.state.errorCode}</h1>
           <h1>Users</h1>
         </div>
 
-        <div className="col-lg-3 col-12  homeStat">
+        <div
+          className={
+            colorScheme === 'dark'
+              ? 'col-lg-3 col-12 homeStatDark'
+              : 'col-lg-3 col-12 homeStat'
+          }
+        >
           <h1 id="div4">{this.state.errorCode}</h1>
           <h1>Active Users</h1>
         </div>

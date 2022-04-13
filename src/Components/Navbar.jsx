@@ -91,7 +91,7 @@ export function NavbarLocal(props) {
               as={Link}
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/JeremieSD/Software-Engineering"
+              href="https://github.com/Group29-TCD/Software-Engineering"
               className={githubClassName}
             >
               Github Project

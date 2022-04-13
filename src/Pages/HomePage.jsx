@@ -68,7 +68,11 @@ class HomePage extends Component {
                   <FontAwesomeIcon icon={faChartLine} />
                 </h1>
                 <HomeNavContainer
-                  styled="font-weight-bold text-green"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-green'
+                      : 'font-weight-bold text-green'
+                  }
                   btnStyle="align-bottom btn btn-outline-green"
                   btnTitle1="Wikidata"
                   btnTitle2="Dashboard"
@@ -77,12 +81,24 @@ class HomePage extends Component {
                 />
               </div>
               <div className="col-lg-4 col-sm-12 homeNav">
-                <h1 className="text-blue">
+                <h1
+                  className={
+                    colorScheme === 'dark' ? 'text-dark-blue' : 'text-blue'
+                  }
+                >
                   <FontAwesomeIcon icon={faUser} />
                 </h1>
                 <HomeNavContainer
-                  styled="font-weight-bold text-blue"
-                  btnStyle="align-bottom btn btn-outline-blue"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-blue'
+                      : 'font-weight-bold text-blue'
+                  }
+                  btnStyle={
+                    colorScheme === 'dark'
+                      ? 'align-bottom btn btn-outline-dark-blue'
+                      : 'align-bottom btn btn-outline-blue'
+                  }
                   btnTitle1="User"
                   btnTitle2="Data"
                   btnText="Users"

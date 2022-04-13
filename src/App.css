@@ -92,6 +92,13 @@ body.dark {
     border-left: none;
     border-radius: 2%;
   }
+  .homeStatDark {
+    border-top: 1px solid #ffc400;
+    border-bottom: 1px solid #ffc400;
+    border-right: none;
+    border-left: none;
+    border-radius: 2%;
+  }
 }
 .navbar-light .navbar-nav .nav-link.dark {
   color: #ffffff;
