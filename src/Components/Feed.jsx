@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FeedData from '../Backend/FeedData';
 import Navbar from '../Components/Navbar';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 // eslint-disable-next-line
 import style from '../style.css'
 
@@ -9,6 +10,7 @@ import style from '../style.css'
 function Feed() {
   const [feedData] = useState(new FeedData(30));
   const [paused, setPaused] = useState(false);
+  const { colorScheme, toggleColorScheme } = useContext(ColorSchemeContext);
   const [recentChanges, setRecentChanges] = useState({
     items: [],
   });
@@ -29,15 +31,24 @@ function Feed() {
 
   return (
     <div>
-      <h3 className="text-blue text-left">Most Recent Activity</h3>
+      <h3
+        className="text-blue text-left"
+        style={colorScheme === 'dark' ? { color: '#FFFFFF' } : {}}
+      >
+        Most Recent Activity
+      </h3>
       <form className="text-left" onChange={togglePause}>
-        <label>
+        <label style={colorScheme === 'dark' ? { color: 'white' } : {}}>
           <input type="checkbox" /> Paused
         </label>
       </form>
       <ul className="list-group">
         {recentChanges.items.map((item, index) => (
-          <li className="list-group-item text-left" key={index}>
+          <li
+            className="list-group-item text-left"
+            key={index}
+            style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}
+          >
             <div
               className={
                 item.scores?.damaging?.score?.prediction ? 'text-red' : ''
