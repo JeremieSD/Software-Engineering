@@ -23,6 +23,7 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log(this);
     return (
       <div className="HomePage">
         <Navbar history={this.state.history} />

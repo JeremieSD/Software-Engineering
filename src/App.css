@@ -56,8 +56,9 @@ body.dark {
   padding: 0;
   background-color: #fff;
 }
-.Graph-Container-Card-Dark {
-  background-color: #172b4d;
+.Graph-Container-Card.dark {
+  background-color: #42526E;
+  color: #ffffff;
 }
 
 .full-graph-container {
@@ -66,8 +67,10 @@ body.dark {
   padding: 0;
   background-color: #fff;
 }
-.full-graph-container-dark {
-  background-color: #172b4d;
+.full-graph-container.dark {
+  background-color: #42526E;
+  color: #ffffff;
+
 }
 
 @media screen and (max-width: 992px) {
