@@ -236,6 +236,13 @@ img {
 .text-dark {
   color: var(--p) !important;
 }
+.text-black {
+  color:#091e42
+}
+.text-lower {
+  position: relative;
+  bottom: 10px;
+}
 
 .navbar-light .navbar-nav .nav-link {
   color: var(--p);
