@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 
 class AboutPage extends Component {
   constructor(props) {
@@ -150,6 +151,7 @@ class AboutPage extends Component {
     this.decrement = this.decrement.bind(this);
     this.increment = this.increment.bind(this);
   }
+  static contextType = ColorSchemeContext;
   decrement = () => {
     this.setState({
       currentStudent:
@@ -163,6 +165,7 @@ class AboutPage extends Component {
     });
   };
   render() {
+    const { colorScheme, toggleColorScheme } = this.context;
     return (
       <div className="aboutPageContainer">
         <Navbar history={this.state.history} />
@@ -170,7 +173,12 @@ class AboutPage extends Component {
           <div className="row">
             <div className="col-lg-6 col-sm-12  aboutPageContent">
               <div className="explainContainer text-left">
-                <h3 className="text-blue">Why we made our project</h3>
+                <h3
+                  className="text-blue"
+                  style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}
+                >
+                  Why we made our project
+                </h3>
                 <p>
                   We are a group of Computer Science students studying in
                   Trinity College Dublin. We undertake a module in which we are
@@ -188,7 +196,12 @@ class AboutPage extends Component {
               </div>
               <br />
               <div className=" licenseContainer text-left">
-                <h3 className="text-blue">Licensing</h3>
+                <h3
+                  className="text-blue"
+                  style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}
+                >
+                  Licensing
+                </h3>
                 <p>
                   We have insured all libraries and all project dependencies
                   licenses cover our web apps intended use.
@@ -209,7 +222,13 @@ class AboutPage extends Component {
             </div>
             <div className="col-lg-6 col-sm-12 profiles">
               <div className="client">
-                <h3 className="text-red">Clients</h3>
+                <h3 className="text-red">
+                  <span
+                    style={colorScheme === 'dark' ? { color: '#ffc400' } : {}}
+                  >
+                    Clients
+                  </span>
+                </h3>
                 <div className="card-deck">
                   <div className="card card-profile">
                     <div className="card-body">
@@ -249,7 +268,13 @@ class AboutPage extends Component {
               </div>
               <br />
               <div className="text-title">
-                <h3 className="text-red">Students</h3>
+                <h3 className="text-red">
+                  <span
+                    style={colorScheme === 'dark' ? { color: '#ffc400' } : {}}
+                  >
+                    Students
+                  </span>
+                </h3>
                 <button
                   className="text-button text-title-button"
                   onClick={this.increment}

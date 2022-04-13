@@ -14,6 +14,7 @@ import { ProportionFlaggedSettings } from './ProportionFlagged';
 import { MEMORY_MODE } from '../Backend/APIWrapper';
 
 import { NumberOfChangesSettings } from './NumberOfChanges';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 
 //This is the dashboard page, it shows the feed and all of our graphs
 
@@ -25,8 +26,10 @@ class HomePage extends Component {
       history: this.props.history,
     };
   }
+  static contextType = ColorSchemeContext;
 
   render() {
+    const { colorScheme, setColorScheme } = this.context;
     return (
       <div className="HomePage">
         <Navbar />
@@ -55,7 +58,7 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-            <label>
+            <label style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}>
               <input
                 type="checkbox"
                 value="memory"
@@ -64,7 +67,7 @@ class HomePage extends Component {
                   console.log('Memory mode toggled');
                 }}
               />
-              Memory saving mode
+              Memory Saving Mode
             </label>
             <div className="deck-container">
               <CardDeck className="deck">

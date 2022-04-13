@@ -21,9 +21,9 @@ class HomePage extends Component {
     super(props);
     this.state = { history: this.props.history };
   }
-
+  static contextType = ColorSchemeContext;
   render() {
-    console.log(this);
+    const { colorScheme, toggleColorScheme } = this.context;
     return (
       <div className="HomePage">
         <Navbar history={this.state.history} />
@@ -38,11 +38,25 @@ class HomePage extends Component {
             <div className="row">
               <div className="col-lg-4 col-sm-12">
                 <h1 className="text-red">
-                  <FontAwesomeIcon icon={faBars} />
+                  <span
+                    style={colorScheme === 'dark' ? { color: '#ffc400' } : {}}
+                  >
+                    {' '}
+                    <FontAwesomeIcon icon={faBars} />{' '}
+                  </span>
                 </h1>
+
                 <HomeNavContainer
-                  styled="font-weight-bold text-red"
-                  btnStyle="align-bottom btn btn-outline-red"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-yellow'
+                      : 'font-weight-bold text-red'
+                  }
+                  btnStyle={
+                    colorScheme === 'dark'
+                      ? 'align-bottom btn btn-outline-yellow'
+                      : 'align-bottom btn btn-outline-red'
+                  }
                   btnTitle1="About"
                   btnTitle2="Us"
                   btnText="About"

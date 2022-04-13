@@ -243,6 +243,9 @@ img {
   position: relative;
   bottom: 10px;
 }
+.text-dark-yellow {
+  color: #ffc400
+}
 
 .navbar-light .navbar-nav .nav-link {
   color: var(--p);
@@ -268,6 +271,10 @@ img {
 .btn-outline-red {
   color: var(--red) !important;
   border-color: var(--red) !important;
+}
+.btn-outline-yellow {
+  color: #ffc400 !important;
+  border-color: #ffc400 !important;
 }
 
 .btn-outline-blue {
