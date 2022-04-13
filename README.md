@@ -1,4 +1,4 @@
-# [Wikidata Live Changes](https://jeremiesd.github.io/Software-Engineering/)
+# [Wikidata Live Changes](https://group29-tcd.github.io/Software-Engineering/)
 
 ![banner](data/Dashboard.gif)
 
@@ -18,7 +18,7 @@ You will need to have installed:
 1. Clone the GitHub repository
 
 ```
-git clone https://github.com/JeremieSD/Software-Engineering.git
+git clone https://github.com/Group29-TCD/Software-Engineering.git
 ```
 
 2. Navigate into the cloned GitHub repository
