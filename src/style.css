@@ -229,6 +229,19 @@ img {
   color: var(--blue);
 }
 
+.pause {
+
+  border-style: solid;
+  border-radius: 8px;
+  padding-left: 30px;
+  margin: 30px;
+  width: 150px;
+  height: 30px;
+  background-color: #ccc7c7;
+}
+
+
+
 .text-green {
   color: var(--green);
 }

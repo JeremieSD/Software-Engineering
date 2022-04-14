@@ -6,7 +6,7 @@ import style from '../style.css'
 
 //Creates the feed shown on the dashboard, it updates in real time and highlights suspicious changes in red
 
-function Feed() {
+function DashboardFeed() {
   const [feedData] = useState(new FeedData(30));
   const [paused, setPaused] = useState(false);
   const [recentChanges, setRecentChanges] = useState({
@@ -35,15 +35,7 @@ function Feed() {
           <input type="checkbox" /> Paused
         </label>
       </form>
-      <div className="feed col-lg-3 col-12 infobox">
-        <h2> Recent Changes</h2>
-        <p>
-          This page shows the Recent Changes made by Users with the timestamp.
-          Moreover, It detects and visualise the Suspicious activities. The
-          Sustpicious activities are highlighted with red marks.
-        </p>
-      </div>
-      <ul className="list-group col-lg-9 col-12">
+      <ul className="list-group">
         {recentChanges.items.map((item, index) => (
           <li className="list-group-item text-left " key={index}>
             <div
@@ -67,4 +59,4 @@ const getTimeDifference = toCompare =>
     Math.abs(new Date().getTime() - new Date(toCompare).getTime()) / 1000
   );
 
-export default Feed;
+export default DashboardFeed;
