@@ -15,7 +15,7 @@ import { ProportionFlaggedSettings } from './ProportionFlagged';
 import { NumberOfChangesSettings } from './NumberOfChanges';
 
 //This is the dashboard page, it shows the feed and all of our graphs
-
+//blank commit (account testing)
 class HomePage extends Component {
   constructor(props) {
     super(props);
