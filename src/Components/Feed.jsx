@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FeedData from '../Backend/FeedData';
 import Navbar from '../Components/Navbar';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 // eslint-disable-next-line
 import style from '../style.css'
 
@@ -9,6 +10,7 @@ import style from '../style.css'
 function Feed() {
   const [feedData] = useState(new FeedData(30));
   const [paused, setPaused] = useState(false);
+  const { colorScheme, toggleColorScheme } = useContext(ColorSchemeContext);
   const [recentChanges, setRecentChanges] = useState({
     items: [],
   });
@@ -30,26 +32,38 @@ function Feed() {
   return (
     <div>
       <h3 className="text-blue text-left">Most Recent Activity</h3>
-      <form className="text-left" onChange={togglePause}>
+      <form className="pause text-left" onChange={togglePause}>
         <label>
           <input type="checkbox" /> Paused
         </label>
       </form>
-      <ul className="list-group">
-        {recentChanges.items.map((item, index) => (
-          <li className="list-group-item text-left" key={index}>
-            <div
-              className={
-                item.scores?.damaging?.score?.prediction ? 'text-red' : ''
-              }
-            >
-              {`User ${item.user} action ${item.type} on ${
-                item.title
-              } ${getTimeDifference(item.timestamp)} seconds ago`}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="row">
+        <div className="col-lg-3 col-12 infobox">
+          <h3> Recent Changes</h3>
+          <p>
+            This page shows the Recent changes made by user with timestampt.
+            Moreover, it shows the suspicious activities. The Suspicious
+            activities are mentioned with red text.
+          </p>
+        </div>
+        <div className="col-lg-9 col-12">
+          <ul className="list-group">
+            {recentChanges.items.map((item, index) => (
+              <li className="list-group-item text-left" key={index}>
+                <div
+                  className={
+                    item.scores?.damaging?.score?.prediction ? 'text-red' : ''
+                  }
+                >
+                  {`User ${item.user} action ${item.type} on ${
+                    item.title
+                  } ${getTimeDifference(item.timestamp)} seconds ago`}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

@@ -26,7 +26,6 @@ class UsersSearchPage extends Component {
       recentChanges: [],
       invalidSearch: false,
       loading: false,
-      value: '',
     };
     this.onClick = this.onClick.bind(this);
   }

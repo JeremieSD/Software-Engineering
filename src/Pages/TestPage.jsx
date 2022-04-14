@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import GraphCard from '../Components/GraphCard';
-import FeedData from '../Components/Feed';
+import DashboardFeedData from '../Components/DashboardFeed';
 import CardDeck from 'react-bootstrap/CardDeck';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SimpleBarGraph from '../Components/SimpleBarGraph';
@@ -11,11 +11,13 @@ import { MostActivePagesGraphSettings } from './MostActivePages';
 import { LargestRecentEditsSettings } from './LargestRecentEdits';
 import { RecentEditSizeSettings } from './RecentEditSize';
 import { ProportionFlaggedSettings } from './ProportionFlagged';
+import { MEMORY_MODE } from '../Backend/APIWrapper';
 
 import { NumberOfChangesSettings } from './NumberOfChanges';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 
 //This is the dashboard page, it shows the feed and all of our graphs
-
+//blank commit (account testing)
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -24,15 +26,17 @@ class HomePage extends Component {
       history: this.props.history,
     };
   }
+  static contextType = ColorSchemeContext;
 
   render() {
+    const { colorScheme, setColorScheme } = this.context;
     return (
       <div className="HomePage">
         <Navbar />
         <div className="row justify-content-left text-dark">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div className="feedContainer">
-              <FeedData />
+              <DashboardFeedData />
             </div>
             <div>
               <button
@@ -54,6 +58,17 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <label style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}>
+              <input
+                type="checkbox"
+                value="memory"
+                onInput={e => {
+                  MEMORY_MODE.mode = !MEMORY_MODE.mode;
+                  console.log('Memory mode toggled');
+                }}
+              />
+              Memory Saving Mode
+            </label>
             <div className="deck-container">
               <CardDeck className="deck">
                 <GraphCard

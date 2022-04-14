@@ -1,4 +1,4 @@
-# [Wikidata Live Changes](https://jeremiesd.github.io/Software-Engineering/)
+# [Wikidata Live Changes](https://group29-tcd.github.io/Software-Engineering/)
 
 ![banner](data/Dashboard.gif)
 
@@ -18,7 +18,7 @@ You will need to have installed:
 1. Clone the GitHub repository
 
 ```
-git clone https://github.com/JeremieSD/Software-Engineering.git
+git clone https://github.com/Group29-TCD/Software-Engineering.git
 ```
 
 2. Navigate into the cloned GitHub repository
@@ -49,12 +49,23 @@ The website should now have opened on your default browser. The server is hosted
 * [Nivo](https://nivo.rocks/) - Graphing framework used
 
 ## Authors
+### 2022
+* [James Cowan](https://github.com/JayCowan)
+* [Liam O Lionaird](https://github.com/liam-ol)
+* [Conor O Sirideain](https://github.com/Tepja16)
+* [Michael Keogh](https://github.com/M-Keogh)
+* [Ridish Kolli](https://github.com/ridish05)
+* [Maile Monteiro da Rocha](https://github.com/maile-mdr)
+
+### 2021
 * [Jeremie Sajeev Daniel](https://github.com/JeremieSD)
 * [Conor Brian O'Neill](https://github.com/conoro24)
 * [Aoife Alena Khan](https://github.com/aoife-K)
 * [Xiaolei Zhang](https://github.com/Xiaoleiii)
 * [Matteo Luciano McGuinness](https://github.com/m477301)
 * [Emmet Morrin](https://github.com/Unimuspanet)
+
+### 2020
 * [Isobel Mahon](https://github.com/isobelm)
 * [Brian Lynch](https://github.com/brianlunch)
 * [Odhran Mullan](https://github.com/omullan)
