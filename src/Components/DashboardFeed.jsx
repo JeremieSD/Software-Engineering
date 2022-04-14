@@ -6,7 +6,7 @@ import style from '../style.css'
 
 //Creates the feed shown on the dashboard, it updates in real time and highlights suspicious changes in red
 
-function Feed() {
+function DashboardFeed() {
   const [feedData] = useState(new FeedData(30));
   const [paused, setPaused] = useState(false);
   const [recentChanges, setRecentChanges] = useState({
@@ -30,38 +30,26 @@ function Feed() {
   return (
     <div>
       <h3 className="text-blue text-left">Most Recent Activity</h3>
-      <form className="text-left" onChange={togglePause}>
+      <form className="text-left pause" onChange={togglePause}>
         <label>
           <input type="checkbox" /> Paused
         </label>
       </form>
-      <div className="row">
-        <div className="col-lg-3 col-12 infobox">
-          <h3> Recent Changes</h3>
-          <p>
-            This page shows the Recent changes made by user with timestampt.
-            Moreover, it shows the suspicious activities. The Suspicious
-            activities are mentioned with red text.
-          </p>
-        </div>
-        <div className="col-lg-9 col-12">
-          <ul className="list-group">
-            {recentChanges.items.map((item, index) => (
-              <li className="list-group-item text-left" key={index}>
-                <div
-                  className={
-                    item.scores?.damaging?.score?.prediction ? 'text-red' : ''
-                  }
-                >
-                  {`User ${item.user} action ${item.type} on ${
-                    item.title
-                  } ${getTimeDifference(item.timestamp)} seconds ago`}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <ul className="list-group">
+        {recentChanges.items.map((item, index) => (
+          <li className="list-group-item text-left " key={index}>
+            <div
+              className={
+                item.scores?.damaging?.score?.prediction ? 'text-red' : ''
+              }
+            >
+              {`User ${item.user} action ${item.type} on ${
+                item.title
+              } ${getTimeDifference(item.timestamp)} seconds ago`}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -71,4 +59,4 @@ const getTimeDifference = toCompare =>
     Math.abs(new Date().getTime() - new Date(toCompare).getTime()) / 1000
   );
 
-export default Feed;
+export default DashboardFeed;
