@@ -30,7 +30,7 @@ function Feed() {
   return (
     <div>
       <h3 className="text-blue text-left">Most Recent Activity</h3>
-      <form className="text-left" onChange={togglePause}>
+      <form className="pause text-left" onChange={togglePause}>
         <label>
           <input type="checkbox" /> Paused
         </label>

@@ -17,7 +17,18 @@ body {
 input {
   border: none;
 }
+.pause{
+  border-style: solid;
+  border-radius: 5px;
+  width: 190px;
+  height: 40px;
+  background-color: #cecbcb;
+  padding-left: 50px;
+  padding-top: 5px;
+  margin-left: 100px;
+  margin-bottom: 10px;
 
+}
 .card-profile:hover {
   filter: brightness(100%) !important;
 }

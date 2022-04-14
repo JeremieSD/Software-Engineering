@@ -30,7 +30,7 @@ function DashboardFeed() {
   return (
     <div>
       <h3 className="text-blue text-left">Most Recent Activity</h3>
-      <form className="text-left pause" onChange={togglePause}>
+      <form className="pause text-left pause" onChange={togglePause}>
         <label>
           <input type="checkbox" /> Paused
         </label>
