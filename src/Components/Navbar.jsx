@@ -15,6 +15,7 @@ class NavbarLocal extends Component {
     return (
       <Navbar>
         <Navbar.Collapse>
+          <Navbar.Brand>WikiData Live</Navbar.Brand>
           <Nav>
             <Nav.Link
               as={Link}
