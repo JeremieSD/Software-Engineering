@@ -64,6 +64,7 @@ function Feed() {
           </ul>
         </div>
       </div>
+    </div>
   );
 }
 
