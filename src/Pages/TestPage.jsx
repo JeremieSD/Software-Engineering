@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../Components/Navbar';
 import GraphCard from '../Components/GraphCard';
-import FeedData from '../Components/Feed';
+import DashboardFeedData from '../Components/DashboardFeed';
 import CardDeck from 'react-bootstrap/CardDeck';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SimpleBarGraph from '../Components/SimpleBarGraph';
@@ -32,7 +32,7 @@ class HomePage extends Component {
         <div className="row justify-content-left text-dark">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div className="feedContainer">
-              <FeedData />
+              <DashboardFeedData />
             </div>
             <div>
               <button
