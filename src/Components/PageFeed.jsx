@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as utils from '../Backend/searchingFunctionality';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 
 class PageFeed extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class PageFeed extends Component {
   componentWillUnmount() {
     clearInterval(this.refreshInterval);
   }
+  static contextType = ColorSchemeContext;
 
   onclick(search) {
     this.setState({ value: search });
@@ -53,11 +55,17 @@ class PageFeed extends Component {
     this.state.paused = !this.state.paused;
   }
   render() {
+    const { colorScheme, toggleColorScheme } = this.context;
     return (
       <div>
-        <h3 className="text-blue text-left">Page Revisions</h3>
+        <h3
+          className="text-blue text-left"
+          style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}
+        >
+          Page Revisions
+        </h3>
         <form className="text-left" onChange={this.togglePause}>
-          <label>
+          <label style={colorScheme === 'dark' ? { color: '#ffffff' } : {}}>
             <input type="checkbox" /> Paused
           </label>
         </form>

@@ -56,13 +56,14 @@ class PieChartRefresh extends Component {
 
   tooltip = function(click, url) {
     return (
-      <div className="iframe-container">
-        <iframe
-          src={url + click.label}
-          className="iframe"
-          title="tooltip-option-2"
-        />
-      </div>
+      <span />
+      //<div className="iframe-container">
+      //  <iframe
+      //    src={url + click.label}
+      //    className="iframe"
+      //   title="tooltip-option-2"
+      //  />
+      //</div>
     );
   };
 
@@ -70,7 +71,7 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.getData.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
         this.setState({
           loaded: true,
           data: smlData,
@@ -85,7 +86,7 @@ class PieChartRefresh extends Component {
     const getData = this.props.settings.refreshMethod.bind(this);
     getData(this.props.value).then(data => {
       if (data != -1) {
-        const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+        const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
         this.setState({
           loaded: true,
           data: smlData,

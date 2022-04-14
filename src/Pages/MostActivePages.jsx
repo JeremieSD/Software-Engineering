@@ -52,7 +52,7 @@ export const MostActivePagesGraphSettings = {
   index: 'id',
   xAxis: 'pages',
   yAxis: 'actions',
-  colors: 'pastel1',
+  colors: 'set1',
   onClick: function(click) {
     window.open('https://www.wikidata.org/wiki/' + click.indexValue, '_blank');
   },

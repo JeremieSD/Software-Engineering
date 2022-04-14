@@ -21,20 +21,21 @@ class PieChart extends Component {
 
   tooltip = function(click, url) {
     return (
-      <div className="iframe-container">
-        <iframe
-          src={url + click.label}
-          className="iframe"
-          title="tooltip-option-2"
-        />
-      </div>
+      <span />
+      //<div className="iframe-container">
+      //  <iframe
+      //    src={url + click.label}
+      //    className="iframe"
+      //   title="tooltip-option-2"
+      //  />
+      //</div>
     );
   };
 
   loadData = () => {
     const getData = this.props.settings.getData.bind(this);
     getData().then(data => {
-      const smlData = data.slice(0, this.state.fullGraph ? 30 : 10);
+      const smlData = data.slice(0, this.state.fullGraph ? 30 : 9);
       this.setState({
         loaded: true,
         data: smlData,

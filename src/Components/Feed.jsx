@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import FeedData from '../Backend/FeedData';
 import Navbar from '../Components/Navbar';
+import { ColorSchemeContext } from '../Platform/ColorScheme';
 // eslint-disable-next-line
 import style from '../style.css'
 
@@ -9,6 +10,7 @@ import style from '../style.css'
 function Feed() {
   const [feedData] = useState(new FeedData(30));
   const [paused, setPaused] = useState(false);
+  const { colorScheme, toggleColorScheme } = useContext(ColorSchemeContext);
   const [recentChanges, setRecentChanges] = useState({
     items: [],
   });
@@ -62,7 +64,6 @@ function Feed() {
           </ul>
         </div>
       </div>
-    </div>
   );
 }
 

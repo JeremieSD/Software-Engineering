@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import TitleContainer from '../Components/TitleContainer';
-
+import {
+  ColorSchemeProvider,
+  ColorSchemeContext,
+} from '../Platform/ColorScheme';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../Components/Navbar';
 import HomeNavContainer from '../Components/HomeNavContainer';
@@ -16,11 +19,11 @@ homeNavContainer, homeStatsContainer and TitleContainer components */
 class HomePage extends Component {
   constructor(props) {
     super(props);
-
     this.state = { history: this.props.history };
   }
-
+  static contextType = ColorSchemeContext;
   render() {
+    const { colorScheme, toggleColorScheme } = this.context;
     return (
       <div className="HomePage">
         <Navbar history={this.state.history} />
@@ -35,11 +38,25 @@ class HomePage extends Component {
             <div className="row">
               <div className="col-lg-4 col-sm-12">
                 <h1 className="text-red">
-                  <FontAwesomeIcon icon={faBars} />
+                  <span
+                    style={colorScheme === 'dark' ? { color: '#ffc400' } : {}}
+                  >
+                    {' '}
+                    <FontAwesomeIcon icon={faBars} />{' '}
+                  </span>
                 </h1>
+
                 <HomeNavContainer
-                  styled="font-weight-bold text-red"
-                  btnStyle="align-bottom btn btn-outline-red"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-yellow'
+                      : 'font-weight-bold text-red'
+                  }
+                  btnStyle={
+                    colorScheme === 'dark'
+                      ? 'align-bottom btn btn-outline-yellow'
+                      : 'align-bottom btn btn-outline-red'
+                  }
                   btnTitle1="About"
                   btnTitle2="Us"
                   btnText="About"
@@ -51,7 +68,11 @@ class HomePage extends Component {
                   <FontAwesomeIcon icon={faChartLine} />
                 </h1>
                 <HomeNavContainer
-                  styled="font-weight-bold text-green"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-green'
+                      : 'font-weight-bold text-green'
+                  }
                   btnStyle="align-bottom btn btn-outline-green"
                   btnTitle1="Wikidata"
                   btnTitle2="Dashboard"
@@ -60,12 +81,24 @@ class HomePage extends Component {
                 />
               </div>
               <div className="col-lg-4 col-sm-12 homeNav">
-                <h1 className="text-blue">
+                <h1
+                  className={
+                    colorScheme === 'dark' ? 'text-dark-blue' : 'text-blue'
+                  }
+                >
                   <FontAwesomeIcon icon={faUser} />
                 </h1>
                 <HomeNavContainer
-                  styled="font-weight-bold text-blue"
-                  btnStyle="align-bottom btn btn-outline-blue"
+                  styled={
+                    colorScheme === 'dark'
+                      ? 'font-weight-bold text-dark-blue'
+                      : 'font-weight-bold text-blue'
+                  }
+                  btnStyle={
+                    colorScheme === 'dark'
+                      ? 'align-bottom btn btn-outline-dark-blue'
+                      : 'align-bottom btn btn-outline-blue'
+                  }
                   btnTitle1="User"
                   btnTitle2="Data"
                   btnText="Users"
