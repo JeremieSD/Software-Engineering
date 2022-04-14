@@ -38,7 +38,8 @@ export function NavbarLocal(props) {
   let githubClassName = activePage.endsWith('/ksknc')
     ? 'nav-link--active'
     : 'nav-link';
-
+  let variantName = 'light';
+  let backgroundName = 'light';
   // Toggle dark mode
   if (colorScheme === 'dark') {
     homeClassName += ' dark';
@@ -48,11 +49,13 @@ export function NavbarLocal(props) {
     pageRevisionsClassName += ' dark';
     aboutUsClassName += ' dark';
     githubClassName += ' dark';
+    variantName = 'dark';
+    backgroundName = 'dark';
   }
 
   return (
     <div>
-      <Navbar>
+      <Navbar variant={variantName} bg={backgroundName}>
         <Navbar.Collapse>
           <Navbar.Brand>WikiData Live</Navbar.Brand>
           <Nav>
