@@ -14,6 +14,7 @@ class NavbarLocal extends Component {
     const activePage = window.location.href;
     return (
       <Navbar>
+        <Navbar.Brand>WikiData Live</Navbar.Brand>
         <Navbar.Collapse>
           <Nav>
             <Nav.Link

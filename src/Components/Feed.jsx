@@ -35,7 +35,7 @@ function Feed() {
           <input type="checkbox" /> Paused
         </label>
       </form>
-      <div className="col-lg-3 col-12 infobox">
+      <div className="feed col-lg-3 col-12 infobox">
         <h2> Recent Changes</h2>
         <p>
           This page shows the Recent Changes made by Users with the timestamp.
