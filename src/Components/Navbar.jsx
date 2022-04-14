@@ -54,6 +54,7 @@ export function NavbarLocal(props) {
   }
 
   return (
+    //integerated NAVbar with Dark Mode
     <div>
       <Navbar variant={variantName} bg={backgroundName}>
         <Navbar.Collapse>
