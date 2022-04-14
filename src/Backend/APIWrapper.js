@@ -3,6 +3,17 @@ const SCORING_ENDPOINT = 'https://ores.wikimedia.org/v3/scores/wikidatawiki/';
 const MAX_QUERY_SIZE = 50;
 const NUM_RETRIES = 5;
 
+/* Memory saving mode state object. See Backend/MEMORY_MODE.md */
+let MEMORY_MODE = {
+  mode: false,
+};
+export { MEMORY_MODE };
+
+/* Function that changes graph refresh rate based on memory saving mode. Needs proper state management to work */
+export const getRefreshTime = () => {
+  return MEMORY_MODE.mode ? 2000 : 5000;
+};
+
 /**
  * @typedef {Object} User
  * @property {number} userid - The user's id
@@ -29,7 +40,7 @@ export const getMostEditsUsers = async () => {
     format: 'json',
     list: 'allusers',
     auprop: 'editcount|groups',
-    aulimit: 'max',
+    aulimit: MEMORY_MODE.mode ? 100 : 'max',
     auwitheditsonly: '1',
     auactiveusers: '1',
   };
@@ -52,7 +63,7 @@ export const getMostActiveUsers = async () => {
     format: 'json',
     list: 'allusers',
     auprop: 'editcount|groups',
-    aulimit: 'max',
+    aulimit: MEMORY_MODE.mode ? 100 : 'max',
     auwitheditsonly: '1',
     auactiveusers: '1',
   };
@@ -68,7 +79,7 @@ export const getRecentEditsWithSize = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'title|ids|sizes|timestamp',
-    rclimit: '500',
+    rclimit: MEMORY_MODE.mode ? 100 : '500',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
@@ -82,7 +93,7 @@ export const getRecentEditsWithFlags = async () => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'ids',
-    rclimit: '50',
+    rclimit: MEMORY_MODE.mode ? 10 : '50',
   };
   const edits = query(API_ENDPOINT, params, NUM_RETRIES).then(
     result => result.query.recentchanges
@@ -233,7 +244,7 @@ export const queryRecentChanges = prevTimestamp => {
     format: 'json',
     list: 'recentchanges',
     rcprop: 'title|ids|timestamp|user|sizes',
-    rclimit: 'max',
+    rclimit: MEMORY_MODE.mode ? 100 : 'max',
     rcstart: tmpTimestamp,
     rcend: prevTimestamp,
   };

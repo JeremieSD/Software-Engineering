@@ -20,8 +20,8 @@ export const PageRevisionsOverTimeSettings = {
     this.state.values.forEach(item => {
       if (
         !myMap.has(item.timestamp.slice(0, -10)) &&
-        item.timestamp.slice(0, -10) > '2020-01-01' &&
-        item.timestamp.slice(0, -10) < '2021-07-01'
+        item.timestamp.slice(0, -10) > '2021-01-01' &&
+        item.timestamp.slice(0, -10) < '2022-12-31'
       ) {
         myMap.set(item.timestamp.slice(0, -10), item);
       }
@@ -58,8 +58,8 @@ export const PageRevisionsOverTimeSettings = {
       this.state.values.forEach(item => {
         if (
           !myMap.has(item.timestamp.slice(0, -10)) &&
-          item.timestamp.slice(0, -10) > '2020-01-01' &&
-          item.timestamp.slice(0, -10) < '2021-07-01'
+          item.timestamp.slice(0, -10) > '2021-01-01' &&
+          item.timestamp.slice(0, -10) < '2022-12-31'
         ) {
           myMap.set(item.timestamp.slice(0, -10), item);
         }
@@ -83,7 +83,7 @@ export const PageRevisionsOverTimeSettings = {
     return -1;
   },
   colorBy: 'type',
-  colors: 'set2',
+  colors: 'set1',
   onClick: function(click) {
     window.open('https://www.wikidata.org/wiki/' + click.label, '_blank');
   },
